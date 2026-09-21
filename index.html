@@ -28,6 +28,7 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --badge-bg: linear-gradient(135deg, #0284c7, #2563eb);
+            --success: #22c55e;
         }
 
         * {
@@ -184,12 +185,16 @@
             -webkit-backdrop-filter: blur(14px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            scroll-margin-top: 2rem;
         }
 
-        .card:hover {
+        .card:hover, .card:target {
             border-color: var(--card-border-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.3), 0 0 20px rgba(56, 189, 248, 0.1);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.3), 0 0 20px rgba(56, 189, 248, 0.15);
+        }
+
+        .card:target {
+            outline: 2px solid var(--accent);
         }
 
         .card-header {
@@ -235,31 +240,102 @@
             color: var(--text-muted);
         }
 
-        ul.solution-steps {
-            margin: 0;
-            padding-left: 1.25rem;
-            color: #cbd5e1;
-            font-size: 0.93rem;
-            line-height: 1.6;
+        /* İnteraktif Checklist Adımları */
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin: 0.4rem 0 1rem 0;
         }
 
-        ul.solution-steps li {
-            margin-bottom: 0.35rem;
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.55rem 0.75rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .step-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .step-item input[type="checkbox"] {
+            margin-top: 3px;
+            accent-color: var(--accent);
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+        .step-text {
+            color: #cbd5e1;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .step-item.checked .step-text {
+            text-decoration: line-through;
+            color: #64748b;
+        }
+
+        /* Eylem Butonları Bölümü */
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            padding-top: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 0.4rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .action-btn.whatsapp {
+            color: #4ade80;
+            border-color: rgba(74, 222, 128, 0.2);
+            background: rgba(74, 222, 128, 0.06);
+        }
+
+        .action-btn.whatsapp:hover {
+            background: rgba(74, 222, 128, 0.18);
         }
 
         details {
-            margin-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.07);
-            padding-top: 0.75rem;
+            margin-top: 0.75rem;
         }
 
         summary {
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--accent);
             cursor: pointer;
             user-select: none;
-            transition: color 0.15s ease;
         }
 
         summary:hover {
@@ -267,19 +343,63 @@
         }
 
         .details-content {
-            padding: 0.65rem 0.25rem 0 0.25rem;
+            padding: 0.5rem 0.25rem 0 0.25rem;
             font-size: 0.88rem;
             color: #94a3b8;
             line-height: 1.5;
         }
 
-        .no-result {
+        /* Sonuç Bulunamadı & Talep Kutusu */
+        .no-result-card {
             text-align: center;
-            color: var(--text-muted);
-            padding: 3.5rem 1.5rem;
+            padding: 2.5rem 1.5rem;
             background: var(--card-bg);
             border-radius: 14px;
-            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+        }
+
+        .request-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25d366;
+            color: #0f172a;
+            padding: 0.65rem 1.25rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .request-btn:hover {
+            background: #20ba5a;
+            transform: translateY(-1px);
+        }
+
+        /* Kopyalandı Bildirimi (Toast) */
+        #toast {
+            position: fixed;
+            bottom: 24px;
+            background: #10b981;
+            color: #fff;
+            padding: 0.65rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.25s ease;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -307,9 +427,12 @@
     <div class="results" id="resultsContainer"></div>
 </div>
 
+<div id="toast">Metin kopyalandı!</div>
+
 <script>
 const errorDatabase = [
     {
+        id: "f5-e05",
         code: "F5 / E05",
         brand: "Baymak / Demirdöküm",
         category: "kombi",
@@ -322,6 +445,7 @@ const errorDatabase = [
         details: "Sorun devam ederse prosestat (hava basınç anahtarı) veya fan motorunda elektriksel/mekanik arıza olabilir."
     },
     {
+        id: "e01-a01-f28",
         code: "E01 / A01 / F28",
         brand: "Baymak / E.C.A / Vaillant",
         category: "kombi",
@@ -334,6 +458,7 @@ const errorDatabase = [
         details: "Gaz valfi bobin arızası veya iyonizasyon elektrodunun kirlenmesi/işlevini yitirmesi durumunda servis müdahalesi gerekir."
     },
     {
+        id: "f10-e03",
         code: "F10 / E03",
         brand: "Demirdöküm / Baymak",
         category: "kombi",
@@ -346,6 +471,7 @@ const errorDatabase = [
         details: "Basınç sürekli düşüyorsa tesisatta su kaçağı veya kombinin genleşme tankında membran patlağı olabilir."
     },
     {
+        id: "f1-e02",
         code: "F1 / E02",
         brand: "Demirdöküm / Baymak",
         category: "kombi",
@@ -358,6 +484,7 @@ const errorDatabase = [
         details: "Sirkülasyon pompası sıkışmış, ana eşanjör kireç bağlamış veya kalorifer dönüş filtresi tıkanmış olabilir."
     },
     {
+        id: "f22-f75",
         code: "F22 / F75",
         brand: "Vaillant",
         category: "kombi",
@@ -370,6 +497,7 @@ const errorDatabase = [
         details: "F75 hatası özellikle su basınç sensörünün tıkanması veya sirkülasyon pompasının devir alamamasından kaynaklanır."
     },
     {
+        id: "ea-ce",
         code: "EA / CE",
         brand: "Bosch Condens",
         category: "kombi",
@@ -382,6 +510,7 @@ const errorDatabase = [
         details: "Ateşleme elektrotlarında karbon birikmesi veya elektronik anakart alev devresi arızası görülebilir."
     },
     {
+        id: "e08-f08",
         code: "E08 / F08",
         brand: "Arçelik / Beko Çamaşır",
         category: "beyazesya",
@@ -394,6 +523,7 @@ const errorDatabase = [
         details: "Tahliye motorunun pervanesi sıkışmış veya motor bobini yanmış olabilir."
     },
     {
+        id: "e18-f18",
         code: "E18 / F18",
         brand: "Bosch / Siemens Çamaşır",
         category: "beyazesya",
@@ -406,6 +536,7 @@ const errorDatabase = [
         details: "Pompa filtresi temizlenmesine rağmen boşaltmıyorsa manyetik tahliye motoru arızalıdır."
     },
     {
+        id: "e15",
         code: "E15",
         brand: "Bosch / Siemens Bulaşık",
         category: "beyazesya",
@@ -418,6 +549,7 @@ const errorDatabase = [
         details: "Tabandaki taşma emniyet şamandırası devreye girmiştir. Su kaçağı iç hortumlardan kaynaklanıyor olabilir."
     },
     {
+        id: "e01-kapi",
         code: "E01 / Kapı Kilidi",
         brand: "Arçelik / Beko Çamaşır",
         category: "beyazesya",
@@ -430,6 +562,7 @@ const errorDatabase = [
         details: "Elektronik kapı kilidi (PTC) arızalandığında kart kilit sinyali alamaz."
     },
     {
+        id: "4c-4e",
         code: "4C / 4E",
         brand: "Samsung Çamaşır",
         category: "beyazesya",
@@ -442,6 +575,7 @@ const errorDatabase = [
         details: "Ventil bobini arızalandığında elektrik gitse dahi su vanasını açamaz."
     },
     {
+        id: "ch05-e1",
         code: "CH05 / E1",
         brand: "LG / Beko Klima",
         category: "klima",
@@ -454,6 +588,7 @@ const errorDatabase = [
         details: "Üniteler arası sinyal kablosundaki kopukluk veya dış ünite inverter kartı arızasından kaynaklanır."
     },
     {
+        id: "u4-a6",
         code: "U4 / A6",
         brand: "Daikin Klima",
         category: "klima",
@@ -470,34 +605,89 @@ const errorDatabase = [
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('resultsContainer');
 const tabButtons = document.querySelectorAll('.tab-btn');
+const toast = document.getElementById('toast');
 
 let activeCategory = 'all';
+
+function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+function copyToClipboard(text, successMsg) {
+    navigator.clipboard.writeText(text).then(() => {
+        showToast(successMsg);
+    });
+}
 
 function renderCards(data) {
     resultsContainer.innerHTML = '';
     
     if (data.length === 0) {
-        resultsContainer.innerHTML = '<div class="no-result">🔍 Aradığınız kriterlere uygun bir kayıt bulunamadı.<br><small style="margin-top:8px; display:inline-block; color:#64748b;">Yalnızca hata kodunu (örn: F5) veya cihaz markasını yazmayı deneyin.</small></div>';
+        const query = searchInput.value.trim();
+        const whatsappReportUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent("Merhaba, sitede şu hata kodunu aradım ancak bulamadım: " + query + ". Rehbere ekleyebilir misiniz?")}`;
+        
+        resultsContainer.innerHTML = `
+            <div class="no-result-card">
+                <div style="font-size:2rem; margin-bottom:0.5rem;">🔍</div>
+                <div style="font-weight:700; font-size:1.1rem; margin-bottom:0.3rem;">"${query}" arızası henüz rehberde yok</div>
+                <p style="color:#94a3b8; font-size:0.9rem; margin:0 0 1rem 0;">Bu kodu inceleyip listeye eklememiz için bize tek tıkla iletebilirsin.</p>
+                <a href="${whatsappReportUrl}" target="_blank" class="request-btn">
+                    💬 Bu Hata Kodunu Bildir & Talep Et
+                </a>
+            </div>
+        `;
         return;
     }
 
     data.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
+        card.id = item.id;
+
+        const currentUrl = `${window.location.origin}${window.location.pathname}#${item.id}`;
+        const waText = encodeURIComponent(`*${item.brand} - ${item.code} Hatası (${item.title})*\nÇözüm Rehberi ve Kontrol Adımları için tıkla: ${currentUrl}`);
+        const waUrl = `https://api.whatsapp.com/send?text=${waText}`;
+
+        const technicianText = `Cihaz: ${item.brand}\nHata Kodu: ${item.code}\nArıza Tanımı: ${item.title}\nKullanıcı Kontrolü: Evdeki standart reset/temizleme adımları uygulandı, problem devam ediyor.`;
+
+        // Checklist HTML
+        const stepsHtml = item.steps.map((step, idx) => `
+            <label class="step-item">
+                <input type="checkbox" onchange="this.parentElement.classList.toggle('checked', this.checked)">
+                <span class="step-text">${step}</span>
+            </label>
+        `).join('');
+
         card.innerHTML = `
             <div class="card-header">
                 <span class="code-badge">${item.code}</span>
                 <span class="device-info">${item.brand}</span>
             </div>
             <h3 class="issue-title">${item.title}</h3>
-            <div class="steps-label">Ne Yapılmalı?</div>
-            <ul class="solution-steps">
-                ${item.steps.map(step => `<li>${step}</li>`).join('')}
-            </ul>
+            
+            <div class="steps-label">Uygulanacak Adımlar (İşaretleyin)</div>
+            <div class="step-list">
+                ${stepsHtml}
+            </div>
+
             <details>
                 <summary>▶ 🔧 Servis & Parça İpuçları</summary>
                 <div class="details-content">${item.details}</div>
             </details>
+
+            <div class="card-actions">
+                <a href="${waUrl}" target="_blank" class="action-btn whatsapp">
+                    💬 WhatsApp'ta Paylaş
+                </a>
+                <button class="action-btn" onclick="copyToClipboard('${currentUrl}', '🔗 Doğrudan kart linki kopyalandı!')">
+                    🔗 Linki Kopyala
+                </button>
+                <button class="action-btn" onclick='copyToClipboard(${JSON.stringify(technicianText)}, "📋 Servis arıza notu panoya kopyalandı!")'>
+                    📝 Usta / Servis Notu Al
+                </button>
+            </div>
         `;
         resultsContainer.appendChild(card);
     });
@@ -529,7 +719,18 @@ tabButtons.forEach(btn => {
     });
 });
 
+// Sayfa ilk yüklendiğinde çalıştır
 renderCards(errorDatabase);
+
+// URL'de doğrudan bir ID varsa oraya odaklan (#f5-e05 gibi)
+window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+            setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 200);
+        }
+    }
+});
 </script>
 
 </body>
