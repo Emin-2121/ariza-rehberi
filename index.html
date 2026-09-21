@@ -7,8 +7,8 @@
 
     <!-- Temel SEO Başlık ve Açıklaması -->
     <title>Cihaz Arıza & Hata Kodu Rehberi | Kombi, Çamaşır, Klima ve Buzdolabı Çözümleri</title>
-    <meta name="description" content="Kombi, klima, termosifon ve beyaz eşyalardaki hata kodlarının anlamları, tahmini parça maliyetleri ve servis öncesi kontrol adımları.">
-    <meta name="keywords" content="kombi hata kodları, f5 arızası, e15 arızası, çamaşır makinesi hata kodları, buzdolabı ünlem işareti, kombi su basıncı, arıza rehberi">
+    <meta name="description" content="Kombi, klima, termosifon, kurutma ve beyaz eşyalardaki hata kodlarının anlamları, tahmini parça maliyetleri ve servis öncesi adım adım kontroller.">
+    <meta name="keywords" content="kombi hata kodları, f5 arızası, e15 arızası, çamaşır makinesi hata kodları, e09 bulaşık, buzdolabı ünlem, kurutma filtresi, arıza rehberi">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://ariza-rehberi.vercel.app/">
 
@@ -337,7 +337,6 @@
             border-radius: 6px;
         }
 
-        /* 1. Tahmini Maliyet & İşçilik Göstergesi */
         .cost-estimate-badge {
             display: inline-flex;
             gap: 0.6rem;
@@ -373,7 +372,6 @@
             color: #f1f5f9;
         }
 
-        /* 4. Kombi Su Basıncı İçin SVG Gösterge Şeması */
         .gauge-container {
             display: flex;
             align-items: center;
@@ -447,7 +445,6 @@
             color: #64748b;
         }
 
-        /* 3. Kullanıcı Not Kutusu */
         .user-note-box {
             margin-top: 0.85rem;
             background: rgba(255, 255, 255, 0.02);
@@ -617,7 +614,6 @@
             transform: translateY(-1px);
         }
 
-        /* 2. Acil Arama Butonlu Güvenlik Bölümü */
         .safety-banner {
             margin-top: 3.5rem;
             padding: 1.2rem;
@@ -823,12 +819,12 @@
     <header>
         <div class="hero-badge">⚡ Servis Öncesi Kontrol Aracı</div>
         <h1>Arıza & Hata Kodu Rehberi</h1>
-        <p class="subtitle">Kombi, klima, beyaz eşya veya termosifondaki kodu aratın, maliyetleri öğrenin ve çözümü evde deneyin.</p>
+        <p class="subtitle">Kombi, klima, beyaz eşya, kurutma veya termosifondaki kodu aratın, maliyetleri öğrenin ve çözümü evde deneyin.</p>
     </header>
 
     <div class="search-wrapper">
         <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Örn: F5, E18, Buzdolabı ünlem, Termosifon..." autofocus>
+        <input type="text" id="searchInput" placeholder="Örn: F5, E18, E09, Kurutma filtresi, Termosifon..." autofocus>
         <button id="micBtn" class="mic-btn" title="Sesle Ara" onclick="startSpeechRecognition()">🎙️</button>
     </div>
 
@@ -838,8 +834,9 @@
         <button class="tag-btn" onclick="quickSearch('F5')">🔥 Baymak F5</button>
         <button class="tag-btn" onclick="quickSearch('Su Basıncı')">💧 Su Basma (F10/F22)</button>
         <button class="tag-btn" onclick="quickSearch('E18')">🧺 Bosch E18</button>
+        <button class="tag-btn" onclick="quickSearch('E09')">🍽️ Bulaşık E09 Isıtma</button>
+        <button class="tag-btn" onclick="quickSearch('Kurutma')">💨 Kurutma Filtresi</button>
         <button class="tag-btn" onclick="quickSearch('Ünlem')">🧊 Buzdolabı Ünlem</button>
-        <button class="tag-btn" onclick="quickSearch('Termosifon')">⚡ Termosifon</button>
         <button class="tag-btn" onclick="quickSearch('CH05')">❄️ Klima CH05</button>
     </div>
 
@@ -854,7 +851,7 @@
                 <select id="wizardDevice" class="wizard-select" onchange="runWizard()">
                     <option value="">1. Cihazınızı Seçin...</option>
                     <option value="kombi">Kombi</option>
-                    <option value="beyazesya">Çamaşır / Bulaşık</option>
+                    <option value="beyazesya">Çamaşır / Bulaşık / Kurutma</option>
                     <option value="sogutma">Buzdolabı / Termosifon</option>
                     <option value="klima">Klima</option>
                 </select>
@@ -862,6 +859,7 @@
                     <option value="">2. Yaşanan Sorun Nedir?</option>
                     <option value="su">Su Basıncı / Su Akıtma / Su Boşaltmama</option>
                     <option value="atesleme">Ateşleme Yapmıyor / Gaz Yok</option>
+                    <option value="isitmiyor">Suyu Isıtmıyor / Kurutmuyor</option>
                     <option value="sogutmuyor">Soğutmuyor / Ünlem Yanıp Sönüyor</option>
                     <option value="iletisim">Çalışmıyor / İletişim / Şalter Attırma</option>
                 </select>
@@ -872,7 +870,7 @@
     <div class="category-tabs">
         <button class="tab-btn active" data-cat="all">Tümü</button>
         <button class="tab-btn" data-cat="kombi">🔥 Kombiler</button>
-        <button class="tab-btn" data-cat="beyazesya">🧺 Çamaşır / Bulaşık</button>
+        <button class="tab-btn" data-cat="beyazesya">🧺 Çamaşır / Bulaşık / Kurutma</button>
         <button class="tab-btn" data-cat="sogutma">🧊 Soğutma & Termosifon</button>
         <button class="tab-btn" data-cat="klima">❄️ Klimalar</button>
     </div>
@@ -942,6 +940,7 @@
 
 <script>
 const errorDatabase = [
+    // --- KOMBİLER ---
     {
         id: "f5-e05",
         code: "F5 / E05",
@@ -960,6 +959,23 @@ const errorDatabase = [
         details: "Sorun devam ederse prosestat (hava basınç anahtarı) veya fan motorunda elektriksel/mekanik arıza olabilir."
     },
     {
+        id: "eca-e4",
+        code: "E4",
+        brand: "E.C.A Proteus / Confeo",
+        category: "kombi",
+        title: "Diferansiyel Hava Basınç Uyarısı",
+        cost: "350 - 800 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
+        steps: [
+            "Atık gaz bacasının rüzgardan etkilenip etkilenmediğini veya gevşeyip çıkmadığını denetleyin.",
+            "Baca çıkış terminalinde kuş teli veya yabancı cisim olup olmadığını kontrol edin.",
+            "Kombinin panelindeki R (Reset) düğmesine 3 saniye basılı tutun."
+        ],
+        details: "Hava akış anahtarı (prosestat) kontak yapışması veya fan salyangozunda toz birikmesi durumunda parça temizliği/değişimi gerekir."
+    },
+    {
         id: "e01-a01-f28",
         code: "E01 / A01 / F28",
         brand: "Baymak / E.C.A / Vaillant",
@@ -971,7 +987,7 @@ const errorDatabase = [
         hasGauge: false,
         steps: [
             "Evdeki gaz vanalarının açık olduğunu kontrol edin (ocağı yakmayı deneyin).",
-            "Kombinin yanında bulunan gaz vanasının boruyla paralel hizada (açık) olduğunu doğrulayın.",
+            "Kombinin yanında bulunan sarı gaz vanasının boruyla paralel hizada (açık) olduğunu doğrulayın.",
             "Kombi panelindeki Reset (R) tuşuna 3 saniye basarak yeniden başlatın (3 kez deneyin)."
         ],
         details: "Gaz valfi bobin arızası veya iyonizasyon elektrodunun kirlenmesi durumunda servis müdahalesi gerekir."
@@ -987,11 +1003,28 @@ const errorDatabase = [
         diffClass: "diff-low",
         hasGauge: true,
         steps: [
-            "Kombinin alt kısmındaki doldurma musluğunu sola çevirerek açın.",
+            "Kombinin alt kısmındaki doldurma musluğunu (mavi veya siyah) sola çevirerek açın.",
             "Ön paneldeki basınç göstergesi 1.5 bar değerine gelene kadar su basın.",
             "Musluğu iyice sıkıp kapatın. Cihaz otomatik olarak çalışmaya başlayacaktır."
         ],
         details: "Basınç sürekli düşüyorsa tesisatta su kaçağı veya genleşme tankında membran patlağı olabilir."
+    },
+    {
+        id: "baymak-e03",
+        code: "E03",
+        brand: "Baymak Lambert / Baxi",
+        category: "kombi",
+        title: "Aşırı Isınma Emniyet Termostatı Kilidi",
+        cost: "250 - 650 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
+        steps: [
+            "Evdeki petek vanalarının en az 3 tanesinin tamamen açık olduğunu teyit edin.",
+            "Kombinin altındaki kalorifer dönüş filtresinin vanalarının açık olduğunu kontrol edin.",
+            "Cihazı şalterden kapatıp su sıcaklığının 30 dereceye düşmesini bekleyin ve resetleyin."
+        ],
+        details: "Sirkülasyon pompası sıkışmışsa kombi aniden hararet yapar ve limit termostatı atar."
     },
     {
         id: "f1-e02",
@@ -1044,6 +1077,8 @@ const errorDatabase = [
         ],
         details: "Ateşleme elektrotlarında karbon birikmesi veya elektronik kart devresi arızası görülebilir."
     },
+
+    // --- BEYAZ EŞYA & KURUTMA ---
     {
         id: "e08-f08",
         code: "E08 / F08",
@@ -1079,6 +1114,40 @@ const errorDatabase = [
         details: "Pompa filtresi temizlenmesine rağmen boşaltmıyorsa manyetik tahliye motoru arızalıdır."
     },
     {
+        id: "bosch-e23",
+        code: "E23 / F23",
+        brand: "Bosch / Siemens Çamaşır",
+        category: "beyazesya",
+        title: "Aquastop Taban Su Kaçağı Algılandı",
+        cost: "350 - 900 TL",
+        diff: "Orta",
+        diffClass: "diff-mid",
+        hasGauge: false,
+        steps: [
+            "Makinenin su giriş musluğunu derhal kapatın ve fişini prizden çekin.",
+            "Cihazın taban haznesine su sızmış ve güvenlik şamandırası kilitlenmiştir.",
+            "Makineyi hafifçe öne doğru eğerek tabandaki birikmiş suyu yere bir bez yardımıyla tahliye edin."
+        ],
+        details: "Körük contası yırtılması, deterjan çekmecesi taşması veya tahliye hortumu patlağı araştırılmalıdır."
+    },
+    {
+        id: "samsung-3e",
+        code: "3E / 3C",
+        brand: "Samsung Çamaşır",
+        category: "beyazesya",
+        title: "Motor Devir Sensörü (Tako) / Aşırı Yük Hatası",
+        cost: "300 - 1.100 TL",
+        diff: "Orta",
+        diffClass: "diff-mid",
+        hasGauge: false,
+        steps: [
+            "Kazan içine tek parça aşırı ağır battaniye veya fazla çamaşır konulup konulmadığını kontrol edin; yükü azaltın.",
+            "Makineyi kapatıp fişini prizden çekin, 5 dakika bekledikten sonra tekrar çalıştırın.",
+            "Tamburu elinizle çevirip rahat dönüp dönmediğini (sıkışma var mı) kontrol edin."
+        ],
+        details: "Kazan rahat dönüyorsa motor arkasındaki devir algılayıcı tako bobini veya motor kömürleri aşınmıştır."
+    },
+    {
         id: "e15",
         code: "E15",
         brand: "Bosch / Siemens Bulaşık",
@@ -1094,6 +1163,40 @@ const errorDatabase = [
             "Cihazı tamamen kurulayıp 2 saat bekledikten sonra tekrar fişe takın."
         ],
         details: "Tabandaki taşma emniyet şamandırası devreye girmiştir. Su kaçağı iç hortumlardan kaynaklanıyor olabilir."
+    },
+    {
+        id: "bosch-e09",
+        code: "E09 / F09",
+        brand: "Bosch / Siemens Bulaşık",
+        category: "beyazesya",
+        title: "Isıtma Hatası / Suyu Isıtmama Sorunu",
+        cost: "800 - 2.400 TL",
+        diff: "Zor",
+        diffClass: "diff-high",
+        hasGauge: false,
+        steps: [
+            "Program bittiğinde bulaşıkların soğuk ve ıslak çıkıp çıkmadığını teyit edin.",
+            "Makinenin tabanındaki metal filtre süzgecini çıkarıp kireç veya yağ birikintilerini temizleyin.",
+            "Cihazın fişini çekip 10 dakika sonra yeniden başlatın."
+        ],
+        details: "Bosch/Siemens grubunda rezistans ısıtıcı yıkama motoruna entegredir (Isı pompalı motor). Rezistans teli koptuğunda komple motor ünitesi değişir."
+    },
+    {
+        id: "kurutma-filtre",
+        code: "Filtre / Su Tankı Uyarısı",
+        brand: "Arçelik / Beko / Bosch Kurutma",
+        category: "beyazesya",
+        title: "Kondenser Tıkanıklığı veya Kurutmama",
+        cost: "0 - 450 TL",
+        diff: "Çok Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
+        steps: [
+            "Kapak girişindeki tiftik hav filtresini çıkarıp musluk altında ılık suyla yıkayarak kurutun.",
+            "Sol alt köşedeki kondenser/evaporatör metal petek kapakçığını açıp süpürge fırçasıyla tozları çekin.",
+            "Üst su toplama çekmecesini boşaltın ve sensör metal çubuklarını kuru bezle silin."
+        ],
+        details: "Hava akımı kesildiğinde cihaz aşırı ısınma korumasına geçer ve çamaşırlar nemli kalır."
     },
     {
         id: "e01-kapi",
@@ -1129,6 +1232,8 @@ const errorDatabase = [
         ],
         details: "Ventil bobini arızalandığında elektrik gitse dahi su vanasını açamaz."
     },
+
+    // --- SOĞUTMA & TERMOSİFON ---
     {
         id: "buzdolabi-unlem",
         code: "(!) Kırmızı Ünlem",
@@ -1164,6 +1269,25 @@ const errorDatabase = [
         details: "Şalter açılır açılmaz atıyorsa kazan içindeki elektrikli rezistans patlamıştır; rezistans değişimi gerekir."
     },
     {
+        id: "termosifon-damlatma",
+        code: "Ventilden Su Damlatma",
+        brand: "Genel Termosifonlar",
+        category: "sogutma",
+        title: "Emniyet Ventili Basınç Tahliyesi",
+        cost: "150 - 350 TL",
+        diff: "Çok Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
+        steps: [
+            "Cihaz suyu ısıtırken genleşen suyun tahliye ventili ucundan damlaması normal bir güvenlik refleksidir.",
+            "Ventilin ucuna şeffaf ince bir serum hortumu takarak gidere yönlendirin.",
+            "Cihaz kapalıyken bile şebeke basıncından sürekli fışkırıyorsa emniyet ventili arızalıdır."
+        ],
+        details: "Şebeke su basıncı 5 bar üzerindeyse evin girişine basınç düşürücü regülatör takılması tavsiye edilir."
+    },
+
+    // --- KLİMALAR ---
+    {
         id: "ch05-e1",
         code: "CH05 / E1",
         brand: "LG / Beko Klima",
@@ -1179,6 +1303,23 @@ const errorDatabase = [
             "Kumandadan klimayı tekrar çalıştırın."
         ],
         details: "Üniteler arası sinyal kablosundaki kopukluk veya dış ünite inverter kartı arızasından kaynaklanır."
+    },
+    {
+        id: "lg-ch01",
+        code: "CH01 / CH02",
+        brand: "LG / Beko Klima",
+        category: "klima",
+        title: "İç Ünite Sıcaklık / Boru Sensör Arızası",
+        cost: "250 - 600 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
+        steps: [
+            "Klimanın ön panel kapağını yukarı kaldırıp toz filtrelerini yıkayın.",
+            "Filtrenin hemen arkasındaki siyah damla uçlu ortam sensörünün yerinden çıkıp çıkmadığına bakın.",
+            "Cihazın sigortasını kapatıp 2 dakika sonra yeniden açın."
+        ],
+        details: "Sensör ohm değerini yitirdiğinde (NTC arızası) oda sıcaklığını yanlış algılar veya hiç üfleme yapmaz."
     },
     {
         id: "u4-a6",
@@ -1245,6 +1386,7 @@ function runWizard() {
 
     if (sym === 'su') searchInput.value = 'su';
     else if (sym === 'atesleme') searchInput.value = 'ateşleme';
+    else if (sym === 'isitmiyor') searchInput.value = 'ısıtma';
     else if (sym === 'sogutmuyor') searchInput.value = 'ünlem';
     else if (sym === 'iletisim') searchInput.value = 'iletişim';
 
@@ -1361,13 +1503,9 @@ function renderCards(data) {
             <div class="gauge-container">
                 <svg width="70" height="70" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="42" fill="none" stroke="#1e293b" stroke-width="8" />
-                    <!-- Düşük Bölge (Kırmızı) -->
                     <path d="M 20 70 A 42 42 0 0 1 35 25" fill="none" stroke="#ef4444" stroke-width="8" />
-                    <!-- İdeal Bölge 1.5 Bar (Yeşil) -->
                     <path d="M 35 25 A 42 42 0 0 1 65 25" fill="none" stroke="#22c55e" stroke-width="8" />
-                    <!-- Yüksek Bölge (Kırmızı) -->
                     <path d="M 65 25 A 42 42 0 0 1 80 70" fill="none" stroke="#ef4444" stroke-width="8" />
-                    <!-- İbre (1.5 barı işaret eder) -->
                     <line x1="50" y1="50" x2="50" y2="18" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" />
                     <circle cx="50" cy="50" r="4" fill="#fff" />
                     <text x="50" y="70" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="bold">1.5 BAR</text>
@@ -1404,7 +1542,6 @@ function renderCards(data) {
                 <div class="details-content">${item.details}</div>
             </details>
 
-            <!-- Özel Not Defteri -->
             <div class="user-note-box">
                 <div class="user-note-header">
                     <span>📝 Cihazınız İçin Özel Not (Sadece Bu Cihazda Saklanır)</span>
