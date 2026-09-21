@@ -7,8 +7,8 @@
 
     <!-- Temel SEO Başlık ve Açıklaması -->
     <title>Cihaz Arıza & Hata Kodu Rehberi | Kombi, Çamaşır, Klima ve Buzdolabı Çözümleri</title>
-    <meta name="description" content="Kombi, klima, termosifon ve beyaz eşyalardaki hata kodlarının anlamları ve servis çağırmadan önce evde uygulayabileceğiniz adım adım pratik çözüm rehberi.">
-    <meta name="keywords" content="kombi hata kodları, f5 arızası, e15 arızası, çamaşır makinesi hata kodları, buzdolabı ünlem işareti, termosifon arızası, arıza rehberi">
+    <meta name="description" content="Kombi, klima, termosifon ve beyaz eşyalardaki hata kodlarının anlamları, tahmini parça maliyetleri ve servis öncesi kontrol adımları.">
+    <meta name="keywords" content="kombi hata kodları, f5 arızası, e15 arızası, çamaşır makinesi hata kodları, buzdolabı ünlem işareti, kombi su basıncı, arıza rehberi">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://ariza-rehberi.vercel.app/">
 
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ariza-rehberi.vercel.app/">
     <meta property="og:title" content="Cihaz Arıza & Hata Kodu Rehberi">
-    <meta property="og:description" content="Kombi, klima, termosifon ve beyaz eşyalardaki arıza kodlarını anında bulun, adım adım çözümü uygulayın.">
+    <meta property="og:description" content="Kombi, klima, termosifon ve beyaz eşyalardaki arıza kodlarını anında bulun, maliyetini öğrenin ve çözümü uygulayın.">
 
     <style>
         :root {
@@ -31,6 +31,7 @@
             --badge-bg: linear-gradient(135deg, #0284c7, #2563eb);
             --success: #22c55e;
             --warning: #f59e0b;
+            --danger: #ef4444;
         }
 
         * {
@@ -336,11 +337,62 @@
             border-radius: 6px;
         }
 
+        /* 1. Tahmini Maliyet & İşçilik Göstergesi */
+        .cost-estimate-badge {
+            display: inline-flex;
+            gap: 0.6rem;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 0.4rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            margin-bottom: 0.85rem;
+        }
+
+        .cost-val {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .diff-tag {
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        .diff-low { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+        .diff-mid { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .diff-high { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+
         .issue-title {
             margin: 0 0 0.75rem 0;
             font-size: 1.15rem;
             font-weight: 700;
             color: #f1f5f9;
+        }
+
+        /* 4. Kombi Su Basıncı İçin SVG Gösterge Şeması */
+        .gauge-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(56, 189, 248, 0.04);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            margin: 0.6rem 0 1rem 0;
+        }
+
+        .gauge-desc {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        .gauge-desc strong {
+            color: #38bdf8;
         }
 
         .steps-label {
@@ -393,6 +445,42 @@
         .step-item.checked .step-text {
             text-decoration: line-through;
             color: #64748b;
+        }
+
+        /* 3. Kullanıcı Not Kutusu */
+        .user-note-box {
+            margin-top: 0.85rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 0.6rem 0.75rem;
+        }
+
+        .user-note-header {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .user-note-input {
+            width: 100%;
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            color: #fff;
+            padding: 0.45rem 0.65rem;
+            font-size: 0.82rem;
+            outline: none;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 48px;
+        }
+
+        .user-note-input:focus {
+            border-color: var(--accent);
         }
 
         .feedback-bar {
@@ -529,6 +617,7 @@
             transform: translateY(-1px);
         }
 
+        /* 2. Acil Arama Butonlu Güvenlik Bölümü */
         .safety-banner {
             margin-top: 3.5rem;
             padding: 1.2rem;
@@ -549,7 +638,45 @@
             font-size: 0.9rem;
         }
 
-        /* Footer ve AdSense Uyumlu Yasal Bağlantılar */
+        .emergency-calls {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 0.85rem;
+        }
+
+        .call-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .call-gas {
+            background: #dc2626;
+            color: #fff;
+        }
+
+        .call-gas:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+        }
+
+        .call-water {
+            background: #0284c7;
+            color: #fff;
+        }
+
+        .call-water:hover {
+            background: #0369a1;
+            transform: translateY(-1px);
+        }
+
         footer {
             margin-top: 3rem;
             padding-top: 1.5rem;
@@ -579,7 +706,6 @@
             color: var(--accent);
         }
 
-        /* Modal (Yasal Metin Açılır Penceresi) */
         .modal {
             display: none;
             position: fixed;
@@ -670,7 +796,7 @@
                 color: #000 !important;
                 padding: 0;
             }
-            .search-wrapper, .quick-tags, .wizard-box, .category-tabs, .card-actions, .feedback-bar, .safety-banner, footer, header .hero-badge {
+            .search-wrapper, .quick-tags, .wizard-box, .category-tabs, .card-actions, .feedback-bar, .user-note-box, .safety-banner, footer, header .hero-badge {
                 display: none !important;
             }
             .card {
@@ -697,7 +823,7 @@
     <header>
         <div class="hero-badge">⚡ Servis Öncesi Kontrol Aracı</div>
         <h1>Arıza & Hata Kodu Rehberi</h1>
-        <p class="subtitle">Kombi, klima, beyaz eşya veya termosifondaki kodu aratın, adımları uygulayarak çözümü deneyin.</p>
+        <p class="subtitle">Kombi, klima, beyaz eşya veya termosifondaki kodu aratın, maliyetleri öğrenin ve çözümü evde deneyin.</p>
     </header>
 
     <div class="search-wrapper">
@@ -753,10 +879,14 @@
 
     <div class="results" id="resultsContainer"></div>
 
-    <!-- Güvenlik & Yasal Uyarı Bildirimi -->
+    <!-- Acil Arama Butonlu Güvenlik Bildirimi -->
     <div class="safety-banner">
         <strong>⚠️ Önemli Güvenlik Uyarısı</strong>
-        Bu rehberdeki adımlar genel bilgilendirme amaçlıdır. Gaz kokusu duyarsanız hiçbir elektrik düğmesine dokunmayın, ortamı havalandırıp derhal <strong>187 Doğalgaz Acil</strong> hattını arayın. Cihazların iç parça değişimlerini ve 220V elektrik bağlantılarını uzman yetkili servislere bırakınız.
+        Bu rehberdeki adımlar genel bilgilendirme amaçlıdır. Gaz kokusu duyarsanız hiçbir elektrik düğmesine dokunmayın, ortamı havalandırıp derhal acil çağrı butonlarını kullanın. Cihazların iç parça değişimlerini ve 220V elektrik bağlantılarını uzman yetkili servislere bırakınız.
+        <div class="emergency-calls">
+            <a href="tel:187" class="call-btn call-gas">🚨 187 Doğalgaz Acil Ara</a>
+            <a href="tel:185" class="call-btn call-water">💧 185 Su / Kanal Arıza Ara</a>
+        </div>
     </div>
 
     <!-- AdSense ve SEO Uyumlu Footer -->
@@ -772,7 +902,7 @@
     </footer>
 </div>
 
-<!-- Modal 1: Gizlilik Politikası (AdSense İçin Zorunlu) -->
+<!-- Yasal Modallar -->
 <div id="privacyModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -780,24 +910,22 @@
             <button class="close-btn" onclick="closeModal('privacyModal')">&times;</button>
         </div>
         <p>Arıza Rehberi (ariza-rehberi.vercel.app) olarak ziyaretçilerimizin gizliliğine saygı duyuyoruz. Bu sayfa, sitemizi ziyaret ettiğinizde toplanabilecek veriler ve bunların kullanımı hakkında bilgi verir.</p>
-        <p><strong>Çerezler ve Reklamlar:</strong> Sitemiz, kullanıcı deneyimini iyileştirmek ve ilerleyen süreçte Google AdSense gibi üçüncü taraf reklam ağları aracılığıyla ilgi alanına dayalı reklamlar sunmak için çerezler (cookies) kullanabilir. Google dahil üçüncü taraf tedarikçiler, kullanıcıların sitemizi veya diğer web sitelerini önceki ziyaretlerine dayalı olarak reklam yayınlamak için çerezleri kullanır.</p>
-        <p><strong>Yerel Depolama (LocalStorage):</strong> Sitede yaptığınız oylamalar (İşe Yaradı/Yaramadı) ve tamamlanan adımlar yalnızca kendi tarayıcınızın yerel hafızasında saklanır; sunucularımıza kişisel veri olarak aktarılmaz.</p>
+        <p><strong>Çerezler ve Reklamlar:</strong> Sitemiz, kullanıcı deneyimini iyileştirmek ve Google AdSense gibi üçüncü taraf reklam ağları aracılığıyla ilgi alanına dayalı reklamlar sunmak için çerezler (cookies) kullanabilir.</p>
+        <p><strong>Yerel Depolama (LocalStorage):</strong> Sitede yaptığınız oylamalar, kullanıcı notları ve tamamlanan adımlar yalnızca kendi tarayıcınızın yerel hafızasında saklanır; sunucularımıza aktarılmaz.</p>
     </div>
 </div>
 
-<!-- Modal 2: Kullanım Koşulları -->
 <div id="termsModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h3>Kullanım Koşulları ve Sorumluluk Reddi</h3>
             <button class="close-btn" onclick="closeModal('termsModal')">&times;</button>
         </div>
-        <p>Bu platformda sunulan arıza kodları, teşhisler ve çözüm adımları yalnızca bilgilendirme ve ilk müdahale tavsiyesi niteliğindedir.</p>
-        <p><strong>Sorumluluk Reddi:</strong> Platform yöneticileri, sitedeki tavsiyelerin uygulanması sırasında veya sonrasında cihazlarda meydana gelebilecek fiziksel/elektronik arızalardan, kullanıcı hatalarından veya can/mal güvenliği risklerinden sorumlu tutulamaz. Elektrik, su veya doğalgaz içeren kritik arızalarda daima yetkili servislere başvurulmalıdır.</p>
+        <p>Bu platformda sunulan arıza kodları, tahmini parça maliyetleri ve çözüm adımları yalnızca bilgilendirme ve ilk müdahale tavsiyesi niteliğindedir.</p>
+        <p><strong>Sorumluluk Reddi:</strong> Platform yöneticileri, sitedeki tavsiyelerin uygulanması sırasında veya sonrasında cihazlarda meydana gelebilecek hasarlardan, kullanıcı hatalarından veya can/mal güvenliği risklerinden sorumlu tutulamaz.</p>
     </div>
 </div>
 
-<!-- Modal 3: İletişim & Künye -->
 <div id="contactModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -805,8 +933,8 @@
             <button class="close-btn" onclick="closeModal('contactModal')">&times;</button>
         </div>
         <p><strong>Platform:</strong> Arıza & Hata Kodu Rehberi</p>
-        <p><strong>Amacımız:</strong> Ev aletleri ve ısıtma/soğutma sistemlerinde kullanıcıların basit kontrolleri yaparak gereksiz servis maliyetlerinden tasarruf etmesini sağlamak.</p>
-        <p><strong>Hata Bildirimi & İş Birlikleri:</strong> Listeye yeni hata kodları ekletmek, telif bildirimleri veya sponsorluk/iş birliği talepleriniz için doğrudan WhatsApp hattımızdan veya arama kutusundaki bildirim butonundan bizimle iletişime geçebilirsiniz.</p>
+        <p><strong>Amacımız:</strong> Ev aletlerinde gereksiz servis maliyetlerinden tasarruf sağlamak ve arızaları güvenli kılmak.</p>
+        <p><strong>İş Birliği & Hata Talebi:</strong> Listeye yeni kod ekletmek veya iş ortaklığı için arama sonuçlarındaki bildirim butonunu veya WhatsApp hattımızı kullanabilirsiniz.</p>
     </div>
 </div>
 
@@ -820,6 +948,10 @@ const errorDatabase = [
         brand: "Baymak / Demirdöküm",
         category: "kombi",
         title: "Hava Akış / Prosestat Hatası",
+        cost: "350 - 750 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
         steps: [
             "Kombinin bacasının yerinden çıkıp çıkmadığını kontrol edin.",
             "Bacanın dışarıdaki çıkış ağzının kar, buz veya kuş yuvası ile tıkanmadığından emin olun.",
@@ -833,12 +965,16 @@ const errorDatabase = [
         brand: "Baymak / E.C.A / Vaillant",
         category: "kombi",
         title: "Ateşleme Başarısızlığı (Gaz Yokluğu)",
+        cost: "400 - 1.200 TL",
+        diff: "Orta",
+        diffClass: "diff-mid",
+        hasGauge: false,
         steps: [
             "Evdeki gaz vanalarının açık olduğunu kontrol edin (ocağı yakmayı deneyin).",
             "Kombinin yanında bulunan gaz vanasının boruyla paralel hizada (açık) olduğunu doğrulayın.",
             "Kombi panelindeki Reset (R) tuşuna 3 saniye basarak yeniden başlatın (3 kez deneyin)."
         ],
-        details: "Gaz valfi bobin arızası veya iyonizasyon elektrodunun kirlenmesi/işlevini yitirmesi durumunda servis müdahalesi gerekir."
+        details: "Gaz valfi bobin arızası veya iyonizasyon elektrodunun kirlenmesi durumunda servis müdahalesi gerekir."
     },
     {
         id: "f10-e03",
@@ -846,12 +982,16 @@ const errorDatabase = [
         brand: "Demirdöküm / Baymak",
         category: "kombi",
         title: "Düşük Su Basıncı Hatası",
+        cost: "0 - 300 TL (Kullanıcı Çözebilir)",
+        diff: "Çok Kolay",
+        diffClass: "diff-low",
+        hasGauge: true,
         steps: [
             "Kombinin alt kısmındaki doldurma musluğunu sola çevirerek açın.",
             "Ön paneldeki basınç göstergesi 1.5 bar değerine gelene kadar su basın.",
             "Musluğu iyice sıkıp kapatın. Cihaz otomatik olarak çalışmaya başlayacaktır."
         ],
-        details: "Basınç sürekli düşüyorsa tesisatta su kaçağı veya kombinin genleşme tankında membran patlağı olabilir."
+        details: "Basınç sürekli düşüyorsa tesisatta su kaçağı veya genleşme tankında membran patlağı olabilir."
     },
     {
         id: "f1-e02",
@@ -859,12 +999,16 @@ const errorDatabase = [
         brand: "Demirdöküm / Baymak",
         category: "kombi",
         title: "Aşırı Isınma / Limit Termostat Hatası",
+        cost: "300 - 900 TL",
+        diff: "Orta",
+        diffClass: "diff-mid",
+        hasGauge: false,
         steps: [
             "Radyatör (petek) vanalarının en az 2-3 tanesinin tamamen açık olduğunu kontrol edin.",
             "Kombiyi kapatıp su sıcaklığının düşmesi için 15-20 dakika bekleyin.",
             "Reset tuşuna basarak cihazı tekrar çalıştırın."
         ],
-        details: "Sirkülasyon pompası sıkışmış, ana eşanjör kireç bağlamış veya kalorifer dönüş filtresi tıkanmış olabilir."
+        details: "Sirkülasyon pompası sıkışmış veya kalorifer dönüş filtresi tıkanmış olabilir."
     },
     {
         id: "f22-f75",
@@ -872,6 +1016,10 @@ const errorDatabase = [
         brand: "Vaillant",
         category: "kombi",
         title: "Yetersiz Su Basıncı veya Pompa Algılama Sorunu",
+        cost: "200 - 1.400 TL",
+        diff: "Orta",
+        diffClass: "diff-mid",
+        hasGauge: true,
         steps: [
             "Basınç göstergesini kontrol edin; 1 bar altındaysa alt vanadan 1.5 bara kadar su ekleyin.",
             "Kombiyi kapatıp açarak pompanın devreye girip girmediğini dinleyin.",
@@ -885,18 +1033,27 @@ const errorDatabase = [
         brand: "Bosch Condens",
         category: "kombi",
         title: "Alev Algılanmadı / Düşük Tesisat Basıncı",
+        cost: "450 - 1.100 TL",
+        diff: "Orta",
+        diffClass: "diff-mid",
+        hasGauge: false,
         steps: [
             "Gaz giriş vanasının açık olduğundan emin olun.",
             "Su basıncı 1 bar altındaysa alt musluktan 1.5 bara yükseltin.",
             "Reset butonuna basılı tutarak cihazı yeniden başlatın."
         ],
-        details: "Ateşleme elektrotlarında karbon birikmesi veya elektronik anakart alev devresi arızası görülebilir."
+        details: "Ateşleme elektrotlarında karbon birikmesi veya elektronik kart devresi arızası görülebilir."
     },
     {
         id: "e08-f08",
+        code: "E08 / F08",
         brand: "Arçelik / Beko Çamaşır",
         category: "beyazesya",
         title: "Su Boşaltma Hatası (Tahliye Problemi)",
+        cost: "250 - 550 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
         steps: [
             "Makinenin sağ alt köşesindeki tahliye filtre kapağını açın.",
             "Filtreyi sola çevirerek çıkarın, yabancı cisimleri (bozuk para, toka) temizleyin.",
@@ -910,6 +1067,10 @@ const errorDatabase = [
         brand: "Bosch / Siemens Çamaşır",
         category: "beyazesya",
         title: "Pompa Tıkalı / Su Tahliye Edilemiyor",
+        cost: "300 - 650 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
         steps: [
             "Sağ alttaki küçük tahliye hortumundan kovaya suyu akıtın.",
             "Pompa kapağını dikkatlice açıp tamburdan gelen yabancı cisimleri temizleyin.",
@@ -923,6 +1084,10 @@ const errorDatabase = [
         brand: "Bosch / Siemens Bulaşık",
         category: "beyazesya",
         title: "Tabanda Su Kaçağı (Su Güvenlik Kilidi)",
+        cost: "200 - 600 TL",
+        diff: "Orta",
+        diffClass: "diff-mid",
+        hasGauge: false,
         steps: [
             "Cihazın fişini prizden çekin ve su musluğunu kapatın.",
             "Makineyi öne doğru yaklaşık 45 derece eğerek alt haznedeki suyu bezle akıtın.",
@@ -936,6 +1101,10 @@ const errorDatabase = [
         brand: "Arçelik / Beko Çamaşır",
         category: "beyazesya",
         title: "Kapak Kilitlenmeme Hatası",
+        cost: "200 - 450 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
         steps: [
             "Kapağı biraz sertçe bastırarak dilin yuvaya tam oturduğundan emin olun.",
             "Kapak mandalını ve kilit tırnağını kontrol edin.",
@@ -949,6 +1118,10 @@ const errorDatabase = [
         brand: "Samsung Çamaşır",
         category: "beyazesya",
         title: "Su Girişi / Su Alma Hatası",
+        cost: "250 - 500 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
         steps: [
             "Makinenin bağlı olduğu su musluğunun açık olduğunu kontrol edin.",
             "Arkadaki su giriş hortumunu söküp tel filtreyi fırça ile kireçten temizleyin.",
@@ -962,12 +1135,16 @@ const errorDatabase = [
         brand: "Arçelik / Beko Buzdolabı",
         category: "sogutma",
         title: "Yüksek Sıcaklık Uyarısı (Yetersiz Soğutma)",
+        cost: "400 - 2.500 TL",
+        diff: "Zor",
+        diffClass: "diff-high",
+        hasGauge: false,
         steps: [
             "Buzdolabı kapaklarının uzun süre açık kalıp kalmadığını kontrol edin.",
             "Kapak fitillerinin (lastiklerinin) yırtık olup olmadığını ve hava sızdırıp sızdırmadığını inceleyin.",
-            "Dolabın içine yeni ve aşırı sıcak tencere/yemek konulduysa ısının dengelenmesi için 4-5 saat bekleyin."
+            "Dolabın içine yeni ve aşırı sıcak yemek konulduysa ısının dengelenmesi için 4-5 saat bekleyin."
         ],
-        details: "Kırmızı ünlem soğutma derecesi kritik seviyeye çıktığında yanar. Kompresör (motor) kalkış yapmıyor veya gaz kaçağı olabilir."
+        details: "Kompresör kalkış yapmıyor veya gaz kaçağı olabilir; yetkili servis müdahalesi gerektirir."
     },
     {
         id: "termosifon-salter",
@@ -975,12 +1152,16 @@ const errorDatabase = [
         brand: "Demirdöküm / Ariston Termosifon",
         category: "sogutma",
         title: "Rezistans Kaçağı veya Emniyet Termostatı Açması",
+        cost: "350 - 750 TL",
+        diff: "Orta",
+        diffClass: "diff-mid",
+        hasGauge: false,
         steps: [
             "Termosifonun alt kapağındaki manuel reset (emniyet) butonuna hafifçe bastırıp tık sesini kontrol edin.",
             "Cihazı şalterden kapatıp elektrik bağlantı vidalarının gevşeyip gevşemediğini gözlemleyin.",
             "Cihazın su basıncının dolu olduğunu doğrulayın (susuz çalıştırmayınız)."
         ],
-        details: "Şalter açılır açılmaz atıyorsa kazan içindeki elektrikli rezistans patlamış ve gövdeye elektrik kaçırıyordur; rezistans değişimi gerekir."
+        details: "Şalter açılır açılmaz atıyorsa kazan içindeki elektrikli rezistans patlamıştır; rezistans değişimi gerekir."
     },
     {
         id: "ch05-e1",
@@ -988,6 +1169,10 @@ const errorDatabase = [
         brand: "LG / Beko Klima",
         category: "klima",
         title: "İç - Dış Ünite Haberleşme Hatası",
+        cost: "500 - 1.800 TL",
+        diff: "Zor",
+        diffClass: "diff-high",
+        hasGauge: false,
         steps: [
             "Klimanın bağlı olduğu sigortayı indirin.",
             "En az 3 dakika bekledikten sonra sigortayı tekrar kaldırın.",
@@ -1001,6 +1186,10 @@ const errorDatabase = [
         brand: "Daikin Klima",
         category: "klima",
         title: "İletişim Hatası veya İç Fan Kilitlenmesi",
+        cost: "600 - 2.200 TL",
+        diff: "Zor",
+        diffClass: "diff-high",
+        hasGauge: false,
         steps: [
             "Ön kapağı açıp filtreleri yıkayarak temizleyin.",
             "Cihazın ana şalterini kapatıp 5 dakika bekleyin ve yeniden açın.",
@@ -1100,15 +1289,18 @@ function startSpeechRecognition() {
 function vote(id, type) {
     const key = `vote_${id}`;
     localStorage.setItem(key, type);
-    showToast(type === 'up' ? "Teşekkürler! Geri bildiriminiz kaydedildi 👍" : "Geri bildiriminiz kaydedildi, rehberi geliştireceğiz 👎");
+    showToast(type === 'up' ? "Teşekkürler! Geri bildiriminiz kaydedildi 👍" : "Geri bildiriminiz kaydedildi, geliştireceğiz 👎");
     filterData();
+}
+
+function saveUserNote(id, text) {
+    localStorage.setItem(`user_note_${id}`, text);
 }
 
 function printCard(id) {
     window.print();
 }
 
-// Modal Kontrolleri
 function openModal(id) {
     document.getElementById(id).classList.add('active');
 }
@@ -1134,7 +1326,7 @@ function renderCards(data) {
             <div class="no-result-card">
                 <div style="font-size:2rem; margin-bottom:0.5rem;">🔍</div>
                 <div style="font-weight:700; font-size:1.1rem; margin-bottom:0.3rem;">"${query}" arızası henüz rehberde yok</div>
-                <p style="color:#94a3b8; font-size:0.9rem; margin:0 0 1rem 0;">Bu kodu inceleyip listeye eklememiz için bize tek tıkla iletebilirsin.</p>
+                <p style="color:#94a3b8; font-size:0.9rem; margin:0 0 1rem 0;">Bu kodu inceleyip listeye eklememiz için bize iletebilirsin.</p>
                 <a href="${whatsappReportUrl}" target="_blank" class="request-btn">
                     💬 Bu Hata Kodunu Bildir & Talep Et
                 </a>
@@ -1149,7 +1341,7 @@ function renderCards(data) {
         card.id = item.id;
 
         const currentUrl = `${window.location.origin}${window.location.pathname}#${item.id}`;
-        const waText = encodeURIComponent(`*${item.brand} - ${item.code} Hatası (${item.title})*\nÇözüm Rehberi ve Kontrol Adımları için tıkla: ${currentUrl}`);
+        const waText = encodeURIComponent(`*${item.brand} - ${item.code} Hatası (${item.title})*\nÇözüm Rehberi için tıkla: ${currentUrl}`);
         const waUrl = `https://api.whatsapp.com/send?text=${waText}`;
 
         const technicianText = `Cihaz: ${item.brand}\nHata Kodu: ${item.code}\nArıza Tanımı: ${item.title}\nKullanıcı Kontrolü: Evdeki standart reset/temizleme adımları uygulandı, problem devam ediyor.`;
@@ -1162,14 +1354,46 @@ function renderCards(data) {
         `).join('');
 
         const userVote = localStorage.getItem(`vote_${item.id}`);
+        const savedNote = localStorage.getItem(`user_note_${item.id}`) || '';
+
+        // Kombi basıncı için SVG Manometre Göstergesi
+        const gaugeHtml = item.hasGauge ? `
+            <div class="gauge-container">
+                <svg width="70" height="70" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="#1e293b" stroke-width="8" />
+                    <!-- Düşük Bölge (Kırmızı) -->
+                    <path d="M 20 70 A 42 42 0 0 1 35 25" fill="none" stroke="#ef4444" stroke-width="8" />
+                    <!-- İdeal Bölge 1.5 Bar (Yeşil) -->
+                    <path d="M 35 25 A 42 42 0 0 1 65 25" fill="none" stroke="#22c55e" stroke-width="8" />
+                    <!-- Yüksek Bölge (Kırmızı) -->
+                    <path d="M 65 25 A 42 42 0 0 1 80 70" fill="none" stroke="#ef4444" stroke-width="8" />
+                    <!-- İbre (1.5 barı işaret eder) -->
+                    <line x1="50" y1="50" x2="50" y2="18" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" />
+                    <circle cx="50" cy="50" r="4" fill="#fff" />
+                    <text x="50" y="70" text-anchor="middle" fill="#cbd5e1" font-size="10" font-weight="bold">1.5 BAR</text>
+                </svg>
+                <div class="gauge-desc">
+                    <strong>İdeal Basınç Aralığı:</strong> İbre yeşil bölgede (1.5 bar civarında) olmalıdır. 1 bar altına düşerse cihaz arızaya geçer.
+                </div>
+            </div>
+        ` : '';
 
         card.innerHTML = `
             <div class="card-header">
                 <span class="code-badge">${item.code}</span>
                 <span class="device-info">${item.brand}</span>
             </div>
+
+            <div class="cost-estimate-badge">
+                <span>💰 Tahmini Parça: <span class="cost-val">${item.cost}</span></span>
+                <span>•</span>
+                <span>İşçilik: <span class="diff-tag ${item.diffClass}">${item.diff}</span></span>
+            </div>
+
             <h3 class="issue-title">${item.title}</h3>
             
+            ${gaugeHtml}
+
             <div class="steps-label">Uygulanacak Adımlar (İşaretleyin)</div>
             <div class="step-list">
                 ${stepsHtml}
@@ -1179,6 +1403,14 @@ function renderCards(data) {
                 <summary>▶ 🔧 Servis & Parça İpuçları</summary>
                 <div class="details-content">${item.details}</div>
             </details>
+
+            <!-- Özel Not Defteri -->
+            <div class="user-note-box">
+                <div class="user-note-header">
+                    <span>📝 Cihazınız İçin Özel Not (Sadece Bu Cihazda Saklanır)</span>
+                </div>
+                <textarea class="user-note-input" placeholder="Örn: 2026 kışında filtre temizlenince düzeldi..." oninput="saveUserNote('${item.id}', this.value)">${savedNote}</textarea>
+            </div>
 
             <div class="feedback-bar">
                 <span>Bu çözüm işinize yaradı mı?</span>
