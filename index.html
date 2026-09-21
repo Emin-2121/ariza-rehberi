@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090d16">
 
     <!-- Temel SEO Başlık ve Açıklaması -->
     <title>Cihaz Arıza & Hata Kodu Rehberi | Kombi, Çamaşır Makinesi ve Klima Çözümleri</title>
@@ -29,6 +30,7 @@
             --text-muted: #94a3b8;
             --badge-bg: linear-gradient(135deg, #0284c7, #2563eb);
             --success: #22c55e;
+            --warning: #f59e0b;
         }
 
         * {
@@ -37,7 +39,7 @@
 
         body {
             margin: 0;
-            padding: 3rem 1.25rem;
+            padding: 3rem 1.25rem 2rem 1.25rem;
             min-height: 100vh;
             background-color: var(--bg-base);
             background-image: 
@@ -57,7 +59,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 2.25rem;
+            margin-bottom: 2rem;
         }
 
         .hero-badge {
@@ -95,7 +97,7 @@
 
         .search-wrapper {
             position: relative;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.85rem;
         }
 
         .search-icon {
@@ -131,6 +133,89 @@
             border-color: var(--accent);
             box-shadow: 0 0 0 4px var(--accent-glow), 0 8px 30px rgba(0, 0, 0, 0.4);
             background: rgba(22, 32, 50, 0.95);
+        }
+
+        /* Hızlı Etiketler */
+        .quick-tags {
+            display: flex;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-tags span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .tag-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #cbd5e1;
+            padding: 0.3rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .tag-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Akıllı Teşhis Sihirbazı Kartı */
+        .wizard-box {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px dashed rgba(56, 189, 248, 0.25);
+            border-radius: 12px;
+            padding: 0.9rem 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .wizard-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            color: var(--accent);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .wizard-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            gap: 0.75rem;
+            flex-direction: column;
+        }
+
+        .wizard-content.open {
+            display: flex;
+        }
+
+        .wizard-select-group {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .wizard-select {
+            flex: 1;
+            min-width: 180px;
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background: #121926;
+            color: #fff;
+            outline: none;
+            font-size: 0.88rem;
         }
 
         .category-tabs {
@@ -240,7 +325,6 @@
             color: var(--text-muted);
         }
 
-        /* İnteraktif Checklist Adımları */
         .step-list {
             display: flex;
             flex-direction: column;
@@ -284,7 +368,6 @@
             color: #64748b;
         }
 
-        /* Eylem Butonları Bölümü */
         .card-actions {
             display: flex;
             gap: 0.5rem;
@@ -349,7 +432,6 @@
             line-height: 1.5;
         }
 
-        /* Sonuç Bulunamadı & Talep Kutusu */
         .no-result-card {
             text-align: center;
             padding: 2.5rem 1.5rem;
@@ -379,7 +461,27 @@
             transform: translateY(-1px);
         }
 
-        /* Kopyalandı Bildirimi (Toast) */
+        /* Güvenlik & Yasal Uyarı Bildirimi */
+        .safety-banner {
+            margin-top: 3.5rem;
+            padding: 1.2rem;
+            border-radius: 12px;
+            background: rgba(245, 158, 11, 0.06);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .safety-banner strong {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #f59e0b;
+            margin-bottom: 0.35rem;
+            font-size: 0.9rem;
+        }
+
         #toast {
             position: fixed;
             bottom: 24px;
@@ -417,6 +519,40 @@
         <input type="text" id="searchInput" placeholder="Örn: F5, E18, Demirdöküm, Su akıtıyor..." autofocus>
     </div>
 
+    <!-- 1. Hızlı Popüler Arama Etiketleri -->
+    <div class="quick-tags">
+        <span>Sık Aranan:</span>
+        <button class="tag-btn" onclick="quickSearch('F5')">🔥 Baymak F5</button>
+        <button class="tag-btn" onclick="quickSearch('Su Basıncı')">💧 Su Basma (F10/F22)</button>
+        <button class="tag-btn" onclick="quickSearch('E18')">🧺 Bosch E18</button>
+        <button class="tag-btn" onclick="quickSearch('E15')">🍽️ Bulaşık E15</button>
+        <button class="tag-btn" onclick="quickSearch('CH05')">❄️ Klima CH05</button>
+    </div>
+
+    <!-- 2. Akıllı Teşhis Sihirbazı -->
+    <div class="wizard-box">
+        <div class="wizard-toggle" onclick="toggleWizard()">
+            <span>💡 Kod Bilmiyor musunuz? Belirtiye Göre Arıza Bul</span>
+            <span id="wizardIcon">▼</span>
+        </div>
+        <div class="wizard-content" id="wizardContent">
+            <div class="wizard-select-group">
+                <select id="wizardDevice" class="wizard-select" onchange="runWizard()">
+                    <option value="">1. Cihazınızı Seçin...</option>
+                    <option value="kombi">Kombi</option>
+                    <option value="beyazesya">Çamaşır / Bulaşık</option>
+                    <option value="klima">Klima</option>
+                </select>
+                <select id="wizardSymptom" class="wizard-select" onchange="runWizard()">
+                    <option value="">2. Yaşanan Sorun Nedir?</option>
+                    <option value="su">Su Basıncı / Su Akıtma / Su Boşaltmama</option>
+                    <option value="atesleme">Ateşleme Yapmıyor / Gaz Yok</option>
+                    <option value="iletisim">Çalışmıyor / İletişim / Şalter Attırma</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <div class="category-tabs">
         <button class="tab-btn active" data-cat="all">Tümü</button>
         <button class="tab-btn" data-cat="kombi">🔥 Kombiler</button>
@@ -425,6 +561,12 @@
     </div>
 
     <div class="results" id="resultsContainer"></div>
+
+    <!-- 4. Yasal & Güvenlik Bildirimi -->
+    <div class="safety-banner">
+        <strong>⚠️ Önemli Güvenlik Uyarısı</strong>
+        Bu rehberdeki adımlar genel bilgilendirme amaçlıdır. Gaz kokusu duyarsanız hiçbir elektrik düğmesine dokunmayın, ortamı havalandırıp derhal <strong>187 Doğalgaz Acil</strong> hattını arayın. Cihazların iç parça değişimlerini ve 220V elektrik bağlantılarını uzman yetkili servislere bırakınız.
+    </div>
 </div>
 
 <div id="toast">Metin kopyalandı!</div>
@@ -511,7 +653,6 @@ const errorDatabase = [
     },
     {
         id: "e08-f08",
-        code: "E08 / F08",
         brand: "Arçelik / Beko Çamaşır",
         category: "beyazesya",
         title: "Su Boşaltma Hatası (Tahliye Problemi)",
@@ -621,6 +762,37 @@ function copyToClipboard(text, successMsg) {
     });
 }
 
+function quickSearch(tag) {
+    searchInput.value = tag;
+    filterData();
+    window.scrollTo({ top: searchInput.offsetTop - 30, behavior: 'smooth' });
+}
+
+function toggleWizard() {
+    const content = document.getElementById('wizardContent');
+    const icon = document.getElementById('wizardIcon');
+    content.classList.toggle('open');
+    icon.textContent = content.classList.contains('open') ? '▲' : '▼';
+}
+
+function runWizard() {
+    const dev = document.getElementById('wizardDevice').value;
+    const sym = document.getElementById('wizardSymptom').value;
+    
+    if (dev) {
+        activeCategory = dev;
+        tabButtons.forEach(b => {
+            b.classList.toggle('active', b.dataset.cat === dev);
+        });
+    }
+
+    if (sym === 'su') searchInput.value = 'su';
+    else if (sym === 'atesleme') searchInput.value = 'ateşleme';
+    else if (sym === 'iletisim') searchInput.value = 'iletişim';
+
+    filterData();
+}
+
 function renderCards(data) {
     resultsContainer.innerHTML = '';
     
@@ -652,8 +824,7 @@ function renderCards(data) {
 
         const technicianText = `Cihaz: ${item.brand}\nHata Kodu: ${item.code}\nArıza Tanımı: ${item.title}\nKullanıcı Kontrolü: Evdeki standart reset/temizleme adımları uygulandı, problem devam ediyor.`;
 
-        // Checklist HTML
-        const stepsHtml = item.steps.map((step, idx) => `
+        const stepsHtml = item.steps.map((step) => `
             <label class="step-item">
                 <input type="checkbox" onchange="this.parentElement.classList.toggle('checked', this.checked)">
                 <span class="step-text">${step}</span>
@@ -719,10 +890,9 @@ tabButtons.forEach(btn => {
     });
 });
 
-// Sayfa ilk yüklendiğinde çalıştır
 renderCards(errorDatabase);
 
-// URL'de doğrudan bir ID varsa oraya odaklan (#f5-e05 gibi)
+// URL hash kontrolü
 window.addEventListener('DOMContentLoaded', () => {
     if (window.location.hash) {
         const target = document.querySelector(window.location.hash);
@@ -731,6 +901,22 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// 3. PWA Servis Çalışanı (Çevrimdışı Bellek & Mobil Kurulum Desteği)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        const swBlob = new Blob([`
+            const CACHE_NAME = 'ariza-rehberi-cache-v1';
+            self.addEventListener('install', e => {
+                e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(['/'])));
+            });
+            self.addEventListener('fetch', e => {
+                e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
+            });
+        `], { type: 'application/javascript' });
+        navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
+    });
+}
 </script>
 
 </body>
