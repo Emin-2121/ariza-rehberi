@@ -1,449 +1,398 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cihaz Arıza & Hata Kodu Rehberi</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --card-border: #334155;
-      --accent: #38bdf8;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-    }
-    body {
-      margin: 0;
-      padding: 2.5rem 1rem;
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .container {
-      max-width: 680px;
-      width: 100%;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    h1 {
-      margin: 0 0 0.5rem 0;
-      color: var(--accent);
-      font-size: 2rem;
-      font-weight: 700;
-    }
-    p {
-      color: var(--text-muted);
-      margin: 0;
-      font-size: 0.95rem;
-    }
-    .search-box {
-      margin-bottom: 1rem;
-    }
-    input {
-      width: 100%;
-      padding: 0.9rem 1.2rem;
-      border-radius: 10px;
-      border: 1px solid var(--card-border);
-      background: var(--card-bg);
-      color: var(--text);
-      font-size: 1rem;
-      box-sizing: border-box;
-      outline: none;
-      transition: all 0.2s ease;
-    }
-    input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-    }
-    .filters {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .filter-btn {
-      background: var(--card-bg);
-      color: var(--text-muted);
-      border: 1px solid var(--card-border);
-      padding: 0.5rem 0.9rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .filter-btn:hover {
-      border-color: var(--accent);
-      color: var(--text);
-    }
-    .filter-btn.active {
-      background: var(--accent);
-      color: #0f172a;
-      font-weight: 600;
-      border-color: var(--accent);
-    }
-    .results {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 1.25rem;
-      transition: border-color 0.15s ease;
-    }
-    .card:hover {
-      border-color: #475569;
-    }
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--card-border);
-      padding-bottom: 0.6rem;
-      margin-bottom: 0.8rem;
-    }
-    .badge {
-      background: #0284c7;
-      color: white;
-      font-weight: bold;
-      padding: 0.25rem 0.65rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-    }
-    .brand {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-    .issue-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-      color: #e2e8f0;
-    }
-    .steps {
-      margin: 0.5rem 0 1rem 1.2rem;
-      padding: 0;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.55;
-    }
-    .action-panel {
-      border-top: 1px solid #334155;
-      padding-top: 0.75rem;
-    }
-    details summary {
-      cursor: pointer;
-      color: var(--accent);
-      font-size: 0.88rem;
-      font-weight: 500;
-      user-select: none;
-    }
-    .action-content {
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 6px;
-      padding: 0.8rem;
-      margin-top: 0.6rem;
-      font-size: 0.85rem;
-      color: #cbd5e1;
-      line-height: 1.45;
-    }
-    .empty-state {
-      text-align: center;
-      color: var(--text-muted);
-      padding: 2.5rem 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Temel SEO Başlık ve Açıklaması -->
+    <title>Cihaz Arıza & Hata Kodu Rehberi | Kombi, Çamaşır Makinesi ve Klima Çözümleri</title>
+    <meta name="description" content="Kombi, klima ve beyaz eşyalardaki hata kodlarının anlamları ve servis çağırmadan önce evde uygulayabileceğiniz adım adım pratik çözüm rehberi.">
+    <meta name="keywords" content="kombi hata kodları, f5 arızası, e15 arızası, çamaşır makinesi hata kodları, klima arıza çözümleri, arıza rehberi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ariza-rehberi.vercel.app/">
+
+    <!-- Sosyal Medya ve Paylaşım Önizlemeleri (Open Graph) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ariza-rehberi.vercel.app/">
+    <meta property="og:title" content="Cihaz Arıza & Hata Kodu Rehberi">
+    <meta property="og:description" content="Kombi, klima ve beyaz eşyalardaki arıza kodlarını anında bulun, adım adım çözümü uygulayın.">
+
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            padding: 2.5rem 1rem;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            margin: 0 0 0.5rem 0;
+            color: var(--accent);
+            font-size: 1.85rem;
+        }
+
+        p.subtitle {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1.25rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+            color: #fff;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            background: #1e293b;
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.45rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent);
+            color: #0f172a;
+            font-weight: 600;
+            border-color: var(--accent);
+        }
+
+        .results {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            transition: border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: #475569;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .code-badge {
+            background: #0284c7;
+            color: #fff;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .device-info {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .issue-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .steps-label {
+            margin: 0.5rem 0 0.25rem 0;
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        ul.solution-steps {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        details {
+            margin-top: 0.85rem;
+            border-top: 1px solid #334155;
+            padding-top: 0.5rem;
+        }
+
+        summary {
+            font-size: 0.85rem;
+            color: var(--accent);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .details-content {
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .no-result {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 2rem;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container">
+<div class="container">
     <header>
-      <h1>Arıza & Hata Kodu Rehberi</h1>
-      <p>Kombi, klima veya beyaz eşyanızdaki hata kodunu aratın, anında çözümü uygulayın.</p>
+        <h1>Arıza & Hata Kodu Rehberi</h1>
+        <p class="subtitle">Kombi, klima veya beyaz eşyanızdaki hata kodunu aratın, anında çözümü uygulayın.</p>
     </header>
 
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Örn: E01, F5, Baymak, Su akıtıyor...">
+        <input type="text" id="searchInput" placeholder="Örn: E01, F5, Baymak, Su akıtıyor..." autofocus>
     </div>
 
-    <div class="filters" id="filterContainer">
-      <button class="filter-btn active" data-category="all">Tümü</button>
-      <button class="filter-btn" data-category="kombi">🔥 Kombiler</button>
-      <button class="filter-btn" data-category="beyaz-esya">🧺 Çamaşır / Bulaşık</button>
-      <button class="filter-btn" data-category="klima">❄️ Klimalar</button>
+    <div class="category-tabs">
+        <button class="tab-btn active" data-cat="all">Tümü</button>
+        <button class="tab-btn" data-cat="kombi">🔥 Kombiler</button>
+        <button class="tab-btn" data-cat="beyazesya">🧺 Çamaşır / Bulaşık</button>
+        <button class="tab-btn" data-cat="klima">❄️ Klimalar</button>
     </div>
 
-    <div class="results" id="resultsList"></div>
-  </div>
+    <div class="results" id="resultsContainer"></div>
+</div>
 
-  <script>
-    const errorDatabase = [
-      {
-        category: "kombi",
-        brand: "Baymak / Demirdöküm",
+<script>
+const errorDatabase = [
+    {
         code: "F5 / E05",
+        brand: "Baymak / Demirdöküm",
+        category: "kombi",
         title: "Hava Akış / Prosestat Hatası",
-        solution: [
-          "Bacanın yerinden çıkıp çıkmadığını veya tıkalı olup olmadığını kontrol edin.",
-          "Cihazı şalterinden kapatıp 30 saniye sonra tekrar açarak resetleyin.",
-          "Sorun devam ediyorsa prosestat veya fan motoru arızalı olabilir."
+        steps: [
+            "Kombinin bacasının yerinden çıkıp çıkmadığını kontrol edin.",
+            "Bacanın dışarıdaki çıkış ağzının kar, buz veya kuş yuvası ile tıkanmadığından emin olun.",
+            "Cihazı şalterinden kapatıp 1 dakika sonra tekrar açın (Resetleyin)."
         ],
-        actionNote: "💡 Gerekli Parça / Servis İpucu: Fan motoru tozdan sıkışmış olabilir veya prosestat silikon hortumunda yoğuşma suyu birikmiş olabilir. Servis öncesi bacanın dış ağzını kontrol edin."
-      },
-      {
+        details: "Sorun devam ederse prosestat (hava basınç anahtarı) veya fan motorunda elektriksel/mekanik arıza olabilir."
+    },
+    {
+        code: "E01 / A01 / F28",
+        brand: "Baymak / E.C.A / Vaillant",
         category: "kombi",
-        brand: "Demirdöküm / E.C.A.",
-        code: "F1 / E01",
         title: "Ateşleme Başarısızlığı (Gaz Yokluğu)",
-        solution: [
-          "Dairedeki diğer gazlı cihazları (ocak vb.) açarak daireye gaz geldiğinden emin olun.",
-          "Kombinin altındaki sarı gaz vanasının boruyla aynı hizada (açık) olduğunu kontrol edin.",
-          "Kombi panelindeki 'R' (Reset) tuşuna 3 saniye basılı tutarak cihazı sıfırlayın."
+        steps: [
+            "Evdeki gaz vanalarının açık olduğunu kontrol edin (örneğin ocağı yakmayı deneyin).",
+            "Kombinin yanında bulunan gaz vanasının boruyla paralel hizada (açık) olduğunu doğrulayın.",
+            "Kombi panelindeki Reset (R) tuşuna 3 saniye basarak yeniden başlatın (3 kez deneyin)."
         ],
-        actionNote: "💡 Sıfırlama İpucu: Reset işlemini en fazla 3 kez tekrarlayın. Gaz gelmesine rağmen ateşleme yoksa iyonizasyon elektrodu veya gaz valfi arızalı olabilir."
-      },
-      {
+        details: "Gaz valfi bobin arızası veya iyonizasyon elektrodunun kirlenmesi/işlevini yitirmesi durumunda servis müdahalesi gerekir."
+    },
+    {
+        code: "F10 / E03",
+        brand: "Demirdöküm / Baymak",
         category: "kombi",
-        brand: "Bosch / Buderus",
-        code: "E9 / 2.8 Bar",
-        title: "Düşük Su Basıncı / Aşırı Isınma",
-        solution: [
-          "Kombinin altındaki su doldurma musluğunu saat yönünün tersine yavaşça çevirin.",
-          "Basınç manometresi 1.5 bar seviyesine gelene kadar su basın.",
-          "Musluğu iyice kapatın ve cihaz panelinden resetleyin."
+        title: "Düşük Su Basıncı Hatası",
+        steps: [
+            "Kombinin alt kısmındaki doldurma musluğunu (genellikle mavi veya siyah) sola çevirerek açın.",
+            "Ön paneldeki basınç göstergesi (barometre) 1.5 bar değerine gelene kadar su basın.",
+            "Musluğu iyice sıkıp kapatın. Cihaz otomatik olarak çalışmaya başlayacaktır."
         ],
-        actionNote: "💡 Gerekli Parça İpucu: Su doldurulduktan kısa süre sonra basınç tekrar sıfıra iniyorsa tesisatta kaçak veya genleşme tankı membranı patlamış olabilir."
-      },
-      {
-        category: "kombi",
-        brand: "Vaillant",
-        code: "F.28 / F.29",
-        title: "Ateşleme Başarısızlığı & Gaz Besleme Hatası",
-        solution: [
-          "Gaz sayacının vanasının ve kombi altındaki gaz vanasının açık olduğunu teyit edin.",
-          "Kombi üzerindeki alev işaretli reset düğmesine basın.",
-          "Kış aylarında dış sayaç regülatörünün donup donmadığını kontrol edin."
-        ],
-        actionNote: "💡 Servis Rehberi: F.28 ilk ateşleme hatasıdır; F.29 ise çalışma sırasında alevin kopmasıdır. Gaz armatürü veya ateşleme trafosu kontrol edilmelidir."
-      },
-      {
-        category: "kombi",
-        brand: "Vaillant",
-        code: "F.22",
-        title: "Yetersiz Su Basıncı (Kuru Yanma Riski)",
-        solution: [
-          "Kombinin altındaki doldurma musluğu yardımıyla su ekleyin.",
-          "Dijital ekranda basınç değerinin 1.2 - 1.5 bar aralığına gelmesini sağlayın.",
-          "İşlem sonrası vanayı sıkıca kapatın."
-        ],
-        actionNote: "💡 İpucu: Basınç normal olduğu halde F.22 devam ediyorsa su basınç sensörü tıkanmış veya arızalanmış olabilir."
-      },
-      {
-        category: "kombi",
-        brand: "Ferroli",
-        code: "A01",
-        title: "Brülör Ateşleme Hatası",
-        solution: [
-          "Gaz vanasının açık olduğunu ve gaz akışı olduğunu kontrol edin.",
-          "Cihaz panelindeki reset düğmesine basın.",
-          "Kombinin elektrik faz-nötr bağlantısının ters olup olmadığını kontrol ettirin."
-        ],
-        actionNote: "💡 Teknik İpucu: Ferroli modellerinde faz-nötr tersliği alev algılama elektrodunun sinyal üretmesini engelleyebilir."
-      },
-      {
-        category: "kombi",
-        brand: "Ferroli",
-        code: "F37",
-        title: "Tesisat Su Basıncı Düşük",
-        solution: [
-          "Kombinin altındaki doldurma musluğunu açarak su takviyesi yapın.",
-          "Göstergeyi 1.5 bar değerine getirin ve musluğu kapatın.",
-          "Cihaz otomatik devreye girmezse açma/kapama düğmesinden kapatıp açın."
-        ],
-        actionNote: "💡 Parça İpucu: Doldurma musluğu bozulduysa su almayabilir; parça değişimi gereklidir."
-      },
-      {
-        category: "kombi",
-        brand: "E.C.A. Proteus / Confeo",
-        code: "E03 / E3",
-        title: "Aşırı Sıcaklık Kilitlenmesi (Limit Termostat)",
-        solution: [
-          "Kombiyi kapatıp 15 dakika petek ve su sıcaklığının düşmesini bekleyin.",
-          "Peteklerin en az 2-3 tanesinin vanasının tam açık olduğundan emin olun.",
-          "Cihaz soğuduktan sonra resetleyin."
-        ],
-        actionNote: "💡 Servis İpucu: Sirkülasyon pompası sıkışmışsa sıcak suyu peteklere itemez ve limit termostatı attırır."
-      },
-      {
-        category: "beyaz-esya",
-        brand: "Arçelik / Beko Çamaşır",
+        details: "Basınç sürekli düşüyorsa tesisatta su kaçağı veya kombinin genleşme tankında hava eksikliği/membran patlağı olabilir."
+    },
+    {
         code: "E08 / F08",
-        title: "Su Boşaltma Hatası (Tahliye Problemi)",
-        solution: [
-          "Makinenin sağ alt köşesindeki tahliye filtre kapağını açın.",
-          "Filtreyi sola çevirerek çıkarın, yabancı cisimleri temizleyin.",
-          "Gider hortumunun ezilmediğinden emin olun."
-        ],
-        actionNote: "💡 Parça İpucu: Filtre temiz olmasına rağmen suyu atmıyorsa pompa motoru arızalı olabilir."
-      },
-      {
-        category: "beyaz-esya",
         brand: "Arçelik / Beko Çamaşır",
-        code: "E01 / Kapı Kilidi",
-        title: "Kapak Kilitlenmeme Hatası",
-        solution: [
-          "Kapağı tam bastırarak mandalın yerine oturduğundan emin olun.",
-          "Kapak mandalını kontrol edin.",
-          "Cihazın fişini çekip 2 dakika sonra tekrar takın."
+        category: "beyazesya",
+        title: "Su Boşaltma Hatası (Tahliye Problemi)",
+        steps: [
+            "Makinenin sağ alt köşesindeki tahliye filtre kapağını açın.",
+            "Filtreyi sola çevirerek çıkarın, yabancı cisimleri (bozuk para, toka vb.) temizleyin.",
+            "Gider hortumunun ezilmediğinden veya tıkanmadığından emin olun."
         ],
-        actionNote: "💡 Parça Değişimi: Sorun devam ediyorsa emniyet kilit mekanizması arızalıdır."
-      },
-      {
-        category: "beyaz-esya",
-        brand: "Samsung Çamaşır",
-        code: "4C / 4E",
-        title: "Su Girişi / Su Alma Hatası",
-        solution: [
-          "Su musluğunun açık olduğunu kontrol edin.",
-          "Giriş hortumundaki tel filtreyi kireçten temizleyin.",
-          "Şebeke su basıncının yeterli olduğundan emin olun."
+        details: "Tahliye motorunun pervanesi sıkışmış veya motor bobini yanmış olabilir. Pompa motoru değişimi gerekebilir."
+    },
+    {
+        code: "E18 / F18",
+        brand: "Bosch / Siemens Çamaşır",
+        category: "beyazesya",
+        title: "Pompa Tıkalı / Su Tahliye Edilemiyor",
+        steps: [
+            "Sağ alttaki küçük tahliye hortumundan kovaya suyu akıtın.",
+            "Pompa kapağını dikkatlice açıp tamburdan gelen yabancı cisimleri temizleyin.",
+            "Cihazı kapatıp programı 'Sıkma/Tahliye' konumuna alarak yeniden başlatın."
         ],
-        actionNote: "💡 Parça İpucu: Su giriş ventili (solenoid valf) kontrol edilmelidir."
-      },
-      {
-        category: "beyaz-esya",
-        brand: "Samsung Çamaşır",
-        code: "5C / 5E / dC",
-        title: "Tahliye Problemi veya Dengesiz Yük",
-        solution: [
-          "5C/5E için tahliye filtresini temizleyin.",
-          "dC/Ub hatasında ise tambur içindeki çamaşırları elinizle dengeleyip sıkmayı yeniden başlatın."
-        ],
-        actionNote: "💡 Servis İpucu: Tek parça ağır ürün yıkanırken cihaz balansı sağlayamaz."
-      },
-      {
-        category: "beyaz-esya",
-        brand: "Vestel / Regal Çamaşır",
-        code: "E04",
-        title: "Sürekli Su Alma / Su Seviye Hatası",
-        solution: [
-          "Cihazı prizden çekip tahliye moduna alarak suyu boşaltın.",
-          "Cihazı kapatıp tekrar açın."
-        ],
-        actionNote: "💡 Servis İpucu: Su ventili açık kalmış veya prosestat hortumu delinmiş olabilir."
-      },
-      {
-        category: "beyaz-esya",
-        brand: "Bosch / Siemens Bulaşık",
+        details: "Pompa filtresi temizlenmesine rağmen ses geliyor ve boşaltmıyorsa manyetik tahliye motoru arızalıdır."
+    },
+    {
         code: "E15",
-        title: "Taban Tepsisinde Su Kaçağı (Aquastop Devrede)",
-        solution: [
-          "Cihazın fişini çekin.",
-          "Makineyi öne doğru 45 derece eğerek tabandaki suyu boşaltın.",
-          "Kuruduktan sonra tekrar takıp deneyin."
-        ],
-        actionNote: "💡 Arıza Tespiti: İç kısımdaki sızıntı onarılmazsa arıza birkaç yıkamada tekrarlar."
-      },
-      {
-        category: "beyaz-esya",
         brand: "Bosch / Siemens Bulaşık",
-        code: "E22 / E24",
-        title: "Filtre Tıkanıklığı / Boşaltma Pompası Kilitli",
-        solution: [
-          "Tabandaki mikro filtreyi çıkarıp temizleyin.",
-          "Filtre altındaki pompa pervanesinde yabancı cisim olup olmadığını kontrol edin."
+        category: "beyazesya",
+        title: "Tabanda Su Kaçağı (Su Güvenlik Kilidi)",
+        steps: [
+            "Cihazın fişini prizden çekin ve su musluğunu kapatın.",
+            "Makineyi öne doğru yaklaşık 45 derece eğerek alt tabla haznesindeki birikmiş suyu yere bir bezle akıtın.",
+            "Cihazı tamamen kurulayıp 2 saat bekledikten sonra tekrar fişe takın."
         ],
-        actionNote: "💡 İpucu: Pompa kapağı yerine tam oturmazsa E24 hatası verir."
-      },
-      {
+        details: "Tabandaki taşma emniyet şamandırası devreye girmiştir. Su kaçağı iç hortumlardan veya kazan contasından kaynaklanıyor olabilir."
+    },
+    {
+        code: "E01 / Kapı Kilidi",
+        brand: "Arçelik / Beko Çamaşır",
+        category: "beyazesya",
+        title: "Kapak Kilitlenmeme Hatası",
+        steps: [
+            "Kapağı biraz sertçe bastırarak dilin yuvasına tam oturduğundan emin olun.",
+            "Kapak mandalını ve kilit tırnağını fiziksel kırılmalara karşı kontrol edin.",
+            "Cihazın fişini prizden çekip 2 dakika bekledikten sonra tekrar takın."
+        ],
+        details: "Elektronik kapı kilit mekanizması (PTC kilit) arızalandığında kart kilit sinyali alamaz ve program başlamaz."
+    },
+    {
+        code: "4C / 4E",
+        brand: "Samsung Çamaşır",
+        category: "beyazesya",
+        title: "Su Girişi / Su Alma Hatası",
+        steps: [
+            "Makinenin bağlı olduğu su musluğunun açık olduğunu kontrol edin.",
+            "Cihazın arkasındaki su giriş hortumunu söküp uçtaki tel filtreyi fırça ile kireçten temizleyin.",
+            "Evin genel şebeke su basıncının yeterli olduğundan emin olun."
+        ],
+        details: "Ventil (su giriş ventili) bobini arızalandığında elektrik gitse dahi vanayı açamaz ve su alamaz."
+    },
+    {
+        code: "CH05 / E1",
+        brand: "LG / Beko Klima",
         category: "klima",
-        brand: "Mitsubishi / Daikin / Arçelik",
-        code: "CH05 / E5",
-        title: "İç-Dış Ünite İletişim Hatası",
-        solution: [
-          "Klimanın sigortasını indirin ve 2 dakika bekleyin.",
-          "Sigortayı kaldırıp cihazı yeniden başlatın."
+        title: "İç - Dış Ünite Haberleşme Hatası",
+        steps: [
+            "Klimanın bağlı olduğu sigortayı (şalteri) indirin.",
+            "En az 3 dakika bekledikten sonra sigortayı tekrar kaldırın.",
+            "Kumandadan klimayı tekrar soğutma/ısıtma moduna alın."
         ],
-        actionNote: "💡 Servis İpucu: Voltaj dalgalanmalarında inverter kart korumaya geçer."
-      },
-      {
-        category: "klima",
-        brand: "Beko / Arçelik Klima",
-        code: "CH01 / CH02",
-        title: "İç Ünite Sıcaklık / Boru Sensör Hatası",
-        solution: [
-          "Ön kapağı kaldırıp toz filtrelerini yıkayın.",
-          "Cihazı şalterden kapatıp 5 dakika sonra açın."
-        ],
-        actionNote: "💡 Parça İpucu: NTC ortam veya boru sensörünün ölçümü yapılmalıdır."
-      }
-    ];
+        details: "Üniteler arası sinyal kablosundaki kopukluk, klemens oksitlenmesi veya dış ünite inverter kartı arızasından kaynaklanır."
+    }
+];
 
-    let currentCategory = "all";
-    const searchInput = document.getElementById("searchInput");
-    const resultsList = document.getElementById("resultsList");
-    const filterButtons = document.querySelectorAll(".filter-btn");
+const searchInput = document.getElementById('searchInput');
+const resultsContainer = document.getElementById('resultsContainer');
+const tabButtons = document.querySelectorAll('.tab-btn');
 
-    function renderErrors() {
-      const query = searchInput.value.toLowerCase().trim();
+let activeCategory = 'all';
 
-      const filtered = errorDatabase.filter(item => {
-        const matchesCategory = (currentCategory === "all") || (item.category === currentCategory);
-        const matchesQuery = item.brand.toLowerCase().includes(query) ||
-                             item.code.toLowerCase().includes(query) ||
-                             item.title.toLowerCase().includes(query);
-        return matchesCategory && matchesQuery;
-      });
-
-      if (filtered.length === 0) {
-        resultsList.innerHTML = '<div class="empty-state">Aradığınız kriterlere uygun hata kodu bulunamadı.</div>';
+function renderCards(data) {
+    resultsContainer.innerHTML = '';
+    
+    if (data.length === 0) {
+        resultsContainer.innerHTML = '<div class="no-result">Aradığınız kriterlere uygun bir arıza kaydı bulunamadı. Lütfen sadece kodu (örneğin F5) veya cihaz markasını yazmayı deneyin.</div>';
         return;
-      }
-
-      resultsList.innerHTML = filtered.map(item => `
-        <div class="card">
-          <div class="card-header">
-            <span class="badge">${item.code}</span>
-            <span class="brand">${item.brand}</span>
-          </div>
-          <div class="issue-title">${item.title}</div>
-          <strong>Ne Yapılmalı?</strong>
-          <ul class="steps">
-            ${item.solution.map(step => `<li>${step}</li>`).join("")}
-          </ul>
-          <div class="action-panel">
-            <details>
-              <summary>🔧 Servis / Parça Rehberi & İpuçları</summary>
-              <div class="action-content">
-                ${item.actionNote}
-              </div>
-            </details>
-          </div>
-        </div>
-      `).join("");
     }
 
-    searchInput.addEventListener("input", renderErrors);
+    data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <div class="card-header">
+                <span class="code-badge">${item.code}</span>
+                <span class="device-info">${item.brand}</span>
+            </div>
+            <h3 class="issue-title">${item.title}</h3>
+            <div class="steps-label">Ne Yapılmalı?</div>
+            <ul class="solution-steps">
+                ${item.steps.map(step => `<li>${step}</li>`).join('')}
+            </ul>
+            <details>
+                <summary>▶ 🔧 Servis / Parça Rehberi & İpuçları</summary>
+                <div class="details-content">${item.details}</div>
+            </details>
+        `;
+        resultsContainer.appendChild(card);
+    });
+}
 
-    filterButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        filterButtons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        currentCategory = btn.dataset.category;
-        renderErrors();
-      });
+function filterData() {
+    const query = searchInput.value.toLowerCase().trim();
+    
+    const filtered = errorDatabase.filter(item => {
+        const matchesCategory = (activeCategory === 'all' || item.category === activeCategory);
+        const matchesQuery = item.code.toLowerCase().includes(query) ||
+                             item.brand.toLowerCase().includes(query) ||
+                             item.title.toLowerCase().includes(query) ||
+                             item.details.toLowerCase().includes(query);
+        return matchesCategory && matchesQuery;
     });
 
-    renderErrors();
-  </script>
+    renderCards(filtered);
+}
+
+searchInput.addEventListener('input', filterData);
+
+tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCategory = btn.dataset.cat;
+        filterData();
+    });
+});
+
+// İlk çalıştırma
+renderCards(errorDatabase);
+</script>
+
 </body>
 </html>
