@@ -255,6 +255,42 @@ const errorDatabase = [
         details: "Basınç sürekli düşüyorsa tesisatta su kaçağı veya kombinin genleşme tankında hava eksikliği/membran patlağı olabilir."
     },
     {
+        code: "F1 / E02",
+        brand: "Demirdöküm / Baymak",
+        category: "kombi",
+        title: "Aşırı Isınma / Limit Termostat Hatası",
+        steps: [
+            "Radyatör (petek) vanalarının en az 2-3 tanesinin tamamen açık olduğunu kontrol edin.",
+            "Kombiyi kapatıp su sıcaklığının düşmesi için 15-20 dakika bekleyin.",
+            "Reset tuşuna basarak cihazı tekrar çalıştırın."
+        ],
+        details: "Sirkülasyon pompası sıkışmış, ana eşanjör kireç bağlamış veya kalorifer dönüş filtresi tıkanmış olabilir."
+    },
+    {
+        code: "F22 / F75",
+        brand: "Vaillant",
+        category: "kombi",
+        title: "Yetersiz Su Basıncı veya Pompa Basınç Algılama Sorunu",
+        steps: [
+            "Basınç göstergesini kontrol edin; 1 barın altındaysa alttaki doldurma vanasından 1.5 bara kadar su ekleyin.",
+            "Kombiyi kapatıp açarak pompanın devreye girip girmediğini dinleyin.",
+            "Peteklerin havasını hava alma anahtarı ile tahliye edin."
+        ],
+        details: "F75 hatası özellikle su basınç sensörünün tıkanması veya sirkülasyon pompasının devir alamamasından kaynaklanır."
+    },
+    {
+        code: "EA / CE",
+        brand: "Bosch Condens",
+        category: "kombi",
+        title: "Alev Algılanmadı / Düşük Tesisat Basıncı",
+        steps: [
+            "Gaz giriş vanasının açık olduğundan emin olun.",
+            "Su basıncı 1 bar altındaysa alt musluktan 1.5 bara yükseltin.",
+            "Reset butonuna göstergedeki işaret kaybolana kadar basılı tutun."
+        ],
+        details: "Ateşleme elektrotlarında karbon birikmesi veya elektronik anakart alev algılama devresi arızası görülebilir."
+    },
+    {
         code: "E08 / F08",
         brand: "Arçelik / Beko Çamaşır",
         category: "beyazesya",
@@ -325,6 +361,18 @@ const errorDatabase = [
             "Kumandadan klimayı tekrar soğutma/ısıtma moduna alın."
         ],
         details: "Üniteler arası sinyal kablosundaki kopukluk, klemens oksitlenmesi veya dış ünite inverter kartı arızasından kaynaklanır."
+    },
+    {
+        code: "U4 / A6",
+        brand: "Daikin Klima",
+        category: "klima",
+        title: "İletişim Hatası veya İç Fan Motoru Kilitlenmesi",
+        steps: [
+            "Klimanın ön kapağını açıp filtrelerin tozdan tamamen tıkanıp tıkanmadığını kontrol edin ve yıkayın.",
+            "Cihazın ana şalterini kapatıp 5 dakika bekleyin ve yeniden açın.",
+            "Kumanda üzerinden arıza kodunu resetleyin."
+        ],
+        details: "İç ünite fan motorunun rulmanları kilitlenmiş veya anakart fan devresi arızalanmış olabilir."
     }
 ];
 
