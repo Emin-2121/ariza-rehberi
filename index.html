@@ -6,9 +6,9 @@
     <meta name="theme-color" content="#090d16">
 
     <!-- Temel SEO Başlık ve Açıklaması -->
-    <title>Cihaz Arıza & Hata Kodu Rehberi | Kombi, Çamaşır Makinesi ve Klima Çözümleri</title>
-    <meta name="description" content="Kombi, klima ve beyaz eşyalardaki hata kodlarının anlamları ve servis çağırmadan önce evde uygulayabileceğiniz adım adım pratik çözüm rehberi.">
-    <meta name="keywords" content="kombi hata kodları, f5 arızası, e15 arızası, çamaşır makinesi hata kodları, klima arıza çözümleri, arıza rehberi">
+    <title>Cihaz Arıza & Hata Kodu Rehberi | Kombi, Çamaşır, Klima ve Buzdolabı Çözümleri</title>
+    <meta name="description" content="Kombi, klima, termosifon ve beyaz eşyalardaki hata kodlarının anlamları ve servis çağırmadan önce evde uygulayabileceğiniz adım adım pratik çözüm rehberi.">
+    <meta name="keywords" content="kombi hata kodları, f5 arızası, e15 arızası, çamaşır makinesi hata kodları, buzdolabı ünlem işareti, termosifon arızası, arıza rehberi">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://ariza-rehberi.vercel.app/">
 
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ariza-rehberi.vercel.app/">
     <meta property="og:title" content="Cihaz Arıza & Hata Kodu Rehberi">
-    <meta property="og:description" content="Kombi, klima ve beyaz eşyalardaki arıza kodlarını anında bulun, adım adım çözümü uygulayın.">
+    <meta property="og:description" content="Kombi, klima, termosifon ve beyaz eşyalardaki arıza kodlarını anında bulun, adım adım çözümü uygulayın.">
 
     <style>
         :root {
@@ -98,13 +98,13 @@
         .search-wrapper {
             position: relative;
             margin-bottom: 0.85rem;
+            display: flex;
+            align-items: center;
         }
 
         .search-icon {
             position: absolute;
             left: 1.1rem;
-            top: 50%;
-            transform: translateY(-50%);
             color: var(--text-muted);
             font-size: 1.1rem;
             pointer-events: none;
@@ -112,7 +112,7 @@
 
         input[type="text"] {
             width: 100%;
-            padding: 1.05rem 1.2rem 1.05rem 3rem;
+            padding: 1.05rem 3.2rem 1.05rem 3rem;
             border-radius: 14px;
             border: 1px solid var(--card-border);
             background: rgba(18, 25, 38, 0.85);
@@ -135,7 +135,35 @@
             background: rgba(22, 32, 50, 0.95);
         }
 
-        /* Hızlı Etiketler */
+        .mic-btn {
+            position: absolute;
+            right: 0.75rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.4rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .mic-btn:hover {
+            color: var(--accent);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .mic-btn.listening {
+            color: #ef4444;
+            animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
         .quick-tags {
             display: flex;
             gap: 0.45rem;
@@ -167,7 +195,6 @@
             color: var(--accent);
         }
 
-        /* Akıllı Teşhis Sihirbazı Kartı */
         .wizard-box {
             background: rgba(30, 41, 59, 0.4);
             border: 1px dashed rgba(56, 189, 248, 0.25);
@@ -368,11 +395,52 @@
             color: #64748b;
         }
 
+        .feedback-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.85rem;
+            padding: 0.5rem 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .feedback-btns {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .feedback-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .feedback-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .feedback-btn.active {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: var(--accent);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
         .card-actions {
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
-            margin-top: 1rem;
+            margin-top: 0.85rem;
             padding-top: 0.85rem;
             border-top: 1px solid rgba(255, 255, 255, 0.07);
         }
@@ -461,7 +529,6 @@
             transform: translateY(-1px);
         }
 
-        /* Güvenlik & Yasal Uyarı Bildirimi */
         .safety-banner {
             margin-top: 3.5rem;
             padding: 1.2rem;
@@ -503,6 +570,33 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Yazdırma (Print) CSS Kuralları */
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+                padding: 0;
+            }
+            .search-wrapper, .quick-tags, .wizard-box, .category-tabs, .card-actions, .feedback-bar, .safety-banner, header .hero-badge {
+                display: none !important;
+            }
+            .card {
+                background: #fff !important;
+                border: 1px solid #ccc !important;
+                color: #000 !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+                margin-bottom: 1.5rem;
+            }
+            .code-badge {
+                background: #000 !important;
+                color: #fff !important;
+            }
+            .step-text, .issue-title, .device-info {
+                color: #000 !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -511,25 +605,27 @@
     <header>
         <div class="hero-badge">⚡ Servis Öncesi Kontrol Aracı</div>
         <h1>Arıza & Hata Kodu Rehberi</h1>
-        <p class="subtitle">Kombi, klima veya beyaz eşyanızdaki kodu aratın, adımları uygulayarak çözümü evde deneyin.</p>
+        <p class="subtitle">Kombi, klima, beyaz eşya veya termosifondaki kodu aratın, adımları uygulayarak çözümü deneyin.</p>
     </header>
 
     <div class="search-wrapper">
         <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Örn: F5, E18, Demirdöküm, Su akıtıyor..." autofocus>
+        <input type="text" id="searchInput" placeholder="Örn: F5, E18, Buzdolabı ünlem, Termosifon..." autofocus>
+        <button id="micBtn" class="mic-btn" title="Sesle Ara" onclick="startSpeechRecognition()">🎙️</button>
     </div>
 
-    <!-- 1. Hızlı Popüler Arama Etiketleri -->
+    <!-- Hızlı Popüler Arama Etiketleri -->
     <div class="quick-tags">
         <span>Sık Aranan:</span>
         <button class="tag-btn" onclick="quickSearch('F5')">🔥 Baymak F5</button>
         <button class="tag-btn" onclick="quickSearch('Su Basıncı')">💧 Su Basma (F10/F22)</button>
         <button class="tag-btn" onclick="quickSearch('E18')">🧺 Bosch E18</button>
-        <button class="tag-btn" onclick="quickSearch('E15')">🍽️ Bulaşık E15</button>
+        <button class="tag-btn" onclick="quickSearch('Ünlem')">🧊 Buzdolabı Ünlem</button>
+        <button class="tag-btn" onclick="quickSearch('Termosifon')">⚡ Termosifon</button>
         <button class="tag-btn" onclick="quickSearch('CH05')">❄️ Klima CH05</button>
     </div>
 
-    <!-- 2. Akıllı Teşhis Sihirbazı -->
+    <!-- Akıllı Teşhis Sihirbazı -->
     <div class="wizard-box">
         <div class="wizard-toggle" onclick="toggleWizard()">
             <span>💡 Kod Bilmiyor musunuz? Belirtiye Göre Arıza Bul</span>
@@ -541,12 +637,14 @@
                     <option value="">1. Cihazınızı Seçin...</option>
                     <option value="kombi">Kombi</option>
                     <option value="beyazesya">Çamaşır / Bulaşık</option>
+                    <option value="sogutma">Buzdolabı / Termosifon</option>
                     <option value="klima">Klima</option>
                 </select>
                 <select id="wizardSymptom" class="wizard-select" onchange="runWizard()">
                     <option value="">2. Yaşanan Sorun Nedir?</option>
                     <option value="su">Su Basıncı / Su Akıtma / Su Boşaltmama</option>
                     <option value="atesleme">Ateşleme Yapmıyor / Gaz Yok</option>
+                    <option value="sogutmuyor">Soğutmuyor / Ünlem Yanıp Sönüyor</option>
                     <option value="iletisim">Çalışmıyor / İletişim / Şalter Attırma</option>
                 </select>
             </div>
@@ -557,12 +655,13 @@
         <button class="tab-btn active" data-cat="all">Tümü</button>
         <button class="tab-btn" data-cat="kombi">🔥 Kombiler</button>
         <button class="tab-btn" data-cat="beyazesya">🧺 Çamaşır / Bulaşık</button>
+        <button class="tab-btn" data-cat="sogutma">🧊 Soğutma & Termosifon</button>
         <button class="tab-btn" data-cat="klima">❄️ Klimalar</button>
     </div>
 
     <div class="results" id="resultsContainer"></div>
 
-    <!-- 4. Yasal & Güvenlik Bildirimi -->
+    <!-- Güvenlik & Yasal Uyarı Bildirimi -->
     <div class="safety-banner">
         <strong>⚠️ Önemli Güvenlik Uyarısı</strong>
         Bu rehberdeki adımlar genel bilgilendirme amaçlıdır. Gaz kokusu duyarsanız hiçbir elektrik düğmesine dokunmayın, ortamı havalandırıp derhal <strong>187 Doğalgaz Acil</strong> hattını arayın. Cihazların iç parça değişimlerini ve 220V elektrik bağlantılarını uzman yetkili servislere bırakınız.
@@ -716,6 +815,32 @@ const errorDatabase = [
         details: "Ventil bobini arızalandığında elektrik gitse dahi su vanasını açamaz."
     },
     {
+        id: "buzdolabi-unlem",
+        code: "(!) Kırmızı Ünlem",
+        brand: "Arçelik / Beko Buzdolabı",
+        category: "sogutma",
+        title: "Yüksek Sıcaklık Uyarısı (Yetersiz Soğutma)",
+        steps: [
+            "Buzdolabı kapaklarının uzun süre açık kalıp kalmadığını kontrol edin.",
+            "Kapak fitillerinin (lastiklerinin) yırtık olup olmadığını ve hava sızdırıp sızdırmadığını inceleyin.",
+            "Dolabın içine yeni ve aşırı sıcak tencere/yemek konulduysa ısının dengelenmesi için 4-5 saat bekleyin."
+        ],
+        details: "Kırmızı ünlem soğutma derecesi kritik seviyeye çıktığında yanar. Kompresör (motor) kalkış yapmıyor veya gaz kaçağı olabilir."
+    },
+    {
+        id: "termosifon-salter",
+        code: "Sigorta Atma / Isıtmama",
+        brand: "Demirdöküm / Ariston Termosifon",
+        category: "sogutma",
+        title: "Rezistans Kaçağı veya Emniyet Termostatı Açması",
+        steps: [
+            "Termosifonun alt kapağındaki manuel reset (emniyet) butonuna hafifçe bastırıp tık sesini kontrol edin.",
+            "Cihazı şalterden kapatıp elektrik bağlantı vidalarının gevşeyip gevşemediğini gözlemleyin.",
+            "Cihazın su basıncının dolu olduğunu doğrulayın (susuz çalıştırmayınız)."
+        ],
+        details: "Şalter açılır açılmaz atıyorsa kazan içindeki elektrikli rezistans patlamış ve gövdeye elektrik kaçırıyordur; rezistans değişimi gerekir."
+    },
+    {
         id: "ch05-e1",
         code: "CH05 / E1",
         brand: "LG / Beko Klima",
@@ -747,6 +872,7 @@ const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('resultsContainer');
 const tabButtons = document.querySelectorAll('.tab-btn');
 const toast = document.getElementById('toast');
+const micBtn = document.getElementById('micBtn');
 
 let activeCategory = 'all';
 
@@ -788,9 +914,58 @@ function runWizard() {
 
     if (sym === 'su') searchInput.value = 'su';
     else if (sym === 'atesleme') searchInput.value = 'ateşleme';
+    else if (sym === 'sogutmuyor') searchInput.value = 'ünlem';
     else if (sym === 'iletisim') searchInput.value = 'iletişim';
 
     filterData();
+}
+
+// Sesli Arama Desteği
+function startSpeechRecognition() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        showToast("Tarayıcınız sesli aramayı desteklemiyor.");
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'tr-TR';
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+        micBtn.classList.add('listening');
+        showToast("Dinleniyor... Hata kodunu veya cihazı söyleyin.");
+    };
+
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        searchInput.value = transcript;
+        filterData();
+        showToast(`Aranan: "${transcript}"`);
+    };
+
+    recognition.onerror = () => {
+        micBtn.classList.remove('listening');
+        showToast("Ses algılanamadı, lütfen tekrar deneyin.");
+    };
+
+    recognition.onend = () => {
+        micBtn.classList.remove('listening');
+    };
+
+    recognition.start();
+}
+
+// Oy Verme Sistemi (localStorage)
+function vote(id, type) {
+    const key = `vote_${id}`;
+    localStorage.setItem(key, type);
+    showToast(type === 'up' ? "Teşekkürler! Geri bildiriminiz kaydedildi 👍" : "Geri bildiriminiz kaydedildi, rehberi geliştireceğiz 👎");
+    filterData();
+}
+
+function printCard(id) {
+    window.print();
 }
 
 function renderCards(data) {
@@ -831,6 +1006,8 @@ function renderCards(data) {
             </label>
         `).join('');
 
+        const userVote = localStorage.getItem(`vote_${item.id}`);
+
         card.innerHTML = `
             <div class="card-header">
                 <span class="code-badge">${item.code}</span>
@@ -848,6 +1025,14 @@ function renderCards(data) {
                 <div class="details-content">${item.details}</div>
             </details>
 
+            <div class="feedback-bar">
+                <span>Bu çözüm işinize yaradı mı?</span>
+                <div class="feedback-btns">
+                    <button class="feedback-btn ${userVote === 'up' ? 'active' : ''}" onclick="vote('${item.id}', 'up')">👍 Evet</button>
+                    <button class="feedback-btn ${userVote === 'down' ? 'active' : ''}" onclick="vote('${item.id}', 'down')">👎 Hayır</button>
+                </div>
+            </div>
+
             <div class="card-actions">
                 <a href="${waUrl}" target="_blank" class="action-btn whatsapp">
                     💬 WhatsApp'ta Paylaş
@@ -856,7 +1041,10 @@ function renderCards(data) {
                     🔗 Linki Kopyala
                 </button>
                 <button class="action-btn" onclick='copyToClipboard(${JSON.stringify(technicianText)}, "📋 Servis arıza notu panoya kopyalandı!")'>
-                    📝 Usta / Servis Notu Al
+                    📝 Usta Notu Al
+                </button>
+                <button class="action-btn" onclick="printCard('${item.id}')">
+                    🖨️ Yazdır / PDF
                 </button>
             </div>
         `;
@@ -892,7 +1080,6 @@ tabButtons.forEach(btn => {
 
 renderCards(errorDatabase);
 
-// URL hash kontrolü
 window.addEventListener('DOMContentLoaded', () => {
     if (window.location.hash) {
         const target = document.querySelector(window.location.hash);
@@ -902,7 +1089,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// 3. PWA Servis Çalışanı (Çevrimdışı Bellek & Mobil Kurulum Desteği)
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         const swBlob = new Blob([`
