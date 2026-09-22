@@ -213,7 +213,7 @@
             100% { transform: scale(1); }
         }
 
-        /* --- Gemini Yapay Zeka Kartı Stilleri --- */
+        /* Gemini Kart Stilleri */
         .ai-assistant-card {
             background: rgba(22, 30, 46, 0.9);
             border: 1px solid rgba(56, 189, 248, 0.3);
@@ -850,6 +850,23 @@
             color: var(--accent);
         }
 
+        /* Yasal Feragat Metni Stilleri */
+        .footer-disclaimer {
+            max-width: 680px;
+            margin: 1.2rem auto 0.8rem auto;
+            font-size: 0.76rem;
+            color: #64748b;
+            line-height: 1.6;
+            border-top: 1px dashed rgba(255, 255, 255, 0.08);
+            padding-top: 0.85rem;
+        }
+
+        .footer-copy {
+            margin: 0;
+            font-size: 0.82rem;
+            color: #475569;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -1060,7 +1077,7 @@
         </div>
     </div>
 
-    <!-- AdSense ve SEO Uyumlu Footer -->
+    <!-- AdSense ve SEO Uyumlu Footer & Yasal Feragat -->
     <footer>
         <div class="footer-links">
             <a onclick="openModal('privacyModal')">Gizlilik Politikası</a>
@@ -1069,7 +1086,13 @@
             <span>•</span>
             <a onclick="openModal('contactModal')">İletişim & Künye</a>
         </div>
-        <p>© 2026 Arıza Rehberi. Servis öncesi kullanıcı bilgilendirme aracıdır.</p>
+
+        <!-- Marka ve Yasal Sorumluluk Koruması -->
+        <p class="footer-disclaimer">
+            <strong>Yasal Uyarı:</strong> Bu sitede yer alan tüm marka, model, ticari unvan ve logolar ilgili hak sahiplerine aittir. Sitemiz bağımsız bir tüketici ilk yardım ve bilgilendirme platformu olup, adı geçen hiçbir marka ile resmi acentelik, yetkili servislik veya distribütörlük bağı bulunmamaktadır. Sunulan çözümler tavsiye niteliğindedir.
+        </p>
+
+        <p class="footer-copy">© 2026 Arıza Rehberi. Servis öncesi kullanıcı bilgilendirme aracıdır.</p>
     </footer>
 </div>
 
@@ -1649,7 +1672,6 @@ async function askGemini(soruOverride) {
     aiResponse.style.display = 'block';
     aiResponse.textContent = '⏳ Yapay zeka servis uzmanı inceliyor, lütfen bekleyin...';
 
-    // Kullanıcı mobildeyse kart alanına kaydır
     aiResponse.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
     try {
@@ -1729,7 +1751,6 @@ function renderCards(data) {
         const userVote = localStorage.getItem(`vote_${item.id}`);
         const savedNote = localStorage.getItem(`user_note_${item.id}`) || '';
 
-        // Kombi basıncı için SVG Manometre Göstergesi
         const gaugeHtml = item.hasGauge ? `
             <div class="gauge-container">
                 <svg width="70" height="70" viewBox="0 0 100 100">
