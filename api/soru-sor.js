@@ -1,4 +1,5 @@
 export default async function handler(req, res) {
+  // Sadece POST isteklerine izin ver
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Yalnızca POST istekleri desteklenir.' });
   }
@@ -14,7 +15,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    // Google'ın güncel modeli: gemini-3.6-flash
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
 
     const promptText = `Sen deneyimli, güvenilir bir kombi ve beyaz eşya teknik servis uzmanısın. 
 Kullanıcının ilettiği arıza/sorun durumuna göre kısa, anlaşılır ve güvenliği ön planda tutan adım adım kontroller öner. 
