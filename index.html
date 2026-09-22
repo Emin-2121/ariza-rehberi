@@ -18,6 +18,54 @@
     <meta property="og:title" content="Cihaz Arıza & Hata Kodu Rehberi">
     <meta property="og:description" content="Kombi, klima, termosifon ve beyaz eşyalardaki arıza kodlarını anında bulun, maliyetini öğrenin ve çözümü uygulayın.">
 
+    <!-- Google Botları ve Zengin Sonuçlar İçin Yapılandırılmış Veri (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://ariza-rehberi.vercel.app/#webapp",
+          "name": "Arıza Rehberi",
+          "url": "https://ariza-rehberi.vercel.app/",
+          "description": "Kombi, klima ve beyaz eşya hata kodları, parça maliyetleri ve adım adım çözüm rehberi.",
+          "applicationCategory": "UtilityApplication",
+          "operatingSystem": "All"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://ariza-rehberi.vercel.app/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Kombide ideal su basıncı kaç bar olmalıdır?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Kombiler için ideal su basıncı 1.5 bar seviyesidir. İbre 1 barın altına düştüğünde kombi altındaki doldurma musluğundan su basılmalıdır."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Kombi F5 hata kodu nedir ve nasıl çözülür?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "F5 hatası genellikle hava akış anahtarı (prosestat) veya baca tıkanıklığı sorunudur. Dış baca çıkışının açık olduğundan emin olunup cihaz resetlenmelidir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Bulaşık makinesinde E15 hatası ne anlama gelir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "E15 hatası taban haznesine su sızdığını ve su güvenlik kilidinin (Aquastop) devreye girdiğini belirtir. Cihaz fişten çekilip öne doğru yatırılarak su tahliye edilmelidir."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
     <style>
         :root {
             --bg-base: #090d16;
@@ -163,6 +211,106 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.15); }
             100% { transform: scale(1); }
+        }
+
+        /* --- Gemini Yapay Zeka Kartı Stilleri --- */
+        .ai-assistant-card {
+            background: rgba(22, 30, 46, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.6rem;
+        }
+
+        .ai-header-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .ai-badge {
+            font-size: 0.72rem;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 2px 8px;
+            border-radius: 6px;
+            color: #7dd3fc;
+        }
+
+        .ai-desc {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            margin: 0 0 0.85rem 0;
+            line-height: 1.45;
+        }
+
+        .ai-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .ai-input {
+            flex: 1;
+            padding: 0.75rem 0.95rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #0f172a;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .ai-input:focus {
+            border-color: var(--accent);
+        }
+
+        .ai-btn {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            border: none;
+            color: #fff;
+            padding: 0.75rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .ai-btn:hover {
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .ai-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .ai-response-box {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            background: #0f172a;
+            border-left: 4px solid var(--accent);
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
         }
 
         .quick-tags {
@@ -604,7 +752,7 @@
             font-weight: 700;
             font-size: 0.9rem;
             text-decoration: none;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
             transition: all 0.2s ease;
         }
@@ -792,7 +940,7 @@
                 color: #000 !important;
                 padding: 0;
             }
-            .search-wrapper, .quick-tags, .wizard-box, .category-tabs, .card-actions, .feedback-bar, .user-note-box, .safety-banner, footer, header .hero-badge {
+            .search-wrapper, .ai-assistant-card, .quick-tags, .wizard-box, .category-tabs, .card-actions, .feedback-bar, .user-note-box, .safety-banner, footer, header .hero-badge {
                 display: none !important;
             }
             .card {
@@ -826,6 +974,31 @@
         <span class="search-icon">🔍</span>
         <input type="text" id="searchInput" placeholder="Örn: F5, E18, E09, Kurutma filtresi, Termosifon..." autofocus>
         <button id="micBtn" class="mic-btn" title="Sesle Ara" onclick="startSpeechRecognition()">🎙️</button>
+    </div>
+
+    <!-- Gemini Yapay Zeka Servis Danışmanı Kartı -->
+    <div class="ai-assistant-card">
+        <div class="ai-header">
+            <div class="ai-header-title">
+                <span>🤖 Yapay Zeka Servis Asistanı</span>
+                <span class="ai-badge">Gemini Flash</span>
+            </div>
+        </div>
+        <p class="ai-desc">
+            Cihazınızdaki arıza belirtilerini veya listede bulamadığınız sorunları yazın; yapay zeka usta adım adım kontrolleri listelesin.
+        </p>
+        <div class="ai-input-group">
+            <input 
+                type="text" 
+                id="aiInput" 
+                class="ai-input" 
+                placeholder="Örn: Kombiden ıslık sesi geliyor ve peteklerin altı soğuk..." 
+            />
+            <button id="aiBtn" class="ai-btn" onclick="askGemini()">
+                Ustaya Sor
+            </button>
+        </div>
+        <div id="aiResponse" class="ai-response-box"></div>
     </div>
 
     <!-- Hızlı Popüler Arama Etiketleri -->
@@ -1346,6 +1519,11 @@ const tabButtons = document.querySelectorAll('.tab-btn');
 const toast = document.getElementById('toast');
 const micBtn = document.getElementById('micBtn');
 
+// Gemini UI Elemanları
+const aiInput = document.getElementById('aiInput');
+const aiBtn = document.getElementById('aiBtn');
+const aiResponse = document.getElementById('aiResponse');
+
 let activeCategory = 'all';
 
 function showToast(msg) {
@@ -1457,6 +1635,54 @@ window.onclick = function(event) {
     }
 };
 
+// --- Gemini API İstek Fonksiyonu ---
+async function askGemini(soruOverride) {
+    const soruMetni = (soruOverride || aiInput.value).trim();
+    if (!soruMetni) {
+        showToast("Lütfen bir soru veya arıza açıklaması girin.");
+        aiInput.focus();
+        return;
+    }
+
+    aiBtn.disabled = true;
+    aiBtn.textContent = 'İnceleniyor...';
+    aiResponse.style.display = 'block';
+    aiResponse.textContent = '⏳ Yapay zeka servis uzmanı inceliyor, lütfen bekleyin...';
+
+    // Kullanıcı mobildeyse kart alanına kaydır
+    aiResponse.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    try {
+        const res = await fetch('/api/soru-sor', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ soru: soruMetni })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+            aiResponse.textContent = data.cevap;
+        } else {
+            aiResponse.textContent = '⚠️ Hata: ' + (data.error || 'Cevap alınamadı.');
+        }
+    } catch (err) {
+        aiResponse.textContent = '⚠️ Sunucu bağlantı hatası: ' + err.message;
+    } finally {
+        aiBtn.disabled = false;
+        aiBtn.textContent = 'Ustaya Sor';
+    }
+}
+
+aiInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') askGemini();
+});
+
+function forwardToAi(customQuery) {
+    aiInput.value = customQuery;
+    window.scrollTo({ top: aiInput.offsetTop - 80, behavior: 'smooth' });
+    askGemini(customQuery);
+}
+
 function renderCards(data) {
     resultsContainer.innerHTML = '';
     
@@ -1467,11 +1693,16 @@ function renderCards(data) {
         resultsContainer.innerHTML = `
             <div class="no-result-card">
                 <div style="font-size:2rem; margin-bottom:0.5rem;">🔍</div>
-                <div style="font-weight:700; font-size:1.1rem; margin-bottom:0.3rem;">"${query}" arızası henüz rehberde yok</div>
-                <p style="color:#94a3b8; font-size:0.9rem; margin:0 0 1rem 0;">Bu kodu inceleyip listeye eklememiz için bize iletebilirsin.</p>
-                <a href="${whatsappReportUrl}" target="_blank" class="request-btn">
-                    💬 Bu Hata Kodunu Bildir & Talep Et
-                </a>
+                <div style="font-weight:700; font-size:1.1rem; margin-bottom:0.3rem;">"${query}" arızası henüz sabit listede yok</div>
+                <p style="color:#94a3b8; font-size:0.9rem; margin:0 0 1rem 0;">Beklemenize gerek yok, doğrudan Yapay Zeka Asistanımıza sorabilirsiniz:</p>
+                <div style="display:flex; justify-content:center; gap:0.6rem; flex-wrap:wrap;">
+                    <button onclick="forwardToAi('${query}')" class="request-btn" style="background:#0284c7; color:#fff;">
+                        🤖 "${query}" İçin Yapay Zekaya Sor
+                    </button>
+                    <a href="${whatsappReportUrl}" target="_blank" class="request-btn">
+                        💬 WhatsApp ile Bildir
+                    </a>
+                </div>
             </div>
         `;
         return;
