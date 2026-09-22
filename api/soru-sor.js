@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // Yalnızca POST isteklerini kabul et
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Yalnızca POST istekleri desteklenir.' });
   }
@@ -21,27 +20,19 @@ Cevabını doğrudan maddeler halinde ver.
 
 Kullanıcının sorusu: "${soru}"`;
 
-  // Google'ın en güncel ve en geniş kotalı modelleri
-  const candidateModels = [
-    'gemini-2.5-flash',
-    'gemini-2.5-pro',
-    'gemini-2.0-flash'
-  ];
+  // Google'ın zorunlu kıldığı güncel model
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
 
-  let lastError = null;
-
-  for (const model of candidateModels) {
+  // Geçici yoğunluk (high demand) durumunda pes etmeyip 3 kez deneme mekanizması
+  for (let attempt = 1; attempt <= 3; attempt++) {
     try {
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: promptText }] }]
-          })
-        }
-      );
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: promptText }] }]
+        })
+      });
 
       const data = await response.json();
 
@@ -51,15 +42,19 @@ Kullanıcının sorusu: "${soru}"`;
         });
       }
 
-      // Hata geldiyse kaydet ve bir sonraki modeli dene
-      lastError = data.error?.message || 'Model yanıt vermedi';
+      // Yoğunluk hatası verirse 1 saniye bekleyip tekrar dene
+      if (attempt < 3) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      } else {
+        return res.status(500).json({
+          error: data.error?.message || 'Yapay zeka yanıt veremedi.'
+        });
+      }
     } catch (err) {
-      lastError = err.message;
+      if (attempt === 3) {
+        return res.status(500).json({ error: 'Sunucu hatası: ' + err.message });
+      }
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
   }
-
-  // Tüm aday modeller denenip yanıt alınamazsa
-  return res.status(500).json({
-    error: `Yapay zeka servisi şu an yoğun: ${lastError}`
-  });
 }
