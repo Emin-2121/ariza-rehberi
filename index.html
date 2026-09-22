@@ -271,7 +271,7 @@
             animation: pulse 1.2s infinite;
         }
 
-        /* --- AI SERVİS ASİSTANI (PRO KART) --- */
+        /* --- AI SERVİS ASİSTANI --- */
         .ai-assistant-card {
             background: linear-gradient(145deg, rgba(17, 24, 39, 0.9), rgba(11, 17, 32, 0.85));
             border: 1px solid rgba(56, 189, 248, 0.3);
@@ -409,6 +409,7 @@
             display: none;
             gap: 0.6rem;
             margin-top: 0.85rem;
+            flex-wrap: wrap;
         }
 
         .speech-btn {
@@ -545,7 +546,7 @@
             font-size: 0.88rem;
         }
 
-        /* --- ARIZA KARTLARI (ULTRA MODERN GLASS) --- */
+        /* --- ARIZA KARTLARI --- */
         .results {
             display: flex;
             flex-direction: column;
@@ -811,6 +812,30 @@
 
         .action-btn.whatsapp:hover { background: rgba(74, 222, 128, 0.2); }
 
+        /* Butonlar İçin E-posta Stili */
+        .email-report-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: var(--primary);
+            padding: 0.7rem 1.3rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .email-report-btn:hover {
+            background: var(--primary);
+            color: #030712;
+            transform: translateY(-1.5px);
+            box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);
+        }
+
         /* --- BİLGİ KARTLARI & GÜVENLİK --- */
         .service-tips-card {
             margin-top: 2.5rem;
@@ -1052,7 +1077,6 @@
         <h1>Ev Aletleri Arızalarını Akıllıca Çözün</h1>
         <p>Kombiden beyaz eşyaya, robot süpürgeden klimaya kadar tüm hata kodlarını anında sorgulayın, tahmini parça masraflarını öğrenin ve evde uygulayın.</p>
         
-        <!-- Canlı İstatistik Çubuğu -->
         <div class="stats-bar">
             <div class="stat-card">
                 <div class="stat-number">150+</div>
@@ -1110,10 +1134,11 @@
         
         <div id="aiResponse" class="ai-response-box"></div>
 
-        <!-- Sesli Dinleme Kontrolleri -->
+        <!-- Sesli Dinleme ve Destek Kontrolleri -->
         <div id="speechControls" class="ai-speech-controls">
             <button class="speech-btn" onclick="speakAIResponse()">🔊 Ustayı Dinle</button>
             <button class="speech-btn" style="color:#ef4444; border-color:rgba(239,68,68,0.3);" onclick="stopSpeaking()">⏹️ Durdur</button>
+            <button class="speech-btn" style="color:#38bdf8; border-color:rgba(56,189,248,0.3);" onclick="sendEmailReport('ai')">✉️ Çözülmediyse E-posta ile Danış</button>
         </div>
     </div>
 
@@ -1251,13 +1276,16 @@
         </div>
         <p><strong>Platform:</strong> Arıza & Hata Kodu Rehberi</p>
         <p><strong>Amacımız:</strong> Ev aletlerinde gereksiz servis maliyetlerinden tasarruf sağlamak ve arızaları güvenli kılmak.</p>
-        <p><strong>İş Birliği & Hata Talebi:</strong> Listeye yeni kod ekletmek veya iş ortaklığı için arama sonuçlarındaki bildirim butonunu veya WhatsApp hattımızı kullanabilirsiniz.</p>
+        <p><strong>Geri Bildirim & Hata Kodu Talebi:</strong> Listede olmayan hata kodlarını bildirmek veya platformla iletişime geçmek için: <strong style="color:var(--primary);">iletisim@ariza-rehberi.vercel.app</strong></p>
     </div>
 </div>
 
 <div id="toast">Metin kopyalandı!</div>
 
 <script>
+// --- E-POSTA BİLDİRİM ADRESİ AYARI ---
+const DESTEK_EPOSTA = "iletisim@ariza-rehberi.vercel.app";
+
 const errorDatabase = [
     // --- KOMBİLER ---
     {
@@ -1732,6 +1760,20 @@ function fillAndAsk(promptText) {
     askGemini(promptText);
 }
 
+// --- Otomatik Doldurmalı E-posta Gönderme Fonksiyonu ---
+function sendEmailReport(type) {
+    const arananKelime = searchInput.value.trim() || aiInput.value.trim() || "Belirtilmedi";
+    let konu = encodeURIComponent(`[Arıza Rehberi] Çözülemeyen Kod/Sorun Bildirimi: ${arananKelime}`);
+    let govde = encodeURIComponent(
+        `Merhaba Arıza Rehberi Ekibi,\n\n` +
+        `Sitede aşağıdaki arıza kodunu/sorunu aradım ancak tam çözüm bulamadım:\n\n` +
+        `• Cihaz / Hata Kodu: ${arananKelime}\n` +
+        `• Karşılaştığım Belirtiler:\n\n` +
+        `Bu arızanın incelenip sisteme eklenmesini rica ederim.\n\nİyi çalışmalar.`
+    );
+    window.location.href = `mailto:${DESTEK_EPOSTA}?subject=${konu}&body=${govde}`;
+}
+
 function toggleWizard() {
     const content = document.getElementById('wizardContent');
     const icon = document.getElementById('wizardIcon');
@@ -1875,9 +1917,11 @@ async function askGemini(soruOverride) {
             speechControls.style.display = 'flex';
         } else {
             aiResponse.textContent = '⚠️ Hata: ' + (data.error || 'Cevap alınamadı.');
+            speechControls.style.display = 'flex'; // Hata çıksa da mail ile bildirebilsin
         }
     } catch (err) {
         aiResponse.textContent = '⚠️ Sunucu bağlantı hatası: ' + err.message;
+        speechControls.style.display = 'flex';
     } finally {
         aiBtn.disabled = false;
         aiBtn.textContent = 'Ustaya Sor';
@@ -1899,20 +1943,19 @@ function renderCards(data) {
     
     if (data.length === 0) {
         const query = searchInput.value.trim();
-        const whatsappReportUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent("Merhaba, sitede şu hata kodunu aradım ancak bulamadım: " + query + ". Rehbere ekleyebilir misiniz?")}`;
         
         resultsContainer.innerHTML = `
             <div class="no-result-card" style="text-align:center; padding:3rem 1.5rem; background:var(--surface-1); border-radius:var(--radius-xl); border:1px dashed var(--border-glow);">
                 <div style="font-size:2.5rem; margin-bottom:0.75rem;">🔍</div>
                 <div style="font-weight:700; font-size:1.2rem; margin-bottom:0.4rem;">"${query}" arızası henüz sabit listede yok</div>
-                <p style="color:var(--text-body); font-size:0.92rem; margin:0 0 1.25rem 0;">Beklemenize gerek yok, doğrudan Yapay Zeka Asistanımıza danışabilirsiniz:</p>
+                <p style="color:var(--text-body); font-size:0.92rem; margin:0 0 1.4rem 0;">Doğrudan Yapay Zeka Usta'ya sorabilir veya incelenmesi için bize e-posta ile iletebilirsiniz:</p>
                 <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
                     <button onclick="forwardToAi('${query}')" class="ai-btn" style="padding:0.7rem 1.25rem;">
                         🤖 "${query}" İçin Yapay Zekaya Sor
                     </button>
-                    <a href="${whatsappReportUrl}" target="_blank" class="action-btn whatsapp" style="padding:0.7rem 1.25rem;">
-                        💬 WhatsApp ile Bildir
-                    </a>
+                    <button onclick="sendEmailReport('search')" class="email-report-btn">
+                        ✉️ E-posta ile Bildir
+                    </button>
                 </div>
             </div>
         `;
@@ -2079,7 +2122,7 @@ pwaInstallBtn.addEventListener('click', async () => {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         const swBlob = new Blob([`
-            const CACHE_NAME = 'ariza-rehberi-cache-v3';
+            const CACHE_NAME = 'ariza-rehberi-cache-v4';
             self.addEventListener('install', e => {
                 e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(['/'])));
             });
