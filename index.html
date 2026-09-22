@@ -6,17 +6,23 @@
     <meta name="theme-color" content="#070a12">
 
     <!-- Temel SEO Başlık ve Açıklaması -->
-    <title>Cihaz Arıza & Hata Kodu Rehberi | Kombi, Çamaşır, Klima ve Buzdolabı Çözümleri</title>
-    <meta name="description" content="Kombi, klima, termosifon, kurutma ve beyaz eşyalardaki hata kodlarının anlamları, tahmini parça maliyetleri ve servis öncesi adım adım kontroller.">
-    <meta name="keywords" content="kombi hata kodları, f5 arızası, e15 arızası, çamaşır makinesi hata kodları, e09 bulaşık, buzdolabı ünlem, kurutma filtresi, arıza rehberi">
+    <title>Cihaz Arıza & Hata Kodu Rehberi | Kombi, Çamaşır, Robot Süpürge ve Klima Çözümleri</title>
+    <meta name="description" content="Kombi, klima, beyaz eşya, termosifon, robot süpürge ve airfryer hata kodları. Yapay zeka servis asistanı, sesli yanıt ve tüketici rehberi.">
+    <meta name="keywords" content="kombi hata kodları, f5 arızası, e15 arızası, robot süpürge lazer hatası, airfryer e1 hatası, çamaşır makinesi tamiri, yapay zeka usta">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://ariza-rehberi.vercel.app/">
+
+    <!-- Mobil PWA Web App Yetenekleri -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Arıza Rehberi">
 
     <!-- Sosyal Medya ve Paylaşım Önizlemeleri (Open Graph) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ariza-rehberi.vercel.app/">
     <meta property="og:title" content="Cihaz Arıza & Hata Kodu Rehberi">
-    <meta property="og:description" content="Kombi, klima, termosifon ve beyaz eşyalardaki arıza kodlarını anında bulun, maliyetini öğrenin ve çözümü uygulayın.">
+    <meta property="og:description" content="Kombi, klima, beyaz eşya ve küçük ev aletleri için anında hata kodu analizi ve yapay zeka destekli servis kontrolleri.">
 
     <!-- Google Botları ve Zengin Sonuçlar İçin Yapılandırılmış Veri (JSON-LD) -->
     <script type="application/ld+json">
@@ -28,7 +34,7 @@
           "@id": "https://ariza-rehberi.vercel.app/#webapp",
           "name": "Arıza Rehberi",
           "url": "https://ariza-rehberi.vercel.app/",
-          "description": "Kombi, klima ve beyaz eşya hata kodları, parça maliyetleri ve adım adım çözüm rehberi.",
+          "description": "Kombi, klima ve beyaz eşya hata kodları, parça maliyetleri ve yapay zeka destekli ilk yardım aracı.",
           "applicationCategory": "UtilityApplication",
           "operatingSystem": "All"
         },
@@ -216,7 +222,7 @@
             100% { transform: scale(1); }
         }
 
-        /* --- Gemini Yapay Zeka Kartı (Canlı Siber Işıltı) --- */
+        /* --- Gemini Yapay Zeka Kartı --- */
         .ai-assistant-card {
             background: linear-gradient(145deg, rgba(22, 32, 53, 0.95), rgba(15, 23, 42, 0.92));
             border: 1px solid rgba(56, 189, 248, 0.35);
@@ -231,9 +237,7 @@
         .ai-assistant-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 2px;
             background: linear-gradient(90deg, transparent, #38bdf8, #818cf8, transparent);
         }
@@ -268,8 +272,34 @@
         .ai-desc {
             font-size: 0.86rem;
             color: var(--text-muted);
-            margin: 0 0 0.9rem 0;
+            margin: 0 0 0.75rem 0;
             line-height: 1.5;
+        }
+
+        /* Hızlı Şablon Butonları */
+        .ai-prompt-templates {
+            display: flex;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.85rem;
+        }
+
+        .prompt-pill {
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: #bae6fd;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .prompt-pill:hover {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: var(--accent);
+            color: #fff;
+            transform: translateY(-1px);
         }
 
         .ai-input-group {
@@ -331,6 +361,30 @@
             line-height: 1.65;
             white-space: pre-wrap;
             box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .ai-speech-controls {
+            display: none;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            align-items: center;
+        }
+
+        .speech-btn {
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .speech-btn:hover {
+            background: rgba(56, 189, 248, 0.25);
+            color: #fff;
         }
 
         .quick-tags {
@@ -468,7 +522,7 @@
             gap: 1.35rem;
         }
 
-        /* --- Canlı Glassmorphism Arıza Kartları --- */
+        /* --- Canlı Arıza Kartları --- */
         .card {
             background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -798,8 +852,72 @@
             transform: translateY(-1.5px);
         }
 
+        /* --- Servis Çağırırken Tuzak Rehberi --- */
+        .service-tips-card {
+            margin-top: 2.5rem;
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.7));
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 14px;
+            padding: 1.4rem;
+        }
+
+        .service-tips-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #38bdf8;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.85rem;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .tip-item {
+            background: rgba(11, 17, 32, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+
+        .tip-item strong {
+            color: #f59e0b;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* PWA Yükleme Banner'ı */
+        .pwa-banner {
+            display: none;
+            background: linear-gradient(135deg, #0369a1, #1d4ed8);
+            border-radius: 12px;
+            padding: 0.75rem 1.1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 25px rgba(2, 132, 199, 0.35);
+        }
+
+        .pwa-install-btn {
+            background: #fff;
+            color: #0f172a;
+            border: none;
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            cursor: pointer;
+        }
+
         .safety-banner {
-            margin-top: 3.5rem;
+            margin-top: 2rem;
             padding: 1.25rem;
             border-radius: 12px;
             background: rgba(245, 158, 11, 0.08);
@@ -888,7 +1006,6 @@
             color: var(--accent);
         }
 
-        /* Yasal Feragat Metni Stilleri */
         .footer-disclaimer {
             max-width: 680px;
             margin: 1.2rem auto 0.8rem auto;
@@ -995,7 +1112,7 @@
                 color: #000 !important;
                 padding: 0;
             }
-            .search-wrapper, .ai-assistant-card, .quick-tags, .wizard-box, .category-tabs, .card-actions, .feedback-bar, .user-note-box, .safety-banner, footer, header .hero-badge {
+            .search-wrapper, .ai-assistant-card, .quick-tags, .wizard-box, .category-tabs, .card-actions, .feedback-bar, .user-note-box, .safety-banner, .service-tips-card, .pwa-banner, footer, header .hero-badge {
                 display: none !important;
             }
             .card {
@@ -1019,15 +1136,22 @@
 <body>
 
 <div class="container">
+
+    <!-- PWA Telefona Yükle Banner'ı -->
+    <div id="pwaBanner" class="pwa-banner">
+        <div style="font-size: 0.88rem; font-weight: 600;">📱 Arıza Rehberi'ni telefona uygulama olarak yükleyin</div>
+        <button id="pwaInstallBtn" class="pwa-install-btn">Yükle</button>
+    </div>
+
     <header>
         <div class="hero-badge">⚡ Servis Öncesi Kontrol Aracı</div>
         <h1>Arıza & Hata Kodu Rehberi</h1>
-        <p class="subtitle">Kombi, klima, beyaz eşya, kurutma veya termosifondaki kodu aratın, maliyetleri öğrenin ve çözümü evde deneyin.</p>
+        <p class="subtitle">Kombi, klima, beyaz eşya, termosifon veya robot süpürgenizdeki arızayı bulun, maliyetleri öğrenin ve çözümü evde uygulayın.</p>
     </header>
 
     <div class="search-wrapper">
         <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Örn: F5, E18, E09, Kurutma filtresi, Termosifon..." autofocus>
+        <input type="text" id="searchInput" placeholder="Örn: F5, E18, Robot lazer, Airfryer E1, Termosifon..." autofocus>
         <button id="micBtn" class="mic-btn" title="Sesle Ara" onclick="startSpeechRecognition()">🎙️</button>
     </div>
 
@@ -1040,8 +1164,17 @@
             </div>
         </div>
         <p class="ai-desc">
-            Cihazınızdaki arıza belirtilerini veya listede bulamadığınız sorunları yazın; yapay zeka usta adım adım kontrolleri listelesin.
+            Cihazınızdaki belirtileri yazın ya da aşağıdaki hazır şablonlara tıklayın; usta adım adım kontrolleri listelesin.
         </p>
+
+        <!-- Hızlı Şablon Butonları -->
+        <div class="ai-prompt-templates">
+            <button class="prompt-pill" onclick="fillAndAsk('Kombinin altından su damlıyor ve basınç sürekli düşüyor')">💧 Kombiden su damlıyor</button>
+            <button class="prompt-pill" onclick="fillAndAsk('Çamaşır makinesi sıkma yaparken aşırı sallanıyor ve gürültü yapıyor')">🧺 Makine aşırı sallanıyor</button>
+            <button class="prompt-pill" onclick="fillAndAsk('Bulaşık makinesi tableti eritmiyor ve bardaklar puslu çıkıyor')">🍽️ Tablet erimiyor</button>
+            <button class="prompt-pill" onclick="fillAndAsk('Robot süpürge şarj istasyonunu bulamıyor ve dönüp duruyor')">🤖 Robot yuva bulamıyor</button>
+        </div>
+
         <div class="ai-input-group">
             <input 
                 type="text" 
@@ -1053,7 +1186,14 @@
                 Ustaya Sor
             </button>
         </div>
+        
         <div id="aiResponse" class="ai-response-box"></div>
+
+        <!-- Sesli Dinleme Kontrolleri -->
+        <div id="speechControls" class="ai-speech-controls">
+            <button class="speech-btn" onclick="speakAIResponse()">🔊 Ustayı Dinle</button>
+            <button class="speech-btn" style="color:#ef4444; border-color:rgba(239,68,68,0.3);" onclick="stopSpeaking()">⏹️ Durdur</button>
+        </div>
     </div>
 
     <!-- Hızlı Popüler Arama Etiketleri -->
@@ -1062,8 +1202,9 @@
         <button class="tag-btn" onclick="quickSearch('F5')">🔥 Baymak F5</button>
         <button class="tag-btn" onclick="quickSearch('Su Basıncı')">💧 Su Basma (F10/F22)</button>
         <button class="tag-btn" onclick="quickSearch('E18')">🧺 Bosch E18</button>
-        <button class="tag-btn" onclick="quickSearch('E09')">🍽️ Bulaşık E09 Isıtma</button>
-        <button class="tag-btn" onclick="quickSearch('Kurutma')">💨 Kurutma Filtresi</button>
+        <button class="tag-btn" onclick="quickSearch('E09')">🍽️ Bulaşık E09</button>
+        <button class="tag-btn" onclick="quickSearch('LDS')">🤖 Robot Lazer</button>
+        <button class="tag-btn" onclick="quickSearch('E1 Airfryer')">🍟 Airfryer E1</button>
         <button class="tag-btn" onclick="quickSearch('Ünlem')">🧊 Buzdolabı Ünlem</button>
         <button class="tag-btn" onclick="quickSearch('CH05')">❄️ Klima CH05</button>
     </div>
@@ -1080,6 +1221,7 @@
                     <option value="">1. Cihazınızı Seçin...</option>
                     <option value="kombi">Kombi</option>
                     <option value="beyazesya">Çamaşır / Bulaşık / Kurutma</option>
+                    <option value="kucukev">Robot Süpürge / Airfryer</option>
                     <option value="sogutma">Buzdolabı / Termosifon</option>
                     <option value="klima">Klima</option>
                 </select>
@@ -1087,9 +1229,9 @@
                     <option value="">2. Yaşanan Sorun Nedir?</option>
                     <option value="su">Su Basıncı / Su Akıtma / Su Boşaltmama</option>
                     <option value="atesleme">Ateşleme Yapmıyor / Gaz Yok</option>
-                    <option value="isitmiyor">Suyu Isıtmıyor / Kurutmuyor</option>
+                    <option value="isitmiyor">Suyu Isıtmıyor / Kurutmuyor / Pişirmiyor</option>
                     <option value="sogutmuyor">Soğutmuyor / Ünlem Yanıp Sönüyor</option>
-                    <option value="iletisim">Çalışmıyor / İletişim / Şalter Attırma</option>
+                    <option value="iletisim">Çalışmıyor / Lazer Sensör / İletişim Hatası</option>
                 </select>
             </div>
         </div>
@@ -1098,12 +1240,34 @@
     <div class="category-tabs">
         <button class="tab-btn active" data-cat="all">Tümü</button>
         <button class="tab-btn" data-cat="kombi">🔥 Kombiler</button>
-        <button class="tab-btn" data-cat="beyazesya">🧺 Çamaşır / Bulaşık / Kurutma</button>
+        <button class="tab-btn" data-cat="beyazesya">🧺 Beyaz Eşya & Kurutma</button>
+        <button class="tab-btn" data-cat="kucukev">🤖 Robot & Airfryer</button>
         <button class="tab-btn" data-cat="sogutma">🧊 Soğutma & Termosifon</button>
         <button class="tab-btn" data-cat="klima">❄️ Klimalar</button>
     </div>
 
     <div class="results" id="resultsContainer"></div>
+
+    <!-- Servis Çağırırken Tüketici Tuzak Rehberi -->
+    <div class="service-tips-card">
+        <div class="service-tips-title">
+            <span>🛡️ Servis Çağırırken Bilinmesi Gereken 3 Altın Kural</span>
+        </div>
+        <div class="service-tips-grid">
+            <div class="tip-item">
+                <strong>1. Sahte Google Reklamlarına Dikkat</strong>
+                Arama motorunda en üstte "Sponsorlu" çıkan ilk telefon numaraları genelde yetkili servis değil, fahiş fiyat isteyen aracı korsan servislerdir.
+            </div>
+            <div class="tip-item">
+                <strong>2. Eski Parçayı Mutlaka İsteyin</strong>
+                "Parça değiştirdik" denildiğinde makinenizden çıkan eski arızalı parçayı kutusuyla birlikte teslim almadan asla ödeme yapmayın.
+            </div>
+            <div class="tip-item">
+                <strong>3. "Kart Yanmış" Tuzağı</strong>
+                Sadece 100 liralık bir sigorta veya filtre tıkanıklığı için "anakart yanmış 4000 TL" diyen ustalara karşı mutlaka ikinci bir ustadan fikir alın.
+            </div>
+        </div>
+    </div>
 
     <!-- Acil Arama Butonlu Güvenlik Bildirimi -->
     <div class="safety-banner">
@@ -1467,6 +1631,42 @@ const errorDatabase = [
         details: "Ventil bobini arızalandığında elektrik gitse dahi su vanasını açamaz."
     },
 
+    // --- KÜÇÜK EV ALETLERİ (ROBOT & AIRFRYER) ---
+    {
+        id: "robot-lds",
+        code: "LDS / Hata 1 (Lidar)",
+        brand: "Xiaomi / Roborock / Dreame Robot",
+        category: "kucukev",
+        title: "Lazer Mesafe Sensörü (LDS) Sıkışması",
+        cost: "250 - 950 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
+        steps: [
+            "Robotun üstündeki dönen kuleyi (LDS kapağını) kontrol edin; içine saç veya ip dolanmış mı bakın.",
+            "Turuncu dönen sensör kafasını parmağınızla hafifçe sağa sola çevirerek sıkışmayı açın.",
+            "Basınçlı hava veya kulak pamuğuyla lazer deliklerinin tozunu temizleyin."
+        ],
+        details: "LDS motor kayışı kopmuşsa veya minyatür tahrik motoru yanmışsa motor değişimi gerekir."
+    },
+    {
+        id: "airfryer-e1-e2",
+        code: "E1 / E2 Hatası",
+        brand: "Philips / Xiaomi / Tefal Airfryer",
+        category: "kucukev",
+        title: "NTC Sıcaklık Sensörü Açık Devre / Aşırı Isınma",
+        cost: "200 - 600 TL",
+        diff: "Orta",
+        diffClass: "diff-mid",
+        hasGauge: false,
+        steps: [
+            "Cihazın sepetini çıkarın ve hazne kontak tırnaklarında yağ/artık olup olmadığını silin.",
+            "Fişi prizden çekip cihazın tamamen soğuması için 20 dakika bekleyin.",
+            "Arka hava tahliye ızgarasının duvara en az 10 cm mesafede ve açık olduğunu teyit edin."
+        ],
+        details: "Rezistans tavanındaki termal NTC prob kablosu aşırı ısıdan kopmuş veya kart sensör soketi gevşemiş olabilir."
+    },
+
     // --- SOĞUTMA & TERMOSİFON ---
     {
         id: "buzdolabi-unlem",
@@ -1584,6 +1784,7 @@ const micBtn = document.getElementById('micBtn');
 const aiInput = document.getElementById('aiInput');
 const aiBtn = document.getElementById('aiBtn');
 const aiResponse = document.getElementById('aiResponse');
+const speechControls = document.getElementById('speechControls');
 
 let activeCategory = 'all';
 
@@ -1603,6 +1804,11 @@ function quickSearch(tag) {
     searchInput.value = tag;
     filterData();
     window.scrollTo({ top: searchInput.offsetTop - 30, behavior: 'smooth' });
+}
+
+function fillAndAsk(promptText) {
+    aiInput.value = promptText;
+    askGemini(promptText);
 }
 
 function toggleWizard() {
@@ -1667,6 +1873,28 @@ function startSpeechRecognition() {
     recognition.start();
 }
 
+// --- Sesli Okuma (TTS) Fonksiyonları ---
+function speakAIResponse() {
+    if (!('speechSynthesis' in window)) {
+        showToast("Cihazınız sesli okumayı desteklemiyor.");
+        return;
+    }
+    window.speechSynthesis.cancel();
+    const cleanText = aiResponse.textContent.replace(/[#*`_~]/g, '');
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.lang = 'tr-TR';
+    utterance.rate = 1.0;
+    window.speechSynthesis.speak(utterance);
+    showToast("Usta yanıtı seslendiriyor 🔊");
+}
+
+function stopSpeaking() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        showToast("Ses durduruldu ⏹️");
+    }
+}
+
 function vote(id, type) {
     const key = `vote_${id}`;
     localStorage.setItem(key, type);
@@ -1708,6 +1936,7 @@ async function askGemini(soruOverride) {
     aiBtn.disabled = true;
     aiBtn.textContent = 'İnceleniyor...';
     aiResponse.style.display = 'block';
+    speechControls.style.display = 'none';
     aiResponse.textContent = '⏳ Yapay zeka servis uzmanı inceliyor, lütfen bekleyin...';
 
     aiResponse.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1722,6 +1951,7 @@ async function askGemini(soruOverride) {
         const data = await res.json();
         if (res.ok) {
             aiResponse.textContent = data.cevap;
+            speechControls.style.display = 'flex'; // Sesli dinleme butonlarını göster
         } else {
             aiResponse.textContent = '⚠️ Hata: ' + (data.error || 'Cevap alınamadı.');
         }
@@ -1903,10 +2133,32 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// PWA Yükleme Yakalama Mantığı
+let deferredPrompt;
+const pwaBanner = document.getElementById('pwaBanner');
+const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    pwaBanner.style.display = 'flex';
+});
+
+pwaInstallBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            pwaBanner.style.display = 'none';
+        }
+        deferredPrompt = null;
+    }
+});
+
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         const swBlob = new Blob([`
-            const CACHE_NAME = 'ariza-rehberi-cache-v1';
+            const CACHE_NAME = 'ariza-rehberi-cache-v2';
             self.addEventListener('install', e => {
                 e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(['/'])));
             });
