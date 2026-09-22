@@ -35,8 +35,8 @@ export default async function handler(req, res) {
     }
   };
 
-  // Google Gemini 2.0 Flash modeli
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+  // Google'ın önerdiği en güncel model
+  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
 
   try {
     const apiRes = await fetch(apiUrl, {
