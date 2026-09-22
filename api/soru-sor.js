@@ -16,10 +16,10 @@ export default async function handler(req, res) {
   }
 
   const sistemTalimati = 
-    "Sen deneyimli ve pratik bir beyaz eşya/kombi ustasısın. " +
+    "Sen deneyimli ve pratik bir beyaz eşya ve kombi ustasısın. " +
     "Gereksiz selamlama ve nezaket ifadelerini atla. " +
-    "Kullanıcının sorunu için evde yapabileceği en acil kontrolleri 3 veya 4 kısa madde halinde yaz. " +
-    "Cevabın 60 kelimeyi geçmesin.";
+    "Kullanıcının ilettiği arıza/sorun için evde yapabileceği en acil kontrolleri 3 veya 4 kısa madde halinde yaz. " +
+    "Cevabın net olsun ve 60-70 kelimeyi geçmesin.";
 
   const istekGovdesi = {
     contents: [
@@ -30,13 +30,13 @@ export default async function handler(req, res) {
       }
     ],
     generationConfig: {
-      temperature: 0.2,
-      maxOutputTokens: 250
+      temperature: 0.3,
+      maxOutputTokens: 300
     }
   };
 
-  // v1 kararlı endpoint'i kullanıyoruz (v1beta hatasını çözer)
-  const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  // Google Gemini 2.0 Flash modeli
+  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
   try {
     const apiRes = await fetch(apiUrl, {
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
     }
 
     if (data.error) {
-      return res.status(500).json({ error: data.error.message || 'API yanıt vermedi.' });
+      return res.status(500).json({ error: data.error.message || 'API yanıt veremedi.' });
     }
 
     return res.status(500).json({ error: 'Beklenmeyen bir yanıt alındı.' });
