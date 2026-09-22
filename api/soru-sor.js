@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ 
-      error: 'Vercel üzerinde GEMINI_API_KEY tanımlı değil veya okunamadı. Lütfen Vercel panelindeki Environment Variables alanını kontrol edin.' 
+      error: 'Vercel üzerinde GEMINI_API_KEY bulunamadı.' 
     });
   }
 
@@ -35,38 +35,30 @@ export default async function handler(req, res) {
     }
   };
 
-  // Kararlı Gemini modelleri
-  const modeller = ['gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-1.5-flash'];
-  let sonHataMesaji = '';
+  // v1 kararlı endpoint'i kullanıyoruz (v1beta hatasını çözer)
+  const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
-  for (const model of modeller) {
-    try {
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      
-      const apiRes = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(istekGovdesi)
+  try {
+    const apiRes = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(istekGovdesi)
+    });
+
+    const data = await apiRes.json();
+
+    if (apiRes.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+      return res.status(200).json({ 
+        cevap: data.candidates[0].content.parts[0].text.trim() 
       });
-
-      const data = await apiRes.json();
-
-      if (apiRes.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-        return res.status(200).json({ 
-          cevap: data.candidates[0].content.parts[0].text.trim() 
-        });
-      }
-
-      // Google'ın döndürdüğü gerçek hata mesajını kaydet
-      if (data.error) {
-        sonHataMesaji = `${model} Hatası: ${data.error.message || JSON.stringify(data.error)}`;
-      }
-    } catch (err) {
-      sonHataMesaji = `Bağlantı hatası (${model}): ${err.message}`;
     }
-  }
 
-  return res.status(500).json({ 
-    error: sonHataMesaji || 'Yapay zeka modellerine ulaşılamadı. API anahtarınızı veya internet bağlantısını kontrol edin.' 
-  });
+    if (data.error) {
+      return res.status(500).json({ error: data.error.message || 'API yanıt vermedi.' });
+    }
+
+    return res.status(500).json({ error: 'Beklenmeyen bir yanıt alındı.' });
+  } catch (err) {
+    return res.status(500).json({ error: 'Bağlantı hatası: ' + err.message });
+  }
 }
