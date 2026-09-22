@@ -20,19 +20,26 @@ Cevabını doğrudan maddeler halinde ver.
 
 Kullanıcının sorusu: "${soru}"`;
 
-  // Google'ın zorunlu kıldığı güncel model
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+  // Yoğunluk anında birbirini yedekleyen modeller
+  const candidateModels = [
+    'gemini-2.5-pro',
+    'gemini-3.6-flash'
+  ];
 
-  // Geçici yoğunluk (high demand) durumunda pes etmeyip 3 kez deneme mekanizması
-  for (let attempt = 1; attempt <= 3; attempt++) {
+  let lastError = null;
+
+  for (const model of candidateModels) {
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: promptText }] }]
-        })
-      });
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: promptText }] }]
+          })
+        }
+      );
 
       const data = await response.json();
 
@@ -42,19 +49,14 @@ Kullanıcının sorusu: "${soru}"`;
         });
       }
 
-      // Yoğunluk hatası verirse 1 saniye bekleyip tekrar dene
-      if (attempt < 3) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      } else {
-        return res.status(500).json({
-          error: data.error?.message || 'Yapay zeka yanıt veremedi.'
-        });
-      }
+      // Yoğunluk (high demand) veya kota uyarısı gelirse diğer modele geç
+      lastError = data.error?.message || 'Model yanıt vermedi.';
     } catch (err) {
-      if (attempt === 3) {
-        return res.status(500).json({ error: 'Sunucu hatası: ' + err.message });
-      }
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      lastError = err.message;
     }
   }
+
+  return res.status(500).json({
+    error: `Servis geçici olarak yoğun, lütfen birkaç saniye sonra tekrar deneyin. (${lastError})`
+  });
 }
