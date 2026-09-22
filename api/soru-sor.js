@@ -1,48 +1,65 @@
 export default async function handler(req, res) {
-  // Sadece POST isteklerine izin ver
+  // Yalnızca POST isteklerini kabul et
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Yalnızca POST istekleri desteklenir.' });
   }
 
-  const { soru } = req.body;
+  const { soru } = req.body || {};
   if (!soru || soru.trim() === '') {
-    return res.status(400).json({ error: 'Lütfen bir soru veya arıza açıklaması girin.' });
+    return res.status(400).json({ error: 'Lütfen bir arıza açıklaması veya soru yazın.' });
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'API anahtarı sunucuda tanımlanmamış.' });
+    return res.status(500).json({ error: 'Vercel üzerinde GEMINI_API_KEY tanımlı değil.' });
   }
 
-  try {
-    // Google'ın güncel modeli: gemini-3.6-flash
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
-
-    const promptText = `Sen deneyimli, güvenilir bir kombi ve beyaz eşya teknik servis uzmanısın. 
-Kullanıcının ilettiği arıza/sorun durumuna göre kısa, anlaşılır ve güvenliği ön planda tutan adım adım kontroller öner. 
-Kritik elektrik veya gaz kaçağı riski varsa mutlaka açıkça uyar. 
-Cevabını doğrudan maddeler halinde, teknik jargona boğmadan ver.
+  const promptText = `Sen kombi, klima ve beyaz eşya konusunda uzman, can ve mal güvenliğini ön planda tutan deneyimli bir teknik servis ustasısın.
+Kullanıcının ilettiği arıza/sorun durumuna göre kısa, net, anlaşılır ve güvenliği ön planda tutan adım adım kontroller öner.
+Kritik gaz kaçağı veya elektrik tehlikesi varsa en başta uyar.
+Cevabını doğrudan maddeler halinde ver.
 
 Kullanıcının sorusu: "${soru}"`;
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: promptText }] }]
-      })
-    });
+  // Google'ın en güncel ve en geniş kotalı modelleri
+  const candidateModels = [
+    'gemini-2.5-flash',
+    'gemini-2.5-pro',
+    'gemini-2.0-flash'
+  ];
 
-    const data = await response.json();
+  let lastError = null;
 
-    if (!response.ok) {
-      return res.status(response.status).json({ error: data.error?.message || 'Gemini yanıt veremedi.' });
+  for (const model of candidateModels) {
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: promptText }] }]
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+        return res.status(200).json({
+          cevap: data.candidates[0].content.parts[0].text
+        });
+      }
+
+      // Hata geldiyse kaydet ve bir sonraki modeli dene
+      lastError = data.error?.message || 'Model yanıt vermedi';
+    } catch (err) {
+      lastError = err.message;
     }
-
-    const cevap = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Yanıt alınamadı.';
-    return res.status(200).json({ cevap });
-
-  } catch (err) {
-    return res.status(500).json({ error: 'Sunucu hatası: ' + err.message });
   }
+
+  // Tüm aday modeller denenip yanıt alınamazsa
+  return res.status(500).json({
+    error: `Yapay zeka servisi şu an yoğun: ${lastError}`
+  });
 }
