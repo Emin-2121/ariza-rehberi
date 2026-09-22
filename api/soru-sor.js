@@ -1,24 +1,25 @@
 export default async function handler(req, res) {
-  // Sadece POST isteklerini kabul et
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Yalnızca POST istekleri desteklenir.' });
   }
 
   const { soru } = req.body;
   if (!soru || typeof soru !== 'string') {
-    return res.status(400).json({ error: 'Lütfen geçerli bir arıza veya soru belirtin.' });
+    return res.status(400).json({ error: 'Lütfen bir soru veya arıza belirtin.' });
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'API anahtarı (GEMINI_API_KEY) tanımlanmamış.' });
+    return res.status(500).json({ 
+      error: 'Vercel üzerinde GEMINI_API_KEY tanımlı değil veya okunamadı. Lütfen Vercel panelindeki Environment Variables alanını kontrol edin.' 
+    });
   }
 
   const sistemTalimati = 
-    "Sen deneyimli ve pratik bir beyaz eşya ve kombi ustasısın. " +
-    "Gereksiz nezaket ve selamlama cümlelerini atla. " +
-    "Kullanıcının ilettiği soruna yönelik evde yapılabilecek en kritik kontrolleri doğrudan 3 veya 4 kısa madde halinde yaz. " +
-    "Cevabın net olsun ve 60-70 kelimeyi geçmesin.";
+    "Sen deneyimli ve pratik bir beyaz eşya/kombi ustasısın. " +
+    "Gereksiz selamlama ve nezaket ifadelerini atla. " +
+    "Kullanıcının sorunu için evde yapabileceği en acil kontrolleri 3 veya 4 kısa madde halinde yaz. " +
+    "Cevabın 60 kelimeyi geçmesin.";
 
   const istekGovdesi = {
     contents: [
@@ -29,14 +30,14 @@ export default async function handler(req, res) {
       }
     ],
     generationConfig: {
-      temperature: 0.3,
-      maxOutputTokens: 300
+      temperature: 0.2,
+      maxOutputTokens: 250
     }
   };
 
-  // 1. Tercih: gemini-2.5-flash (En hızlı model)
-  // 2. Tercih (Yedek): gemini-1.5-flash
-  const modeller = ['gemini-2.5-flash', 'gemini-1.5-flash'];
+  // Kararlı Gemini modelleri
+  const modeller = ['gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-1.5-flash'];
+  let sonHataMesaji = '';
 
   for (const model of modeller) {
     try {
@@ -51,17 +52,21 @@ export default async function handler(req, res) {
       const data = await apiRes.json();
 
       if (apiRes.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-        const cevapMetni = data.candidates[0].content.parts[0].text.trim();
-        return res.status(200).json({ cevap: cevapMetni });
+        return res.status(200).json({ 
+          cevap: data.candidates[0].content.parts[0].text.trim() 
+        });
       }
-      
-      console.warn(`${model} yanıt vermedi, sonraki modele geçiliyor:`, data.error?.message);
+
+      // Google'ın döndürdüğü gerçek hata mesajını kaydet
+      if (data.error) {
+        sonHataMesaji = `${model} Hatası: ${data.error.message || JSON.stringify(data.error)}`;
+      }
     } catch (err) {
-      console.error(`${model} bağlantı hatası:`, err.message);
+      sonHataMesaji = `Bağlantı hatası (${model}): ${err.message}`;
     }
   }
 
   return res.status(500).json({ 
-    error: 'Yapay zeka servisi şu an meşgul. Lütfen sorunuzu biraz daha sadeleştirip tekrar deneyin.' 
+    error: sonHataMesaji || 'Yapay zeka modellerine ulaşılamadı. API anahtarınızı veya internet bağlantısını kontrol edin.' 
   });
 }
