@@ -1,62 +1,66 @@
 export default async function handler(req, res) {
+  // Sadece POST isteklerine izin ver
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Yalnızca POST istekleri desteklenir.' });
   }
 
-  const { soru } = req.body || {};
-  if (!soru || soru.trim() === '') {
-    return res.status(400).json({ error: 'Lütfen bir arıza açıklaması veya soru yazın.' });
+  const { soru } = req.body;
+  if (!soru || typeof soru !== 'string') {
+    return res.status(400).json({ error: 'Lütfen geçerli bir soru iletin.' });
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'Vercel üzerinde GEMINI_API_KEY tanımlı değil.' });
+    return res.status(500).json({ error: 'API anahtarı yapılandırılmamış.' });
   }
 
-  const promptText = `Sen kombi, klima ve beyaz eşya konusunda uzman, can ve mal güvenliğini ön planda tutan deneyimli bir teknik servis ustasısın.
-Kullanıcının ilettiği arıza/sorun durumuna göre kısa, net, anlaşılır ve güvenliği ön planda tutan adım adım kontroller öner.
-Kritik gaz kaçağı veya elektrik tehlikesi varsa en başta uyar.
-Cevabını doğrudan maddeler halinde ver.
+  // En hızlı model: gemini-2.5-flash
+  // Thinking budget sıfırlanıp token sayısı kısaltılarak milisaniyeler içinde yanıt alınır
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-Kullanıcının sorusu: "${soru}"`;
+  const systemInstruction = 
+    "Sen pratik ve net konuşan bir beyaz eşya/kombi ustasısın. " +
+    "Gereksiz nezaket ve uzun selamlama cümlelerini atla. " +
+    "Kullanıcının sorununa doğrudan 3 veya 4 kısa madde halinde, evde yapılabilecek en acil kontrolleri söyle. " +
+    "Cevabın kesinlikle 60 kelimeyi geçmesin.";
 
-  // Yoğunluk anında birbirini yedekleyen modeller
-  const candidateModels = [
-    'gemini-2.5-pro',
-    'gemini-3.6-flash'
-  ];
-
-  let lastError = null;
-
-  for (const model of candidateModels) {
-    try {
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: promptText }] }]
-          })
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-        return res.status(200).json({
-          cevap: data.candidates[0].content.parts[0].text
-        });
+  const requestBody = {
+    contents: [
+      {
+        role: "user",
+        parts: [{ text: `${systemInstruction}\n\nKullanıcı Sorunu: ${soru}` }]
       }
-
-      // Yoğunluk (high demand) veya kota uyarısı gelirse diğer modele geç
-      lastError = data.error?.message || 'Model yanıt vermedi.';
-    } catch (err) {
-      lastError = err.message;
+    ],
+    generationConfig: {
+      temperature: 0.2, // Hızlı ve kararlı yanıt
+      maxOutputTokens: 250, // Yanıtı kısa tutarak üretim süresini minimuma indirir
+      thinkingConfig: {
+        thinkingBudget: 0 // Düşünme gecikmesini tamamen kapatır, anında yazar
+      }
     }
-  }
+  };
 
-  return res.status(500).json({
-    error: `Servis geçici olarak yoğun, lütfen birkaç saniye sonra tekrar deneyin. (${lastError})`
-  });
+  try {
+    const apiRes = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody)
+    });
+
+    const data = await apiRes.json();
+
+    if (!apiRes.ok) {
+      // Hata durumunda yedek flash çağrısı (fallback)
+      return res.status(500).json({ error: data.error?.message || 'Yapay zeka servisi yanıt vermedi.' });
+    }
+
+    const rawCevap = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!rawCevap) {
+      return res.status(500).json({ error: 'Yapay zeka boş yanıt döndürdü.' });
+    }
+
+    return res.status(200).json({ cevap: rawCevap.trim() });
+  } catch (err) {
+    return res.status(500).json({ error: 'Bağlantı hatası: ' + err.message });
+  }
 }
