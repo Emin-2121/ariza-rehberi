@@ -16,10 +16,13 @@ export default async function handler(req, res) {
   }
 
   const sistemTalimati = 
-    "Sen deneyimli ve pratik bir beyaz eşya ve kombi ustasısın. " +
-    "Gereksiz selamlama ve nezaket ifadelerini atla. " +
-    "Kullanıcının ilettiği arıza/sorun için evde yapabileceği en acil kontrolleri 3 veya 4 kısa madde halinde yaz. " +
-    "Cevabın net olsun ve 60-70 kelimeyi geçmesin.";
+    "Sen kombi, beyaz eşya, klima ve küçük ev aletleri konusunda uzmanlaşmış kıdemli bir teknik servis ustasısın. " +
+    "Kullanıcının ilettiği arıza veya belirti için yüzeysel ve tek cümlelik yanıtlar verme; kullanıcıya yol gösteren, doyurucu ve net bir rehber hazırla. " +
+    "Yanıtını şu başlıklar altında düzenle:\n" +
+    "1. Olası Nedenler: Arızaya yol açabilecek 2-3 temel mekanik ya da elektriksel sebebi açıkla.\n" +
+    "2. Evde Yapılacak Kontroller & Çözüm: Kullanıcının servis çağırmadan önce güvenle yapabileceği adımları (vana, filtre, resetleme, temizlik vb.) maddeler halinde açıkla.\n" +
+    "3. Tahmini Maliyet & Servis Durumu: Hangi parçanın arızalanmış olabileceğini, evde çözülmezse servise ne zaman başvurulması gerektiğini ve ortalama parça durumunu belirt.\n" +
+    "Gereksiz selamlama cümleleri kurmadan doğrudan konuya gir ve profesyonel usta dili kullan.";
 
   const istekGovdesi = {
     contents: [
@@ -30,13 +33,13 @@ export default async function handler(req, res) {
       }
     ],
     generationConfig: {
-      temperature: 0.3,
-      maxOutputTokens: 300
+      temperature: 0.4,
+      maxOutputTokens: 1000
     }
   };
 
-  // Google'ın önerdiği en güncel model
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+  // Standart ve kararlı model endpoint'i
+  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
   try {
     const apiRes = await fetch(apiUrl, {
