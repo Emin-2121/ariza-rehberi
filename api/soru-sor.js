@@ -35,8 +35,8 @@ export default async function handler(req, res) {
     }
   };
 
-  // v1beta yerine doğrudan kararlı v1 endpoint'i
-  const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  // Gemini 3.6 Flash Endpoint
+  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
 
   try {
     const apiRes = await fetch(apiUrl, {
