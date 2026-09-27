@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
   const sistemTalimati = 
     "Sen profesyonel ve pratik bir teknik servis ustasısın. " +
-    "Yanıtında sadece ve sadece Türkçe kullan. Asla İngilizce düşünce süreci, not veya selamlama yazma. " +
+    "Sadece Türkçe yanıt ver. Asla İngilizce ifade veya düşünce süreci yazma. " +
     "Kullanıcının sorununa karşılık doğrudan şu formatta 3 net madde yaz:\n" +
     "1. [İlk Adım]: Kullanıcının doğrudan elle yapacağı kontrol.\n" +
     "2. [İkinci Adım]: İkinci pratik çözüm veya temizlik adımı.\n" +
@@ -39,33 +39,29 @@ export default async function handler(req, res) {
     }
   };
 
-  // Yoğunluk durumunda sırasıyla denenecek modeller
-  const modeller = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-  for (const model of modeller) {
-    try {
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      const apiRes = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(istekGovdesi)
+  try {
+    const apiRes = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(istekGovdesi)
+    });
+
+    const data = await apiRes.json();
+
+    if (apiRes.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+      return res.status(200).json({ 
+        cevap: data.candidates[0].content.parts[0].text.trim() 
       });
-
-      const data = await apiRes.json();
-
-      if (apiRes.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-        return res.status(200).json({ 
-          cevap: data.candidates[0].content.parts[0].text.trim() 
-        });
-      }
-
-      console.warn(`${model} yanıt vermedi, sıradaki modele geçiliyor...`);
-    } catch (e) {
-      console.warn(`${model} bağlantı hatası:`, e.message);
     }
-  }
 
-  return res.status(500).json({ 
-    error: 'Servis şu an aşırı yoğun. Lütfen birkaç saniye sonra tekrar deneyin.' 
-  });
+    if (data.error) {
+      return res.status(500).json({ error: data.error.message || 'API yanıt veremedi.' });
+    }
+
+    return res.status(500).json({ error: 'Beklenmeyen bir yanıt formatı alındı.' });
+  } catch (err) {
+    return res.status(500).json({ error: 'Bağlantı hatası: ' + err.message });
+  }
 }
