@@ -16,10 +16,14 @@ export default async function handler(req, res) {
   }
 
   const sistemTalimati = 
-    "Sen pratik bir teknik servis ustasısın. " +
-    "Giriş ve selamlama yapmadan doğrudan kullanıcıya yönelik en etkili 3 çözüm adımını madde madde yaz. " +
-    "Her madde 1-2 kısa cümle olsun. En alta tek satır '⚠️ Çözülmezse: ...' diyerek arızalı olabilecek parçayı ekle. " +
-    "Cümleleri yarım bırakma, net ve anlaşılır bitir.";
+    "Sen profesyonel ve pratik bir teknik servis ustasısın. " +
+    "Yanıtında sadece ve sadece Türkçe kullan. Asla İngilizce düşünce süreci, not veya selamlama yazma. " +
+    "Kullanıcının sorununa karşılık doğrudan şu formatta 3 net madde yaz:\n" +
+    "1. [İlk Adım]: Kullanıcının doğrudan elle yapacağı kontrol.\n" +
+    "2. [İkinci Adım]: İkinci pratik çözüm veya temizlik adımı.\n" +
+    "3. [Üçüncü Adım]: Üçüncü pratik kontrol veya sıfırlama adımı.\n" +
+    "⚠️ Çözülmezse: Arızalı olabilecek muhtemel parça.\n" +
+    "Her madde 1-2 kısa cümleden oluşsun, sade ve anlaşılır olsun.";
 
   const istekGovdesi = {
     contents: [
@@ -30,12 +34,12 @@ export default async function handler(req, res) {
       }
     ],
     generationConfig: {
-      temperature: 0.3,
+      temperature: 0.2,
       maxOutputTokens: 600
     }
   };
 
-  // Sırasıyla denenecek modeller (biri yoğunsa diğerine geçer)
+  // Yoğunluk durumunda sırasıyla denenecek modeller
   const modeller = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
 
   for (const model of modeller) {
@@ -55,7 +59,6 @@ export default async function handler(req, res) {
         });
       }
 
-      // Eğer yoğunluk (503 / high demand) veya kota hatası verdiyse döngü sonraki modeli dener
       console.warn(`${model} yanıt vermedi, sıradaki modele geçiliyor...`);
     } catch (e) {
       console.warn(`${model} bağlantı hatası:`, e.message);
