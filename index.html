@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#030712">
 
-    <!-- Tarayıcı Sekme Logosu (Modern SVG Favicon) -->
+    <!-- Tarayıcı Sekme Logosu -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%236366f1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230b1120'/%3E%3Cpath d='M18 4L7 17h8l-2 11 11-13h-8z' fill='url(%23grad)' stroke='%2338bdf8' stroke-width='0.5'/%3E%3C/svg%3E">
 
-    <!-- Temel SEO Başlık ve Açıklaması -->
+    <!-- SEO Başlık ve Açıklaması -->
     <title>Arıza Rehberi AI | Profesyonel Hata & Çözüm Platformu</title>
     <meta name="description" content="Kombi, klima, beyaz eşya ve robot süpürgeler için yapay zeka destekli profesyonel arıza tespit ve servis ilk yardım rehberi.">
     <meta name="robots" content="index, follow">
@@ -19,6 +19,52 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Arıza Rehberi">
+
+    <!-- Google Search Console & SEO Zengin Snippet'ları (Schema.org JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "Arıza Rehberi AI",
+          "url": "https://ariza-rehberi.vercel.app/",
+          "description": "Ev aletleri, kombi, klima ve robot süpürge arıza kodları ve yapay zeka ilk yardım rehberi.",
+          "applicationCategory": "UtilityApplication",
+          "operatingSystem": "All"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Kombi su basıncı neden düşer ve nasıl su basılır?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ev tipi kombilerde ideal çalışma basıncı 1.5 bardır. Kombinin altındaki doldurma musluğu sola çevrilerek ibre 1.5 bara gelene kadar su basılır ve musluk kapatılır."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Çamaşır makinesi suyu neden boşaltmaz (E18 / 5E)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sağ alttaki tahliye pompa kapağı açılarak pervaneye sıkışmış bozuk para, düğme veya tel toka gibi yabancı cisimler temizlenmelidir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Bulaşık makinesinde E15 hatası nedir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "E15 hatası tabandaki güvenlik taşma tepsisinde su biriktiğini gösterir. Cihaz fişten çekilip 45 derece öne/arkaya eğilerek biriken su tahliye edilmelidir."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,7 +96,6 @@
 
         body {
             background-color: var(--bg-base);
-            /* Zenginleştirilmiş Arka Plan: Izgara Deseni + Neon Vurgular */
             background-image: 
                 linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
@@ -68,7 +113,6 @@
             overflow-x: hidden;
         }
 
-        /* --- ÜST NAVBAR --- */
         .navbar {
             width: 100%;
             max-width: 1240px;
@@ -150,14 +194,12 @@
             animation: pulse 1.5s infinite;
         }
 
-        /* --- ANA KONTEYNER --- */
         .container {
             max-width: 1240px;
             width: 100%;
             padding: 0 1.25rem 3rem 1.25rem;
         }
 
-        /* --- HERO BAŞLIK & İSTATİSTİK BAR --- */
         .hero {
             text-align: center;
             margin-bottom: 2.25rem;
@@ -228,7 +270,6 @@
             margin-top: 3px;
         }
 
-        /* --- DASHBOARD ÇİFT SÜTUN DÜZENİ --- */
         .dashboard-layout {
             display: grid;
             grid-template-columns: 1fr 340px;
@@ -240,7 +281,6 @@
             min-width: 0;
         }
 
-        /* --- YAN PANEL (SIDEBAR) --- */
         .sidebar {
             position: sticky;
             top: 5.5rem;
@@ -348,10 +388,39 @@
             transform: translateX(3px);
         }
 
-        /* --- ARAMA KUTUSU --- */
+        /* --- MİNİ TAMİR MALİYETİ HESAPLAYICI --- */
+        .cost-calc-select {
+            width: 100%;
+            padding: 0.65rem 0.8rem;
+            background: #090d16;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.84rem;
+            margin-bottom: 0.6rem;
+            outline: none;
+        }
+
+        .cost-calc-result {
+            margin-top: 0.65rem;
+            padding: 0.75rem;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .cost-calc-val {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-top: 2px;
+        }
+
+        /* --- ARAMA KUTUSU & SON ARAMALAR --- */
         .search-container {
             position: relative;
-            margin-bottom: 1.75rem;
+            margin-bottom: 0.85rem;
         }
 
         .search-icon-box {
@@ -411,6 +480,30 @@
             background: rgba(239, 68, 68, 0.15);
             border-color: #ef4444;
             animation: pulse 1.2s infinite;
+        }
+
+        .recent-searches-bar {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .recent-pill {
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: #7dd3fc;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.78rem;
+        }
+        .recent-pill:hover {
+            background: rgba(56, 189, 248, 0.2);
+            color: #fff;
         }
 
         /* --- AI SERVİS ASİSTANI KARTI --- */
@@ -534,7 +627,6 @@
             transform: translateY(-1.5px);
         }
 
-        /* METNİ KESİNTİSİZ AÇAN CEVAP KUTUSU */
         .ai-response-box {
             display: none;
             margin-top: 1.15rem;
@@ -580,7 +672,16 @@
             color: #fff;
         }
 
-        /* --- SIK ARANAN ETİKETLERİ & KATEGORİ SEKMELERİ --- */
+        .speech-btn.wa-share {
+            background: rgba(34, 197, 94, 0.12);
+            border-color: rgba(34, 197, 94, 0.35);
+            color: #4ade80;
+        }
+        .speech-btn.wa-share:hover {
+            background: rgba(34, 197, 94, 0.25);
+            color: #fff;
+        }
+
         .quick-tags {
             display: flex;
             gap: 0.5rem;
@@ -648,7 +749,6 @@
             box-shadow: 0 4px 18px rgba(2, 132, 199, 0.45);
         }
 
-        /* --- SİHİRBAZ --- */
         .wizard-box {
             background: rgba(15, 23, 42, 0.5);
             border: 1px dashed rgba(56, 189, 248, 0.3);
@@ -697,7 +797,6 @@
             font-size: 0.88rem;
         }
 
-        /* --- ARIZA KARTLARI --- */
         .results {
             display: flex;
             flex-direction: column;
@@ -986,7 +1085,6 @@
             box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);
         }
 
-        /* --- SIK KARŞILAŞILAN REHBERLER BÖLÜMÜ --- */
         .guides-section {
             margin-top: 3rem;
             margin-bottom: 2rem;
@@ -1123,7 +1221,6 @@
             color: #e2e8f0;
         }
 
-        /* --- BİLGİ KARTLARI & GÜVENLİK --- */
         .service-tips-card {
             margin-top: 2.5rem;
             background: linear-gradient(145deg, rgba(22, 30, 49, 0.6), rgba(15, 23, 42, 0.7));
@@ -1192,7 +1289,6 @@
         .call-gas { background: #dc2626; box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35); }
         .call-water { background: #0284c7; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35); }
 
-        /* PWA Banner */
         .pwa-banner {
             display: none;
             background: var(--primary-gradient);
@@ -1215,7 +1311,6 @@
             cursor: pointer;
         }
 
-        /* --- FOOTER --- */
         footer {
             margin-top: 4rem;
             padding-top: 2rem;
@@ -1253,7 +1348,6 @@
             padding-top: 0.95rem;
         }
 
-        /* Modallar */
         .modal {
             display: none;
             position: fixed;
@@ -1328,7 +1422,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Responsive Kuralları */
         @media (max-width: 1024px) {
             .dashboard-layout {
                 grid-template-columns: 1fr;
@@ -1392,7 +1485,7 @@
         
         <div class="stats-bar">
             <div class="stat-card">
-                <div class="stat-number">150+</div>
+                <div class="stat-number">160+</div>
                 <div class="stat-label">Doğrulanmış Hata Kodu</div>
             </div>
             <div class="stat-card">
@@ -1410,19 +1503,25 @@
         </div>
     </section>
 
-    <!-- Ana Çift Sütunlu Dashboard Düzeni -->
+    <!-- Dashboard Düzeni -->
     <div class="dashboard-layout">
         
-        <!-- SOL SÜTUN: Ana İşlem Alanı -->
+        <!-- SOL SÜTUN -->
         <main class="main-column">
             <!-- Arama Çubuğu -->
             <div class="search-container">
                 <span class="search-icon-box">🔍</span>
-                <input type="text" id="searchInput" placeholder="Örn: F5, E18, Robot lazer, Airfryer E1, Termosifon..." autofocus>
+                <input type="text" id="searchInput" placeholder="Örn: F5, E18, Robot lazer, Airfryer E1, F28..." autofocus>
                 <button id="micBtn" class="mic-btn" title="Sesle Ara" onclick="startSpeechRecognition()">🎙️</button>
             </div>
 
-            <!-- Gemini Yapay Zeka Servis Danışmanı Kartı -->
+            <!-- Son Aramalar Çubuğu -->
+            <div id="recentSearches" class="recent-searches-bar">
+                <span>🕒 Son Baktıklarınız:</span>
+                <div id="recentTagsList" style="display:flex; gap:0.4rem; flex-wrap:wrap;"></div>
+            </div>
+
+            <!-- Gemini Yapay Zeka Servis Danışmanı -->
             <div class="ai-assistant-card">
                 <div class="ai-header">
                     <div class="ai-header-title">
@@ -1434,7 +1533,7 @@
                     Cihazınızdaki belirtileri yazın ya da aşağıdaki hazır şablonlara tıklayın; usta adım adım kontrolleri listelesin.
                 </p>
 
-                <!-- Hızlı Şablon Butonları -->
+                <!-- Hazır Şablonlar -->
                 <div class="ai-prompt-templates">
                     <button class="prompt-pill" onclick="fillAndAsk('Kombinin altından su damlıyor ve basınç sürekli düşüyor')">💧 Kombiden su damlıyor</button>
                     <button class="prompt-pill" onclick="fillAndAsk('Çamaşır makinesi sıkma yaparken aşırı sallanıyor ve gürültü yapıyor')">🧺 Makine aşırı sallanıyor</button>
@@ -1456,11 +1555,12 @@
                 
                 <div id="aiResponse" class="ai-response-box"></div>
 
-                <!-- Sesli Dinleme ve Destek Kontrolleri -->
+                <!-- Sesli Dinleme ve WhatsApp Paylaşım Kontrolleri -->
                 <div id="speechControls" class="ai-speech-controls">
                     <button class="speech-btn" onclick="speakAIResponse()">🔊 Ustayı Dinle</button>
                     <button class="speech-btn" style="color:#ef4444; border-color:rgba(239,68,68,0.3);" onclick="stopSpeaking()">⏹️ Durdur</button>
-                    <button class="speech-btn" style="color:#38bdf8; border-color:rgba(56,189,248,0.3);" onclick="sendEmailReport('ai')">✉️ Çözülmediyse E-posta ile Danış</button>
+                    <button class="speech-btn wa-share" onclick="shareAIOnWhatsApp()">💬 WhatsApp'ta Paylaş</button>
+                    <button class="speech-btn" style="color:#38bdf8; border-color:rgba(56,189,248,0.3);" onclick="sendEmailReport('ai')">✉️ E-posta ile Danış</button>
                 </div>
             </div>
 
@@ -1468,6 +1568,7 @@
             <div class="quick-tags">
                 <span>Sık Aranan:</span>
                 <button class="tag-btn" onclick="quickSearch('F5')">🔥 Baymak F5</button>
+                <button class="tag-btn" onclick="quickSearch('F28')">🔥 Vaillant F28</button>
                 <button class="tag-btn" onclick="quickSearch('Su Basıncı')">💧 Su Basma (F10/F22)</button>
                 <button class="tag-btn" onclick="quickSearch('E18')">🧺 Bosch E18</button>
                 <button class="tag-btn" onclick="quickSearch('E09')">🍽️ Bulaşık E09</button>
@@ -1518,9 +1619,33 @@
             <div class="results" id="resultsContainer"></div>
         </main>
 
-        <!-- SAĞ SÜTUN: Bilgi & Yardım Yan Paneli (Boşluğu Dolduran Alan) -->
+        <!-- SAĞ SÜTUN: Bilgi & Araç Yan Paneli -->
         <aside class="sidebar">
-            <!-- 1. Acil Yardım Butonları -->
+            
+            <!-- 1. Mini Tamir Maliyeti Hesaplayıcı -->
+            <div class="side-card">
+                <div class="side-card-title">
+                    <span>🧮 Tahmini Tamir Bütçesi Hesapla</span>
+                </div>
+                <p style="font-size:0.78rem; color:var(--text-body); margin-bottom:0.7rem;">
+                    Parça ve ortalama servis işçilik bütçesini anında hesaplayın:
+                </p>
+                <select id="calcDevice" class="cost-calc-select" onchange="updateCalcParts()">
+                    <option value="kombi">Kombi</option>
+                    <option value="camasir">Çamaşır Makinesi</option>
+                    <option value="bulasik">Bulaşık Makinesi</option>
+                    <option value="robot">Robot Süpürge</option>
+                </select>
+                <select id="calcPart" class="cost-calc-select" onchange="calculateRepairCost()">
+                    <!-- JS ile dolacak -->
+                </select>
+                <div class="cost-calc-result">
+                    <div style="font-size:0.75rem; color:var(--text-muted);">Ortalama Toplam Maliyet</div>
+                    <div id="calcOutput" class="cost-calc-val">500 - 950 TL</div>
+                </div>
+            </div>
+
+            <!-- 2. Acil Yardım Hatları -->
             <div class="side-card">
                 <div class="side-card-title">
                     <span>🚨 Acil Yardım Hatları</span>
@@ -1537,7 +1662,7 @@
                 </div>
             </div>
 
-            <!-- 2. Günün Tasarruf & Koruma İpucu -->
+            <!-- 3. Günün Tasarruf İpucu -->
             <div class="side-card">
                 <div class="side-card-title">
                     <span>💡 Usta Tavsiyesi & Tasarruf</span>
@@ -1547,7 +1672,7 @@
                 </div>
             </div>
 
-            <!-- 3. Trend Hata Kodları -->
+            <!-- 4. Trend Hata Kodları -->
             <div class="side-card">
                 <div class="side-card-title">
                     <span>🔥 En Sık Aranan Kodlar</span>
@@ -1576,7 +1701,7 @@
                 </div>
             </div>
 
-            <!-- 4. Servis Çağırırken Tuzak Uyarısı -->
+            <!-- 5. Servis Çağırırken Tuzak Uyarısı -->
             <div class="side-card">
                 <div class="side-card-title">
                     <span>🛡️ Korsan Servis Tuzağı</span>
@@ -1705,7 +1830,7 @@
         </div>
     </section>
 
-    <!-- Servis Çağırırken Tüketici Tuzak Rehberi -->
+    <!-- Servis Tuzak Rehberi -->
     <div class="service-tips-card">
         <div class="service-tips-title">
             <span>🛡️ Servis Çağırırken Bilinmesi Gereken 3 Altın Kural</span>
@@ -1726,7 +1851,7 @@
         </div>
     </div>
 
-    <!-- Acil Arama Butonlu Güvenlik Bildirimi -->
+    <!-- Acil Arama Güvenlik Bildirimi -->
     <div class="safety-banner">
         <strong>⚠️ Önemli Güvenlik Uyarısı:</strong>
         Bu rehberdeki adımlar genel bilgilendirme amaçlıdır. Gaz kokusu duyarsanız hiçbir elektrik düğmesine dokunmayın, ortamı havalandırıp derhal acil çağrı butonlarını kullanın. Cihazların iç parça değişimlerini ve 220V elektrik bağlantılarını uzman yetkili servislere bırakınız.
@@ -1736,7 +1861,7 @@
         </div>
     </div>
 
-    <!-- Footer & Yasal Feragat -->
+    <!-- Footer -->
     <footer>
         <div class="footer-links">
             <a onclick="openModal('privacyModal')">Gizlilik Politikası</a>
@@ -1754,7 +1879,7 @@
     </footer>
 </div>
 
-<!-- Yasal Modallar -->
+<!-- Modallar -->
 <div id="privacyModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -1763,7 +1888,7 @@
         </div>
         <p>Arıza Rehberi (ariza-rehberi.vercel.app) olarak ziyaretçilerimizin gizliliğine saygı duyuyoruz. Bu sayfa, sitemizi ziyaret ettiğinizde toplanabilecek veriler ve bunların kullanımı hakkında bilgi verir.</p>
         <p><strong>Çerezler ve Reklamlar:</strong> Sitemiz, kullanıcı deneyimini iyileştirmek ve Google AdSense gibi üçüncü taraf reklam ağları aracılığıyla ilgi alanına dayalı reklamlar sunmak için çerezler (cookies) kullanabilir.</p>
-        <p><strong>Yerel Depolama (LocalStorage):</strong> Sitede yaptığınız oylamalar, kullanıcı notları ve tamamlanan adımlar yalnızca kendi tarayıcınızın yerel hafızasında saklanır; sunucularımıza aktarılmaz.</p>
+        <p><strong>Yerel Depolama (LocalStorage):</strong> Sitede yaptığınız oylamalar, kullanıcı notları ve arama geçmişi yalnızca kendi tarayıcınızın yerel hafızasında saklanır; sunucularımıza aktarılmaz.</p>
     </div>
 </div>
 
@@ -1786,7 +1911,7 @@
         </div>
         <p><strong>Platform:</strong> Arıza & Hata Kodu Rehberi</p>
         <p><strong>Amacımız:</strong> Ev aletlerinde gereksiz servis maliyetlerinden tasarruf sağlamak ve arızaları güvenli kılmak.</p>
-        <p><strong>Geri Bildirim & Hata Kodu Talebi:</strong> Listede olmayan hata kodlarını bildirmek veya platformla iletişime geçmek için: <strong style="color:var(--primary);">iletisim@ariza-rehberi.vercel.app</strong></p>
+        <p><strong>Geri Bildirim:</strong> <strong style="color:var(--primary);">iletisim@ariza-rehberi.vercel.app</strong></p>
     </div>
 </div>
 
@@ -1814,6 +1939,40 @@ const errorDatabase = [
         details: "Sorun devam ederse prosestat (hava basınç anahtarı) veya fan motorunda elektriksel/mekanik arıza olabilir."
     },
     {
+        id: "demirdokum-f28",
+        code: "F28 / F29",
+        brand: "Demirdöküm Nitromix / Vaillant",
+        category: "kombi",
+        title: "Ateşleme Başarısızlığı / Gaz Besleme Arızası",
+        cost: "450 - 1.100 TL",
+        diff: "Orta",
+        diffClass: "diff-mid",
+        hasGauge: false,
+        steps: [
+            "Ocağı yakarak evde genel gaz kesintisi olup olmadığını test edin.",
+            "Kombinin altındaki sarı gaz vanasının boruyla paralel (açık) olduğundan emin olun.",
+            "Cihazın panelindeki 'Reset' tuşuna 3 saniye basarak en fazla 3 kez ateşlemeyi tekrarlayın."
+        ],
+        details: "İyonizasyon elektrodu karbon bağlamışsa veya gaz modülasyon valfi açmıyorsa alev algılanamaz."
+    },
+    {
+        id: "baymak-e03",
+        code: "E03",
+        brand: "Baymak Lambert / Baxi",
+        category: "kombi",
+        title: "Aşırı Isınma Emniyet Termostatı Kilidi",
+        cost: "250 - 650 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
+        steps: [
+            "Evdeki petek vanalarının en az 3 tanesinin tamamen açık olduğunu teyit edin.",
+            "Kombinin altındaki kalorifer dönüş filtresinin vanalarının açık olduğunu kontrol edin.",
+            "Cihazı şalterden kapatıp su sıcaklığının düşmesini bekleyin ve resetleyin."
+        ],
+        details: "Sirkülasyon pompası sıkışmışsa kombi aniden hararet yapar ve limit termostatı atar."
+    },
+    {
         id: "eca-e4",
         code: "E4",
         brand: "E.C.A Proteus / Confeo",
@@ -1832,8 +1991,8 @@ const errorDatabase = [
     },
     {
         id: "e01-a01-f28",
-        code: "E01 / A01 / F28",
-        brand: "Baymak / E.C.A / Vaillant",
+        code: "E01 / A01",
+        brand: "Baymak / E.C.A",
         category: "kombi",
         title: "Ateşleme Başarısızlığı (Gaz Yokluğu)",
         cost: "400 - 1.200 TL",
@@ -1863,23 +2022,6 @@ const errorDatabase = [
             "Musluğu iyice sıkıp kapatın. Cihaz otomatik olarak çalışmaya başlayacaktır."
         ],
         details: "Basınç sürekli düşüyorsa tesisatta gizli su kaçağı veya genleşme tankında hava/membran patlağı olabilir."
-    },
-    {
-        id: "baymak-e03",
-        code: "E03",
-        brand: "Baymak Lambert / Baxi",
-        category: "kombi",
-        title: "Aşırı Isınma Emniyet Termostatı Kilidi",
-        cost: "250 - 650 TL",
-        diff: "Kolay",
-        diffClass: "diff-low",
-        hasGauge: false,
-        steps: [
-            "Evdeki petek vanalarının en az 3 tanesinin tamamen açık olduğunu teyit edin.",
-            "Kombinin altındaki kalorifer dönüş filtresinin vanalarının açık olduğunu kontrol edin.",
-            "Cihazı şalterden kapatıp su sıcaklığının düşmesini bekleyin ve resetleyin."
-        ],
-        details: "Sirkülasyon pompası sıkışmışsa kombi aniden hararet yapar ve limit termostatı atar."
     },
     {
         id: "f1-e02",
@@ -2307,6 +2449,23 @@ const errorDatabase = [
         details: "Üniteler arası sinyal kablosundaki kopukluk veya dış ünite inverter kartı arızasından kaynaklanır."
     },
     {
+        id: "arcelik-ch02",
+        code: "CH02 / E2",
+        brand: "Arçelik / Beko İnverter Klima",
+        category: "klima",
+        title: "İç Ünite Boru Sıcaklık Sensörü Hatası",
+        cost: "300 - 650 TL",
+        diff: "Kolay",
+        diffClass: "diff-low",
+        hasGauge: false,
+        steps: [
+            "Klimanın ön kapağını açıp filtreleri bol suyla yıkayıp kurutun.",
+            "Klimanın ana sigortasını kapatıp 5 dakika sonra açarak sistemi resetleyin.",
+            "Klimayı kumandadan soğutma veya ısıtma modunda 24 dereceye ayarlayıp başlatın."
+        ],
+        details: "Boru sıcaklık NTC sensörünün soketi oksitlenmiş veya direnç değeri kaymış olabilir."
+    },
+    {
         id: "lg-ch01",
         code: "CH01 / CH02",
         brand: "LG / Beko Klima",
@@ -2382,6 +2541,31 @@ function copyToClipboard(text, successMsg) {
     navigator.clipboard.writeText(text).then(() => {
         showToast(successMsg);
     });
+}
+
+// --- SON ARAMALAR (LOCALSTORAGE) ---
+function addRecentSearch(query) {
+    if (!query || query.length < 2) return;
+    let recents = JSON.parse(localStorage.getItem('ariza_recents') || '[]');
+    recents = recents.filter(item => item.toLowerCase() !== query.toLowerCase());
+    recents.unshift(query);
+    if (recents.length > 5) recents.pop();
+    localStorage.setItem('ariza_recents', JSON.stringify(recents));
+    renderRecentSearches();
+}
+
+function renderRecentSearches() {
+    const recents = JSON.parse(localStorage.getItem('ariza_recents') || '[]');
+    const bar = document.getElementById('recentSearches');
+    const list = document.getElementById('recentTagsList');
+    if (!recents.length) {
+        bar.style.display = 'none';
+        return;
+    }
+    bar.style.display = 'flex';
+    list.innerHTML = recents.map(tag => `
+        <span class="recent-pill" onclick="quickSearch('${tag}')">${tag}</span>
+    `).join('');
 }
 
 function quickSearch(tag) {
@@ -2491,6 +2675,15 @@ function stopSpeaking() {
     }
 }
 
+// --- YAPAY ZEKA YANITINI WHATSAPP'TA PAYLAŞMA ---
+function shareAIOnWhatsApp() {
+    const text = aiResponse.textContent.trim();
+    if (!text) return;
+    const soru = aiInput.value.trim() || "Arıza Sorusu";
+    const waText = encodeURIComponent(`*🛠️ Arıza Rehberi Yapay Zeka Usta Tavsiyesi*\n*Soru:* ${soru}\n\n${text}\n\n🔗 https://ariza-rehberi.vercel.app`);
+    window.open(`https://api.whatsapp.com/send?text=${waText}`, '_blank');
+}
+
 function vote(id, type) {
     const key = `vote_${id}`;
     localStorage.setItem(key, type);
@@ -2527,6 +2720,8 @@ async function askGemini(soruOverride) {
         aiInput.focus();
         return;
     }
+
+    addRecentSearch(soruMetni);
 
     aiBtn.disabled = true;
     aiBtn.textContent = 'İnceleniyor...';
@@ -2694,6 +2889,9 @@ function renderCards(data) {
 
 function filterData() {
     const query = searchInput.value.toLowerCase().trim();
+    if (query.length >= 2) {
+        addRecentSearch(query);
+    }
     
     const filtered = errorDatabase.filter(item => {
         const matchesCategory = (activeCategory === 'all' || item.category === activeCategory);
@@ -2707,6 +2905,49 @@ function filterData() {
     renderCards(filtered);
 }
 
+// --- MALİYET HESAPLAYICI VERİLERİ & MOTORU ---
+const calcData = {
+    kombi: [
+        { name: "Sirkülasyon Pompası", min: 1400, max: 2800 },
+        { name: "Elektronik Anakart Tamiri", min: 900, max: 1900 },
+        { name: "Fan Motoru / Prosestat", min: 650, max: 1350 },
+        { name: "Doldurma Musluğu / NTC Sensör", min: 300, max: 650 }
+    ],
+    camasir: [
+        { name: "Tahliye Pompa Motoru", min: 450, max: 850 },
+        { name: "Kazan Amortisörleri (Çift)", min: 400, max: 800 },
+        { name: "Elektronik Kapı Kilidi", min: 350, max: 650 },
+        { name: "Kazan Rulman & Keçe Değişimi", min: 1500, max: 3200 }
+    ],
+    bulasik: [
+        { name: "Isı Pompalı Yıkama Motoru", min: 1200, max: 2600 },
+        { name: "Tahliye Motoru", min: 400, max: 800 },
+        { name: "Su Giriş Ventili / Sayaç", min: 350, max: 700 }
+    ],
+    robot: [
+        { name: "LDS Lidar Sensör Motoru", min: 350, max: 850 },
+        { name: "Batarya / Pil Değişimi", min: 650, max: 1400 },
+        { name: "Tekerlek Tahrik Motoru", min: 450, max: 900 }
+    ]
+};
+
+function updateCalcParts() {
+    const dev = document.getElementById('calcDevice').value;
+    const partSelect = document.getElementById('calcPart');
+    const parts = calcData[dev] || [];
+    partSelect.innerHTML = parts.map((p, idx) => `<option value="${idx}">${p.name}</option>`).join('');
+    calculateRepairCost();
+}
+
+function calculateRepairCost() {
+    const dev = document.getElementById('calcDevice').value;
+    const partIdx = document.getElementById('calcPart').value;
+    const part = calcData[dev]?.[partIdx];
+    if (part) {
+        document.getElementById('calcOutput').textContent = `${part.min} - ${part.max} TL`;
+    }
+}
+
 searchInput.addEventListener('input', filterData);
 
 tabButtons.forEach(btn => {
@@ -2718,6 +2959,8 @@ tabButtons.forEach(btn => {
     });
 });
 
+renderRecentSearches();
+updateCalcParts();
 renderCards(errorDatabase);
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -2753,7 +2996,7 @@ pwaInstallBtn.addEventListener('click', async () => {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         const swBlob = new Blob([`
-            const CACHE_NAME = 'ariza-rehberi-cache-v9';
+            const CACHE_NAME = 'ariza-rehberi-cache-v10';
             self.addEventListener('install', e => {
                 e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(['/'])));
             });
