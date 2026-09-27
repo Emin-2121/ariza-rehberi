@@ -35,30 +35,34 @@ export default async function handler(req, res) {
     }
   };
 
-  // Gemini 3.6 Flash Endpoint
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+  // Sırasıyla denenecek modeller (biri yoğunsa diğerine geçer)
+  const modeller = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
 
-  try {
-    const apiRes = await fetch(apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(istekGovdesi)
-    });
-
-    const data = await apiRes.json();
-
-    if (apiRes.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-      return res.status(200).json({ 
-        cevap: data.candidates[0].content.parts[0].text.trim() 
+  for (const model of modeller) {
+    try {
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      const apiRes = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(istekGovdesi)
       });
-    }
 
-    if (data.error) {
-      return res.status(500).json({ error: data.error.message || 'API yanıt veremedi.' });
-    }
+      const data = await apiRes.json();
 
-    return res.status(500).json({ error: 'Beklenmeyen bir yanıt alındı.' });
-  } catch (err) {
-    return res.status(500).json({ error: 'Bağlantı hatası: ' + err.message });
+      if (apiRes.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+        return res.status(200).json({ 
+          cevap: data.candidates[0].content.parts[0].text.trim() 
+        });
+      }
+
+      // Eğer yoğunluk (503 / high demand) veya kota hatası verdiyse döngü sonraki modeli dener
+      console.warn(`${model} yanıt vermedi, sıradaki modele geçiliyor...`);
+    } catch (e) {
+      console.warn(`${model} bağlantı hatası:`, e.message);
+    }
   }
+
+  return res.status(500).json({ 
+    error: 'Servis şu an aşırı yoğun. Lütfen birkaç saniye sonra tekrar deneyin.' 
+  });
 }
