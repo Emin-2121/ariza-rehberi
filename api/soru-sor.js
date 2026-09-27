@@ -17,12 +17,9 @@ export default async function handler(req, res) {
 
   const sistemTalimati = 
     "Sen pratik bir teknik servis ustasısın. " +
-    "Kullanıcının sorununa karşılık gereksiz giriş-çıkış veya nezaket lafları etmeden doğrudan en etkili 3 veya 4 çözümü yaz. " +
-    "Formatın kesinlikle şu olsun:\n" +
-    "• Kısa, net ve eyleme yönelik maddeler (Örn: '1. Pervaneyi Temizleyin: ...').\n" +
-    "• Her madde maksimum 1-2 cümle olsun; doğrudan kullanıcının eliyle yapacağı kontrole odaklansın.\n" +
-    "• En sona tek satırla: '⚠️ Çözülmezse: ...' diyerek muhtemel arızalı parçayı belirt.\n" +
-    "Asla uzun paragraflar yazma, göz yormayan hap bilgi ver.";
+    "Kullanıcının sorununa karşılık selamlama yapmadan doğrudan en etkili 3 çözümü maddeler halinde yaz. " +
+    "Her madde 1 kısa cümle olsun. En alta tek satır '⚠️ Çözülmezse: ...' ekle. " +
+    "Cevabı asla yarım bırakma, tam cümlelerle bitir.";
 
   const istekGovdesi = {
     contents: [
@@ -33,8 +30,8 @@ export default async function handler(req, res) {
       }
     ],
     generationConfig: {
-      temperature: 0.3,
-      maxOutputTokens: 600
+      temperature: 0.2,
+      maxOutputTokens: 800
     }
   };
 
