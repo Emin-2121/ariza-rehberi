@@ -27,8 +27,8 @@
     <style>
         :root {
             --bg-base: #030712;
-            --surface-1: rgba(15, 23, 42, 0.65);
-            --surface-2: rgba(30, 41, 59, 0.5);
+            --surface-1: rgba(15, 23, 42, 0.7);
+            --surface-2: rgba(30, 41, 59, 0.55);
             --border-subtle: rgba(255, 255, 255, 0.08);
             --border-glow: rgba(56, 189, 248, 0.35);
             --primary: #38bdf8;
@@ -50,10 +50,14 @@
 
         body {
             background-color: var(--bg-base);
+            /* Zenginleştirilmiş Arka Plan: Izgara Deseni + Neon Vurgular */
             background-image: 
-                radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.25) 0%, transparent 60%),
-                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.18) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 50%);
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 50% -10%, rgba(56, 189, 248, 0.22) 0%, transparent 60%),
+                radial-gradient(circle at 10% 30%, rgba(99, 102, 241, 0.16) 0%, transparent 45%),
+                radial-gradient(circle at 90% 75%, rgba(14, 165, 233, 0.14) 0%, transparent 50%);
+            background-size: 40px 40px, 40px 40px, auto, auto, auto;
             background-attachment: fixed;
             color: var(--text-title);
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -67,7 +71,7 @@
         /* --- ÜST NAVBAR --- */
         .navbar {
             width: 100%;
-            max-width: 860px;
+            max-width: 1240px;
             padding: 1.2rem 1.25rem;
             display: flex;
             align-items: center;
@@ -77,7 +81,7 @@
             z-index: 100;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             margin-bottom: 1.5rem;
         }
 
@@ -115,7 +119,7 @@
         }
 
         .brand-text {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 800;
             letter-spacing: -0.5px;
         }
@@ -130,24 +134,25 @@
             gap: 7px;
             background: rgba(34, 197, 94, 0.1);
             border: 1px solid rgba(34, 197, 94, 0.25);
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 999px;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             font-weight: 600;
             color: #4ade80;
         }
 
         .status-dot {
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             background: #22c55e;
             border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
+            box-shadow: 0 0 10px #22c55e;
             animation: pulse 1.5s infinite;
         }
 
+        /* --- ANA KONTEYNER --- */
         .container {
-            max-width: 860px;
+            max-width: 1240px;
             width: 100%;
             padding: 0 1.25rem 3rem 1.25rem;
         }
@@ -155,7 +160,7 @@
         /* --- HERO BAŞLIK & İSTATİSTİK BAR --- */
         .hero {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.25rem;
         }
 
         .hero-pill {
@@ -164,9 +169,9 @@
             gap: 8px;
             background: rgba(56, 189, 248, 0.08);
             border: 1px solid rgba(56, 189, 248, 0.25);
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 999px;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             font-weight: 600;
             color: var(--primary);
             margin-bottom: 1.1rem;
@@ -174,9 +179,9 @@
         }
 
         .hero h1 {
-            font-size: 2.6rem;
+            font-size: 2.8rem;
             font-weight: 800;
-            letter-spacing: -1px;
+            letter-spacing: -1.2px;
             line-height: 1.2;
             margin-bottom: 0.85rem;
             background: linear-gradient(180deg, #ffffff 30%, #94a3b8 100%);
@@ -186,40 +191,161 @@
 
         .hero p {
             color: var(--text-body);
-            font-size: 1.05rem;
-            max-width: 620px;
-            margin: 0 auto 1.75rem auto;
+            font-size: 1.1rem;
+            max-width: 720px;
+            margin: 0 auto 1.85rem auto;
             line-height: 1.6;
         }
 
         .stats-bar {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.85rem;
+            max-width: 900px;
+            margin: 0 auto 2rem auto;
         }
 
         .stat-card {
             background: var(--surface-1);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
-            padding: 0.85rem 1rem;
+            padding: 0.95rem 1rem;
             text-align: center;
             backdrop-filter: blur(10px);
         }
 
         .stat-number {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 800;
             color: #fff;
             letter-spacing: -0.5px;
         }
 
         .stat-label {
-            font-size: 0.75rem;
+            font-size: 0.76rem;
             color: var(--text-muted);
             font-weight: 500;
-            margin-top: 2px;
+            margin-top: 3px;
+        }
+
+        /* --- DASHBOARD ÇİFT SÜTUN DÜZENİ --- */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 1.75rem;
+            align-items: start;
+        }
+
+        .main-column {
+            min-width: 0;
+        }
+
+        /* --- YAN PANEL (SIDEBAR) --- */
+        .sidebar {
+            position: sticky;
+            top: 5.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .side-card {
+            background: linear-gradient(180deg, rgba(22, 30, 49, 0.75) 0%, rgba(15, 23, 42, 0.7) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .side-card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 0.65rem;
+        }
+
+        .side-calls {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .side-call-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.7rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.84rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.2s ease;
+        }
+
+        .side-call-gas {
+            background: rgba(220, 38, 38, 0.15);
+            border: 1px solid rgba(220, 38, 38, 0.35);
+            color: #fca5a5;
+        }
+        .side-call-gas:hover {
+            background: #dc2626;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4);
+        }
+
+        .side-call-water {
+            background: rgba(2, 132, 199, 0.15);
+            border: 1px solid rgba(2, 132, 199, 0.35);
+            color: #7dd3fc;
+        }
+        .side-call-water:hover {
+            background: #0284c7;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4);
+        }
+
+        .side-tip-box {
+            background: rgba(9, 13, 22, 0.6);
+            border-left: 3px solid #f59e0b;
+            padding: 0.75rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            color: #cbd5e1;
+        }
+
+        .side-links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .side-link-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+            color: #cbd5e1;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .side-link-item:hover {
+            background: rgba(56, 189, 248, 0.12);
+            border-color: var(--primary);
+            color: #fff;
+            transform: translateX(3px);
         }
 
         /* --- ARAMA KUTUSU --- */
@@ -243,7 +369,7 @@
             padding: 1.2rem 3.5rem 1.2rem 3.4rem;
             border-radius: var(--radius-xl);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(15, 23, 42, 0.75);
+            background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(20px);
             color: #fff;
             font-size: 1.05rem;
@@ -287,7 +413,7 @@
             animation: pulse 1.2s infinite;
         }
 
-        /* --- AI SERVİS ASİSTANI KARTI (ESNEYEBİLEN VE KESİLMEYEN YAPIDA) --- */
+        /* --- AI SERVİS ASİSTANI KARTI --- */
         .ai-assistant-card {
             background: linear-gradient(145deg, rgba(17, 24, 39, 0.9), rgba(11, 17, 32, 0.85));
             border: 1px solid rgba(56, 189, 248, 0.3);
@@ -408,7 +534,7 @@
             transform: translateY(-1.5px);
         }
 
-        /* METNİ AŞAĞIYA DOĞRU EKSİKSİZ AÇAN KUTU */
+        /* METNİ KESİNTİSİZ AÇAN CEVAP KUTUSU */
         .ai-response-box {
             display: none;
             margin-top: 1.15rem;
@@ -1202,9 +1328,25 @@
             100% { transform: scale(1); }
         }
 
+        /* Responsive Kuralları */
+        @media (max-width: 1024px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 640px) {
-            .hero h1 { font-size: 1.95rem; }
-            .stats-bar { grid-template-columns: 1fr; gap: 0.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .stats-bar { grid-template-columns: 1fr; }
+            .sidebar { grid-template-columns: 1fr; }
             .ai-input-group { flex-direction: column; }
             .ai-btn { width: 100%; }
         }
@@ -1212,7 +1354,7 @@
 </head>
 <body>
 
-<!-- Navbar (Vektörel Logolu) -->
+<!-- Navbar -->
 <nav class="navbar">
     <a href="#" class="brand">
         <div class="brand-logo-wrap">
@@ -1230,7 +1372,7 @@
     </a>
     <div class="status-badge">
         <div class="status-dot"></div>
-        <span>AI 3.8 Aktif</span>
+        <span>AI 3.8 / 3.5 Aktif</span>
     </div>
 </nav>
 
@@ -1244,7 +1386,7 @@
 
     <!-- Hero Bölümü -->
     <section class="hero">
-        <div class="hero-pill">🛠️ Bağımsız Servis Öncesi İlk Yardım</div>
+        <div class="hero-pill">🛠️ Bağımsız Servis Öncesi İlk Yardım Portalı</div>
         <h1>Ev Aletleri Arızalarını Akıllıca Çözün</h1>
         <p>Kombiden beyaz eşyaya, robot süpürgeden klimaya kadar tüm hata kodlarını anında sorgulayın, tahmini parça masraflarını öğrenin ve evde uygulayın.</p>
         
@@ -1261,110 +1403,191 @@
                 <div class="stat-number">7/24</div>
                 <div class="stat-label">Yapay Zeka Asistanı</div>
             </div>
+            <div class="stat-card">
+                <div class="stat-number">0 TL</div>
+                <div class="stat-label">İlk Yardım Maliyeti</div>
+            </div>
         </div>
     </section>
 
-    <!-- Arama Çubuğu -->
-    <div class="search-container">
-        <span class="search-icon-box">🔍</span>
-        <input type="text" id="searchInput" placeholder="Örn: F5, E18, Robot lazer, Airfryer E1, Termosifon..." autofocus>
-        <button id="micBtn" class="mic-btn" title="Sesle Ara" onclick="startSpeechRecognition()">🎙️</button>
-    </div>
-
-    <!-- Gemini Yapay Zeka Servis Danışmanı Kartı -->
-    <div class="ai-assistant-card">
-        <div class="ai-header">
-            <div class="ai-header-title">
-                <span>🤖 Yapay Zeka Servis Danışmanı</span>
-                <span class="ai-badge">Gemini 3.8 Flash</span>
-            </div>
-        </div>
-        <p class="ai-desc">
-            Cihazınızdaki belirtileri yazın ya da aşağıdaki hazır şablonlara tıklayın; usta adım adım kontrolleri listelesin.
-        </p>
-
-        <!-- Hızlı Şablon Butonları -->
-        <div class="ai-prompt-templates">
-            <button class="prompt-pill" onclick="fillAndAsk('Kombinin altından su damlıyor ve basınç sürekli düşüyor')">💧 Kombiden su damlıyor</button>
-            <button class="prompt-pill" onclick="fillAndAsk('Çamaşır makinesi sıkma yaparken aşırı sallanıyor ve gürültü yapıyor')">🧺 Makine aşırı sallanıyor</button>
-            <button class="prompt-pill" onclick="fillAndAsk('Bulaşık makinesi tableti eritmiyor ve bardaklar puslu çıkıyor')">🍽️ Tablet erimiyor</button>
-            <button class="prompt-pill" onclick="fillAndAsk('Robot süpürge şarj istasyonunu bulamıyor ve dönüp duruyor')">🤖 Robot yuva bulamıyor</button>
-        </div>
-
-        <div class="ai-input-group">
-            <input 
-                type="text" 
-                id="aiInput" 
-                class="ai-input" 
-                placeholder="Örn: Kombiden ıslık sesi geliyor ve peteklerin altı soğuk..." 
-            />
-            <button id="aiBtn" class="ai-btn" onclick="askGemini()">
-                Ustaya Sor
-            </button>
-        </div>
+    <!-- Ana Çift Sütunlu Dashboard Düzeni -->
+    <div class="dashboard-layout">
         
-        <div id="aiResponse" class="ai-response-box"></div>
-
-        <!-- Sesli Dinleme ve Destek Kontrolleri -->
-        <div id="speechControls" class="ai-speech-controls">
-            <button class="speech-btn" onclick="speakAIResponse()">🔊 Ustayı Dinle</button>
-            <button class="speech-btn" style="color:#ef4444; border-color:rgba(239,68,68,0.3);" onclick="stopSpeaking()">⏹️ Durdur</button>
-            <button class="speech-btn" style="color:#38bdf8; border-color:rgba(56,189,248,0.3);" onclick="sendEmailReport('ai')">✉️ Çözülmediyse E-posta ile Danış</button>
-        </div>
-    </div>
-
-    <!-- Hızlı Popüler Arama Etiketleri -->
-    <div class="quick-tags">
-        <span>Sık Aranan:</span>
-        <button class="tag-btn" onclick="quickSearch('F5')">🔥 Baymak F5</button>
-        <button class="tag-btn" onclick="quickSearch('Su Basıncı')">💧 Su Basma (F10/F22)</button>
-        <button class="tag-btn" onclick="quickSearch('E18')">🧺 Bosch E18</button>
-        <button class="tag-btn" onclick="quickSearch('E09')">🍽️ Bulaşık E09</button>
-        <button class="tag-btn" onclick="quickSearch('LDS')">🤖 Robot Lazer</button>
-        <button class="tag-btn" onclick="quickSearch('E1 Airfryer')">🍟 Airfryer E1</button>
-        <button class="tag-btn" onclick="quickSearch('Ünlem')">🧊 Buzdolabı Ünlem</button>
-        <button class="tag-btn" onclick="quickSearch('CH05')">❄️ Klima CH05</button>
-    </div>
-
-    <!-- Akıllı Teşhis Sihirbazı -->
-    <div class="wizard-box">
-        <div class="wizard-toggle" onclick="toggleWizard()">
-            <span>💡 Kod Bilmiyor musunuz? Belirtiye Göre Arıza Bul</span>
-            <span id="wizardIcon">▼</span>
-        </div>
-        <div class="wizard-content" id="wizardContent">
-            <div class="wizard-select-group">
-                <select id="wizardDevice" class="wizard-select" onchange="runWizard()">
-                    <option value="">1. Cihazınızı Seçin...</option>
-                    <option value="kombi">Kombi</option>
-                    <option value="beyazesya">Çamaşır / Bulaşık / Kurutma</option>
-                    <option value="kucukev">Robot Süpürge / Airfryer</option>
-                    <option value="sogutma">Buzdolabı / Termosifon</option>
-                    <option value="klima">Klima</option>
-                </select>
-                <select id="wizardSymptom" class="wizard-select" onchange="runWizard()">
-                    <option value="">2. Yaşanan Sorun Nedir?</option>
-                    <option value="su">Su Basıncı / Su Akıtma / Su Boşaltmama</option>
-                    <option value="atesleme">Ateşleme Yapmıyor / Gaz Yok</option>
-                    <option value="isitmiyor">Suyu Isıtmıyor / Kurutmuyor / Pişirmiyor</option>
-                    <option value="sogutmuyor">Soğutmuyor / Ünlem Yanıp Sönüyor</option>
-                    <option value="iletisim">Çalışmıyor / Lazer Sensör / İletişim Hatası</option>
-                </select>
+        <!-- SOL SÜTUN: Ana İşlem Alanı -->
+        <main class="main-column">
+            <!-- Arama Çubuğu -->
+            <div class="search-container">
+                <span class="search-icon-box">🔍</span>
+                <input type="text" id="searchInput" placeholder="Örn: F5, E18, Robot lazer, Airfryer E1, Termosifon..." autofocus>
+                <button id="micBtn" class="mic-btn" title="Sesle Ara" onclick="startSpeechRecognition()">🎙️</button>
             </div>
-        </div>
-    </div>
 
-    <div class="category-tabs">
-        <button class="tab-btn active" data-cat="all">Tümü</button>
-        <button class="tab-btn" data-cat="kombi">🔥 Kombiler</button>
-        <button class="tab-btn" data-cat="beyazesya">🧺 Beyaz Eşya & Kurutma</button>
-        <button class="tab-btn" data-cat="kucukev">🤖 Robot & Airfryer</button>
-        <button class="tab-btn" data-cat="sogutma">🧊 Soğutma & Termosifon</button>
-        <button class="tab-btn" data-cat="klima">❄️ Klimalar</button>
-    </div>
+            <!-- Gemini Yapay Zeka Servis Danışmanı Kartı -->
+            <div class="ai-assistant-card">
+                <div class="ai-header">
+                    <div class="ai-header-title">
+                        <span>🤖 Yapay Zeka Servis Danışmanı</span>
+                        <span class="ai-badge">Gemini 3.8 Flash</span>
+                    </div>
+                </div>
+                <p class="ai-desc">
+                    Cihazınızdaki belirtileri yazın ya da aşağıdaki hazır şablonlara tıklayın; usta adım adım kontrolleri listelesin.
+                </p>
 
-    <!-- Sonuç Kartları -->
-    <div class="results" id="resultsContainer"></div>
+                <!-- Hızlı Şablon Butonları -->
+                <div class="ai-prompt-templates">
+                    <button class="prompt-pill" onclick="fillAndAsk('Kombinin altından su damlıyor ve basınç sürekli düşüyor')">💧 Kombiden su damlıyor</button>
+                    <button class="prompt-pill" onclick="fillAndAsk('Çamaşır makinesi sıkma yaparken aşırı sallanıyor ve gürültü yapıyor')">🧺 Makine aşırı sallanıyor</button>
+                    <button class="prompt-pill" onclick="fillAndAsk('Bulaşık makinesi tableti eritmiyor ve bardaklar puslu çıkıyor')">🍽️ Tablet erimiyor</button>
+                    <button class="prompt-pill" onclick="fillAndAsk('Robot süpürge şarj istasyonunu bulamıyor ve dönüp duruyor')">🤖 Robot yuva bulamıyor</button>
+                </div>
+
+                <div class="ai-input-group">
+                    <input 
+                        type="text" 
+                        id="aiInput" 
+                        class="ai-input" 
+                        placeholder="Örn: Kombiden ıslık sesi geliyor ve peteklerin altı soğuk..." 
+                    />
+                    <button id="aiBtn" class="ai-btn" onclick="askGemini()">
+                        Ustaya Sor
+                    </button>
+                </div>
+                
+                <div id="aiResponse" class="ai-response-box"></div>
+
+                <!-- Sesli Dinleme ve Destek Kontrolleri -->
+                <div id="speechControls" class="ai-speech-controls">
+                    <button class="speech-btn" onclick="speakAIResponse()">🔊 Ustayı Dinle</button>
+                    <button class="speech-btn" style="color:#ef4444; border-color:rgba(239,68,68,0.3);" onclick="stopSpeaking()">⏹️ Durdur</button>
+                    <button class="speech-btn" style="color:#38bdf8; border-color:rgba(56,189,248,0.3);" onclick="sendEmailReport('ai')">✉️ Çözülmediyse E-posta ile Danış</button>
+                </div>
+            </div>
+
+            <!-- Hızlı Popüler Arama Etiketleri -->
+            <div class="quick-tags">
+                <span>Sık Aranan:</span>
+                <button class="tag-btn" onclick="quickSearch('F5')">🔥 Baymak F5</button>
+                <button class="tag-btn" onclick="quickSearch('Su Basıncı')">💧 Su Basma (F10/F22)</button>
+                <button class="tag-btn" onclick="quickSearch('E18')">🧺 Bosch E18</button>
+                <button class="tag-btn" onclick="quickSearch('E09')">🍽️ Bulaşık E09</button>
+                <button class="tag-btn" onclick="quickSearch('LDS')">🤖 Robot Lazer</button>
+                <button class="tag-btn" onclick="quickSearch('E1 Airfryer')">🍟 Airfryer E1</button>
+                <button class="tag-btn" onclick="quickSearch('Ünlem')">🧊 Buzdolabı Ünlem</button>
+                <button class="tag-btn" onclick="quickSearch('CH05')">❄️ Klima CH05</button>
+            </div>
+
+            <!-- Akıllı Teşhis Sihirbazı -->
+            <div class="wizard-box">
+                <div class="wizard-toggle" onclick="toggleWizard()">
+                    <span>💡 Kod Bilmiyor musunuz? Belirtiye Göre Arıza Bul</span>
+                    <span id="wizardIcon">▼</span>
+                </div>
+                <div class="wizard-content" id="wizardContent">
+                    <div class="wizard-select-group">
+                        <select id="wizardDevice" class="wizard-select" onchange="runWizard()">
+                            <option value="">1. Cihazınızı Seçin...</option>
+                            <option value="kombi">Kombi</option>
+                            <option value="beyazesya">Çamaşır / Bulaşık / Kurutma</option>
+                            <option value="kucukev">Robot Süpürge / Airfryer</option>
+                            <option value="sogutma">Buzdolabı / Termosifon</option>
+                            <option value="klima">Klima</option>
+                        </select>
+                        <select id="wizardSymptom" class="wizard-select" onchange="runWizard()">
+                            <option value="">2. Yaşanan Sorun Nedir?</option>
+                            <option value="su">Su Basıncı / Su Akıtma / Su Boşaltmama</option>
+                            <option value="atesleme">Ateşleme Yapmıyor / Gaz Yok</option>
+                            <option value="isitmiyor">Suyu Isıtmıyor / Kurutmuyor / Pişirmiyor</option>
+                            <option value="sogutmuyor">Soğutmuyor / Ünlem Yanıp Sönüyor</option>
+                            <option value="iletisim">Çalışmıyor / Lazer Sensör / İletişim Hatası</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-tabs">
+                <button class="tab-btn active" data-cat="all">Tümü</button>
+                <button class="tab-btn" data-cat="kombi">🔥 Kombiler</button>
+                <button class="tab-btn" data-cat="beyazesya">🧺 Beyaz Eşya & Kurutma</button>
+                <button class="tab-btn" data-cat="kucukev">🤖 Robot & Airfryer</button>
+                <button class="tab-btn" data-cat="sogutma">🧊 Soğutma & Termosifon</button>
+                <button class="tab-btn" data-cat="klima">❄️ Klimalar</button>
+            </div>
+
+            <!-- Sonuç Kartları -->
+            <div class="results" id="resultsContainer"></div>
+        </main>
+
+        <!-- SAĞ SÜTUN: Bilgi & Yardım Yan Paneli (Boşluğu Dolduran Alan) -->
+        <aside class="sidebar">
+            <!-- 1. Acil Yardım Butonları -->
+            <div class="side-card">
+                <div class="side-card-title">
+                    <span>🚨 Acil Yardım Hatları</span>
+                </div>
+                <div class="side-calls">
+                    <a href="tel:187" class="side-call-btn side-call-gas">
+                        <span>🔥 187 Doğalgaz Acil</span>
+                        <span>Hemen Ara ➔</span>
+                    </a>
+                    <a href="tel:185" class="side-call-btn side-call-water">
+                        <span>💧 185 Su & Kanalizasyon</span>
+                        <span>Hemen Ara ➔</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 2. Günün Tasarruf & Koruma İpucu -->
+            <div class="side-card">
+                <div class="side-card-title">
+                    <span>💡 Usta Tavsiyesi & Tasarruf</span>
+                </div>
+                <div class="side-tip-box">
+                    <strong>Kombi Basıncı Altın Kuralı:</strong> İdeal bar seviyesi 1.5 bar olmalıdır. Basınç 2.5 barı geçerse emniyet ventili su akıtır, 1 bar altına düşerse kombi yanmaz.
+                </div>
+            </div>
+
+            <!-- 3. Trend Hata Kodları -->
+            <div class="side-card">
+                <div class="side-card-title">
+                    <span>🔥 En Sık Aranan Kodlar</span>
+                </div>
+                <div class="side-links-list">
+                    <div class="side-link-item" onclick="quickSearch('F5')">
+                        <span>Baymak / Demirdöküm F5</span>
+                        <strong style="color:var(--primary);">Hava Akışı</strong>
+                    </div>
+                    <div class="side-link-item" onclick="quickSearch('E18')">
+                        <span>Bosch / Siemens E18</span>
+                        <strong style="color:var(--primary);">Pompa Tıkalı</strong>
+                    </div>
+                    <div class="side-link-item" onclick="quickSearch('E15')">
+                        <span>Bosch Bulaşık E15</span>
+                        <strong style="color:var(--primary);">Su Sızıntısı</strong>
+                    </div>
+                    <div class="side-link-item" onclick="quickSearch('LDS')">
+                        <span>Robot Süpürge Lidar</span>
+                        <strong style="color:var(--primary);">LDS Hatası</strong>
+                    </div>
+                    <div class="side-link-item" onclick="quickSearch('Ünlem')">
+                        <span>Buzdolabı Ünlem</span>
+                        <strong style="color:var(--primary);">Yüksek Isı</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Servis Çağırırken Tuzak Uyarısı -->
+            <div class="side-card">
+                <div class="side-card-title">
+                    <span>🛡️ Korsan Servis Tuzağı</span>
+                </div>
+                <p style="font-size:0.8rem; color:var(--text-body); line-height:1.55;">
+                    İnternet aramalarında en üstte "Sponsorlu" çıkan numaraları hemen aramayın. Servis geldiğinde değiştirilen parçanın eskisini mutlaka isteyin.
+                </p>
+            </div>
+        </aside>
+
+    </div>
 
     <!-- ================= SIK KARŞILAŞILAN ARIZA REHBERLERİ ================= -->
     <section class="guides-section" id="rehberler">
@@ -1481,7 +1704,6 @@
             </article>
         </div>
     </section>
-    <!-- ================= REHBERLER BİTİŞ ================= -->
 
     <!-- Servis Çağırırken Tüketici Tuzak Rehberi -->
     <div class="service-tips-card">
@@ -1514,7 +1736,7 @@
         </div>
     </div>
 
-    <!-- AdSense ve SEO Uyumlu Footer & Yasal Feragat -->
+    <!-- Footer & Yasal Feragat -->
     <footer>
         <div class="footer-links">
             <a onclick="openModal('privacyModal')">Gizlilik Politikası</a>
@@ -2531,7 +2753,7 @@ pwaInstallBtn.addEventListener('click', async () => {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         const swBlob = new Blob([`
-            const CACHE_NAME = 'ariza-rehberi-cache-v8';
+            const CACHE_NAME = 'ariza-rehberi-cache-v9';
             self.addEventListener('install', e => {
                 e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(['/'])));
             });
