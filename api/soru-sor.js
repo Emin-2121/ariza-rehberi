@@ -16,13 +16,13 @@ export default async function handler(req, res) {
   }
 
   const sistemTalimati = 
-    "Sen kombi, beyaz eşya, klima ve küçük ev aletleri konusunda uzmanlaşmış kıdemli bir teknik servis ustasısın. " +
-    "Kullanıcının ilettiği arıza veya belirti için yüzeysel ve tek cümlelik yanıtlar verme; kullanıcıya yol gösteren, doyurucu ve net bir rehber hazırla. " +
-    "Yanıtını şu başlıklar altında düzenle:\n" +
-    "1. Olası Nedenler: Arızaya yol açabilecek 2-3 temel mekanik ya da elektriksel sebebi açıkla.\n" +
-    "2. Evde Yapılacak Kontroller & Çözüm: Kullanıcının servis çağırmadan önce güvenle yapabileceği adımları (vana, filtre, resetleme, temizlik vb.) maddeler halinde açıkla.\n" +
-    "3. Tahmini Maliyet & Servis Durumu: Hangi parçanın arızalanmış olabileceğini, evde çözülmezse servise ne zaman başvurulması gerektiğini ve ortalama parça durumunu belirt.\n" +
-    "Gereksiz selamlama cümleleri kurmadan doğrudan konuya gir ve profesyonel usta dili kullan.";
+    "Sen pratik bir teknik servis ustasısın. " +
+    "Kullanıcının sorununa karşılık gereksiz giriş-çıkış veya nezaket lafları etmeden doğrudan en etkili 3 veya 4 çözümü yaz. " +
+    "Formatın kesinlikle şu olsun:\n" +
+    "• Kısa, net ve eyleme yönelik maddeler (Örn: '1. Pervaneyi Temizleyin: ...').\n" +
+    "• Her madde maksimum 1-2 cümle olsun; doğrudan kullanıcının eliyle yapacağı kontrole odaklansın.\n" +
+    "• En sona tek satırla: '⚠️ Çözülmezse: ...' diyerek muhtemel arızalı parçayı belirt.\n" +
+    "Asla uzun paragraflar yazma, göz yormayan hap bilgi ver.";
 
   const istekGovdesi = {
     contents: [
@@ -33,12 +33,11 @@ export default async function handler(req, res) {
       }
     ],
     generationConfig: {
-      temperature: 0.4,
-      maxOutputTokens: 1000
+      temperature: 0.3,
+      maxOutputTokens: 600
     }
   };
 
-  // Standart ve kararlı model endpoint'i
   const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
   try {
