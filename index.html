@@ -851,6 +851,143 @@
             box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);
         }
 
+        /* --- SIK KARŞILAŞILAN REHBERLER BÖLÜMÜ --- */
+        .guides-section {
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .guides-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .guides-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.4rem;
+        }
+
+        .guides-header p {
+            color: var(--text-body);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .guides-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .guide-card {
+            background: linear-gradient(180deg, rgba(22, 30, 49, 0.75) 0%, rgba(15, 23, 42, 0.7) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .guide-card:hover {
+            border-color: rgba(56, 189, 248, 0.35);
+        }
+
+        .guide-card summary {
+            padding: 1.15rem 1.4rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            user-select: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .guide-card summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .guide-card summary .icon {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: transform 0.2s ease;
+        }
+
+        .guide-card details[open] summary .icon {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+
+        .guide-card .guide-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge-cat {
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-kombi {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .badge-beyazesya {
+            background: rgba(56, 189, 248, 0.15);
+            color: #7dd3fc;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .guide-content {
+            padding: 0 1.4rem 1.4rem 1.4rem;
+            font-size: 0.92rem;
+            line-height: 1.65;
+            color: #cbd5e1;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 1.1rem;
+        }
+
+        .guide-content h4 {
+            margin: 1rem 0 0.5rem 0;
+            font-size: 0.96rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .guide-content ol, .guide-content ul {
+            padding-left: 1.25rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .guide-content li {
+            margin-bottom: 0.45rem;
+        }
+
+        .guide-tip-box {
+            background: rgba(9, 13, 22, 0.7);
+            border-left: 3px solid var(--primary);
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+        }
+
         /* --- BİLGİ KARTLARI & GÜVENLİK --- */
         .service-tips-card {
             margin-top: 2.5rem;
@@ -1219,6 +1356,123 @@
 
     <!-- Sonuç Kartları -->
     <div class="results" id="resultsContainer"></div>
+
+    <!-- ================= SIK KARŞILAŞILAN ARIZA REHBERLERİ (SEO & Tüketici Odaklı) ================= -->
+    <section class="guides-section" id="rehberler">
+        <div class="guides-header">
+            <h2>📖 Sık Karşılaşılan Arızalar ve Pratik Çözüm Rehberleri</h2>
+            <p>Servis çağırmadan önce evde yapabileceğiniz temel kontroller, adımlar ve tasarruf ipuçları.</p>
+        </div>
+
+        <div class="guides-grid">
+            <!-- Rehber 1: Kombi Basıncı -->
+            <article class="guide-card">
+                <details>
+                    <summary>
+                        <span class="guide-title">
+                            <span class="badge-cat badge-kombi">Kombi</span>
+                            Kombi Su Basıncı Neden Düşer? (Bar Doldurma Rehberi)
+                        </span>
+                        <span class="icon">▼</span>
+                    </summary>
+                    <div class="guide-content">
+                        <p><strong>İdeal Çalışma Basıncı:</strong> Ev tipi kombilerde sağlıklı çalışma basınç değeri <strong>1.5 bar</strong> civarında olmalıdır (1.0 ile 2.0 bar arası güvenli çalışma aralığıdır). Basınç 1.0 barın altına düştüğünde kombi kendini emniyete alarak çalışmayı durdurur (F22, E04, F10 arıza kodları).</p>
+                        
+                        <h4>Kombiye Su Nasıl Basılır? (Adım Adım)</h4>
+                        <ol>
+                            <li>Kombinizin alt paneline eğilip bakın; genellikle sağ veya sol altta siyah ya da mavi renkli plastik bir doldurma musluğu bulunur.</li>
+                            <li>Musluğu saat yönünün tersine (sola doğru) yavaşça çevirin. Tazyikli su sesi gelmeye başladığında göstergeyi izleyin.</li>
+                            <li>Manometre ibresi <strong>1.5 bar</strong> seviyesine ulaştığında musluğu sağa çevirerek iyice kapatın. <em>(Musluğu açık unutursanız basınç 3 barı geçer ve kombi emniyet ventilinden su akıtır).</em></li>
+                        </ol>
+
+                        <div class="guide-tip-box">
+                            <strong>Öneri:</strong> Kombi basıncınız haftada bir sürekli düşüyorsa tesisatta mikro sızıntı veya genleşme tankında azot havası eksikliği olabilir.
+                        </div>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Rehber 2: Kombi Ateşleme Hatası -->
+            <article class="guide-card">
+                <details>
+                    <summary>
+                        <span class="guide-title">
+                            <span class="badge-cat badge-kombi">Kombi</span>
+                            Kombi Neden Ateşleme Yapmaz? (F4 / E01 / F28 Hatası Çözümü)
+                        </span>
+                        <span class="icon">▼</span>
+                    </summary>
+                    <div class="guide-content">
+                        <p><strong>Sorun Belirtisi:</strong> Kombi sıcak su veya petek modunda devreye girmeye çalışır, fan sesi gelir ya da çakmak sesleri duyulur ancak alev oluşmadığı için ekranda arıza ışığı yanar.</p>
+
+                        <h4>Servis Öncesi 3 Temel Kontrol</h4>
+                        <ul>
+                            <li><strong>Dairede Gaz Var mı?:</strong> Mutfağınızdaki ocağı açıp çakmağı yakın. Eğer gaz gelmiyorsa ana sayaç vananız veya sokaktaki bina gaz regülatörü atmış olabilir.</li>
+                            <li><strong>Kombi Gaz Vanası Açık mı?:</strong> Kombinin hemen altında yer alan sarı metal doğalgaz vanasının boruyla aynı doğrultuda (paralel) olduğundan emin olun.</li>
+                            <li><strong>Resetleme (Sıfırlama):</strong> Kombi üzerindeki 'R' veya 'Reset' butonuna 3 saniye basılı tutun. Cihazın alevi yakalaması için bu işlemi en fazla 3 defa tekrarlayın.</li>
+                        </ul>
+
+                        <div class="guide-tip-box">
+                            <strong>Güvenlik Uyarısı:</strong> Gaz kokusu hissederseniz hiçbir elektrik düğmesine dokunmayın, kapı ve pencereleri açarak derhal 187 Doğalgaz Acil hattını arayın.
+                        </div>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Rehber 3: Çamaşır Makinesi Tahliye -->
+            <article class="guide-card">
+                <details>
+                    <summary>
+                        <span class="guide-title">
+                            <span class="badge-cat badge-beyazesya">Çamaşır Makinesi</span>
+                            Çamaşır Makinesi Suyu Boşaltmıyor (E18 / 5E / OE Hatası)
+                        </span>
+                        <span class="icon">▼</span>
+                    </summary>
+                    <div class="guide-content">
+                        <p><strong>Sorun Belirtisi:</strong> Program bittiğinde makinenin içinde kirli su kalır, kapak kilidi açılmaz, sıkmaya geçmez ve tahliye pompa motorundan vızıltı sesi gelir.</p>
+
+                        <h4>Pompa Filtresi Temizleme Adımları</h4>
+                        <ol>
+                            <li>Makinenin fişini güvenlik için mutlaka prizden çekin.</li>
+                            <li>Sağ veya sol alt köşede bulunan küçük servis kapağını düz bir tornavida veya madeni parayla açın. Yere kalın bir havlu veya fırın tepsisi yerleştirin.</li>
+                            <li>Varsa küçük ince tahliye hortumunun tıpasını açarak suyu kaba akıtın, ardından yuvarlak büyük filtre kapağını sola doğru çevirip çıkartın.</li>
+                            <li>Filtre yuvasını ve iç kısımdaki pervane kanatlarını kontrol edin. Genellikle içine kaçan bozuk para, tel toka veya düğme pervaneyi sıkıştırmıştır.</li>
+                            <li>Hazneyi tamamen temizledikten sonra filtreyi yerine tam oturtup sıkın ve makineyi sadece "Sıkma/Tahliye" programına alarak test edin.</li>
+                        </ol>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Rehber 4: Bulaşık Makinesi E15 -->
+            <article class="guide-card">
+                <details>
+                    <summary>
+                        <span class="guide-title">
+                            <span class="badge-cat badge-beyazesya">Bulaşık Makinesi</span>
+                            Bulaşık Makinesi E15 / i30 Hatası (Tabanda Su Taşma Kilidi)
+                        </span>
+                        <span class="icon">▼</span>
+                    </summary>
+                    <div class="guide-content">
+                        <p><strong>Sorun Belirtisi:</strong> Makine düğmesinden kapatılsa bile alt kısımdaki pompa motoru durmadan çalışır ve ekranda musluk simgesi veya E15 uyarısı yanıp söner.</p>
+
+                        <h4>Evde Geçici Tahliye ve Çözüm</h4>
+                        <ol>
+                            <li>Önce cihazın elektrik fişini prizden çekin ve güvenlik için su musluğunu kapatın.</li>
+                            <li>Makineyi hafifçe öne çekerek yaklaşık 45 derece arkaya veya yana doğru yatırın. Alt toplama teknesindeki biriken suyun yere akmasını sağlayın (altına bez serin).</li>
+                            <li>Tabandaki su tamamen döküldüğünde güvenlik köpüğü/şamandırası aşağı iner ve hata sıfırlanır. Makineyi düzeltip 1-2 saat kurumasını bekledikten sonra fişe takın.</li>
+                        </ol>
+
+                        <div class="guide-tip-box">
+                            <strong>Bilgi:</strong> Bu hata birkaç gün sonra tekrarlarsa iç hortum bağlantılarında sızıntı veya kazan contasında delinme vardır; teknik servis çağrılmalıdır.
+                        </div>
+                    </div>
+                </details>
+            </article>
+        </div>
+    </section>
+    <!-- ================= REHBERLER BİTİŞ ================= -->
 
     <!-- Servis Çağırırken Tüketici Tuzak Rehberi -->
     <div class="service-tips-card">
