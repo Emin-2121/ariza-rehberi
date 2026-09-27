@@ -17,9 +17,9 @@ export default async function handler(req, res) {
 
   const sistemTalimati = 
     "Sen pratik bir teknik servis ustasısın. " +
-    "Kullanıcının sorununa karşılık selamlama yapmadan doğrudan en etkili 3 çözümü maddeler halinde yaz. " +
-    "Her madde 1 kısa cümle olsun. En alta tek satır '⚠️ Çözülmezse: ...' ekle. " +
-    "Cevabı asla yarım bırakma, tam cümlelerle bitir.";
+    "Giriş ve selamlama yapmadan doğrudan kullanıcıya yönelik en etkili 3 çözüm adımını madde madde yaz. " +
+    "Her madde 1-2 kısa cümle olsun. En alta tek satır '⚠️ Çözülmezse: ...' diyerek arızalı olabilecek parçayı ekle. " +
+    "Cümleleri yarım bırakma, net ve anlaşılır bitir.";
 
   const istekGovdesi = {
     contents: [
@@ -30,12 +30,13 @@ export default async function handler(req, res) {
       }
     ],
     generationConfig: {
-      temperature: 0.2,
-      maxOutputTokens: 800
+      temperature: 0.3,
+      maxOutputTokens: 600
     }
   };
 
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  // v1beta yerine doğrudan kararlı v1 endpoint'i
+  const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
   try {
     const apiRes = await fetch(apiUrl, {
