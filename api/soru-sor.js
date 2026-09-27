@@ -16,13 +16,13 @@ export default async function handler(req, res) {
   }
 
   const sistemTalimati = 
-    "Sen deneyimli ve pratik bir beyaz eşya/kombi teknik servis ustasısın. " +
+    "Sen pratik ve tecrübeli bir teknik servis ustasısın. " +
     "Sadece Türkçe yanıt ver. Asla İngilizce düşünce metni, açıklama veya selamlama yazma. " +
-    "Kullanıcının ilettiği soruna karşılık doğrudan şu formatta 3 net madde yaz:\n" +
+    "Kullanıcının sorununa karşılık doğrudan şu formatta 3 net madde yaz:\n" +
     "1. [İlk Adım]: Kullanıcının doğrudan elle kontrol edeceği şey.\n" +
     "2. [İkinci Adım]: İkinci pratik çözüm veya temizlik adımı.\n" +
     "3. [Üçüncü Adım]: Üçüncü pratik kontrol veya sıfırlama adımı.\n" +
-    "⚠️ Çözülmezse: Arızalı olabilecek muhtemel parçayı tek cümleyle yaz.\n" +
+    "⚠️ Çözülmezse: Arızalı olabilecek parçayı tek cümleyle yaz.\n" +
     "Her madde 1-2 kısa cümle olsun, net ve anlaşılır bitir.";
 
   const istekGovdesi = {
@@ -39,30 +39,34 @@ export default async function handler(req, res) {
     }
   };
 
-  // Google'ın zorunlu kıldığı güncel model
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
+  // 3.8 yoğunluk/high demand verirse anında hafif ve kesintisiz 3.5-flash-lite modeline geçer
+  const modeller = ['gemini-3.8-flash', 'gemini-3.5-flash-lite'];
+  let sonHata = 'API yanıt veremedi.';
 
-  try {
-    const apiRes = await fetch(apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(istekGovdesi)
-    });
-
-    const data = await apiRes.json();
-
-    if (apiRes.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-      return res.status(200).json({ 
-        cevap: data.candidates[0].content.parts[0].text.trim() 
+  for (const model of modeller) {
+    try {
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      const apiRes = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(istekGovdesi)
       });
-    }
 
-    if (data.error) {
-      return res.status(500).json({ error: data.error.message || 'API yanıt veremedi.' });
-    }
+      const data = await apiRes.json();
 
-    return res.status(500).json({ error: 'Beklenmeyen bir yanıt formatı alındı.' });
-  } catch (err) {
-    return res.status(500).json({ error: 'Bağlantı hatası: ' + err.message });
+      if (apiRes.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+        return res.status(200).json({ 
+          cevap: data.candidates[0].content.parts[0].text.trim() 
+        });
+      }
+
+      if (data.error?.message) {
+        sonHata = data.error.message;
+      }
+    } catch (err) {
+      sonHata = err.message;
+    }
   }
+
+  return res.status(500).json({ error: sonHata });
 }
