@@ -287,7 +287,7 @@
             animation: pulse 1.2s infinite;
         }
 
-        /* --- AI SERVİS ASİSTANI (DÜZELTİLMİŞ KUTU) --- */
+        /* --- AI SERVİS ASİSTANI KARTI (ESNEYEBİLEN VE KESİLMEYEN YAPIDA) --- */
         .ai-assistant-card {
             background: linear-gradient(145deg, rgba(17, 24, 39, 0.9), rgba(11, 17, 32, 0.85));
             border: 1px solid rgba(56, 189, 248, 0.3);
@@ -296,6 +296,9 @@
             margin-bottom: 2rem;
             box-shadow: 0 0 40px -10px rgba(56, 189, 248, 0.25), 0 20px 40px rgba(0, 0, 0, 0.5);
             position: relative;
+            height: auto !important;
+            max-height: none !important;
+            overflow: visible !important;
         }
 
         .ai-assistant-card::before {
@@ -405,7 +408,7 @@
             transform: translateY(-1.5px);
         }
 
-        /* --- BURASI KESİLME VE YARIM KALMAYI ÖNLER --- */
+        /* METNİ AŞAĞIYA DOĞRU EKSİKSİZ AÇAN KUTU */
         .ai-response-box {
             display: none;
             margin-top: 1.15rem;
@@ -415,9 +418,10 @@
             border-left: 4px solid var(--primary);
             color: #f1f5f9;
             font-size: 0.94rem;
-            line-height: 1.75;
-            white-space: pre-wrap;
-            word-break: break-word;
+            line-height: 1.8;
+            white-space: pre-wrap !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-left-width: 4px;
             height: auto !important;
@@ -1226,7 +1230,7 @@
     </a>
     <div class="status-badge">
         <div class="status-dot"></div>
-        <span>AI 3.6 Aktif</span>
+        <span>AI 3.8 Aktif</span>
     </div>
 </nav>
 
@@ -1272,7 +1276,7 @@
         <div class="ai-header">
             <div class="ai-header-title">
                 <span>🤖 Yapay Zeka Servis Danışmanı</span>
-                <span class="ai-badge">Gemini 3.6 Flash</span>
+                <span class="ai-badge">Gemini 3.8 Flash</span>
             </div>
         </div>
         <p class="ai-desc">
@@ -1567,13 +1571,9 @@
 <div id="toast">Metin kopyalandı!</div>
 
 <script>
-// --- E-POSTA BİLDİRİM ADRESİ AYARI ---
 const DESTEK_EPOSTA = "iletisim@ariza-rehberi.vercel.app";
 
 const errorDatabase = [
-    // ==========================================
-    // 1. KOMBİLER
-    // ==========================================
     {
         id: "f5-e05",
         code: "F5 / E05",
@@ -1761,10 +1761,6 @@ const errorDatabase = [
         ],
         details: "Ateşleme trafosu veya gaz valfi modülasyon bobini arızalanmış olabilir."
     },
-
-    // ==========================================
-    // 2. BEYAZ EŞYA & KURUTMA
-    // ==========================================
     {
         id: "e08-f08",
         code: "E08 / F08",
@@ -1935,10 +1931,6 @@ const errorDatabase = [
         ],
         details: "Hava akımı kesildiğinde cihaz aşırı ısınma korumasına geçer ve çamaşırlar nemli kalır."
     },
-
-    // ==========================================
-    // 3. KÜÇÜK EV ALETLERİ (ROBOT & AIRFRYER)
-    // ==========================================
     {
         id: "robot-lds",
         code: "LDS / Hata 1 (Lidar)",
@@ -2007,10 +1999,6 @@ const errorDatabase = [
         ],
         details: "Sepet mikrosviçi eğildiğinde sepet takılı olsa bile cihaz güvenliği açmaz."
     },
-
-    // ==========================================
-    // 4. SOĞUTMA & TERMOSİFON
-    // ==========================================
     {
         id: "buzdolabi-unlem",
         code: "(!) Kırmızı Ünlem",
@@ -2079,10 +2067,6 @@ const errorDatabase = [
         ],
         details: "Şebeke su basıncı 5 bar üzerindeyse evin girişine basınç düşürücü regülatör takılması tavsiye edilir."
     },
-
-    // ==========================================
-    // 5. KLİMALAR
-    // ==========================================
     {
         id: "ch05-e1",
         code: "CH05 / E1",
@@ -2159,7 +2143,6 @@ const tabButtons = document.querySelectorAll('.tab-btn');
 const toast = document.getElementById('toast');
 const micBtn = document.getElementById('micBtn');
 
-// Gemini UI Elemanları
 const aiInput = document.getElementById('aiInput');
 const aiBtn = document.getElementById('aiBtn');
 const aiResponse = document.getElementById('aiResponse');
@@ -2190,7 +2173,6 @@ function fillAndAsk(promptText) {
     askGemini(promptText);
 }
 
-// E-posta Bildirimi
 function sendEmailReport(type) {
     const arananKelime = searchInput.value.trim() || aiInput.value.trim() || "Belirtilmedi";
     let konu = encodeURIComponent(`[Arıza Rehberi] Çözülemeyen Kod/Sorun Bildirimi: ${arananKelime}`);
@@ -2316,7 +2298,6 @@ window.onclick = function(event) {
     }
 };
 
-// Gemini API İstek
 async function askGemini(soruOverride) {
     const soruMetni = (soruOverride || aiInput.value).trim();
     if (!soruMetni) {
@@ -2526,7 +2507,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// PWA Yükleme
 let deferredPrompt;
 const pwaBanner = document.getElementById('pwaBanner');
 const pwaInstallBtn = document.getElementById('pwaInstallBtn');
@@ -2551,7 +2531,7 @@ pwaInstallBtn.addEventListener('click', async () => {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         const swBlob = new Blob([`
-            const CACHE_NAME = 'ariza-rehberi-cache-v7';
+            const CACHE_NAME = 'ariza-rehberi-cache-v8';
             self.addEventListener('install', e => {
                 e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(['/'])));
             });
