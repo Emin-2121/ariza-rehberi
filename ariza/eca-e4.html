@@ -3,51 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ECA Kombi E4 Düşük Su Basıncı Arızası - Kesin Çözüm ve Kontrol Rehberi</title>
-  <meta name="description" content="ECA kombilerde su basıncı düşüklüğü ve su basma vanası çözümü.">
-  <link rel="canonical" href="[https://ariza-rehberi.vercel.app/ariza/$](https://ariza-rehberi.vercel.app/ariza/$){ariza.slug}">
+  <title>E.C.A Kombi E4 Düşük Basınç Uyarısı - Çözümü ve Tamir Rehberi</title>
+  <meta name="description" content="E.C.A kombilerde kalorifer devresi su basıncının kritik seviyeye düşmesi. Servis çağırmadan önce yapılması gereken kontroller ve tahmini maliyet analizi.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ariza-rehberi.vercel.app/ariza/eca-e4">
+  
+  <!-- Yapısal Veri (HowTo Schema) -->
   <script type="application/ld+json">
   {
-    "@context": "[https://schema.org](https://schema.org)",
+    "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "ECA Kombi E4 Düşük Su Basıncı Arızası",
-    "description": "ECA kombilerde su basıncı düşüklüğü ve su basma vanası çözümü.",
-    "step": [{"@type":"HowToStep","position":1,"name":"Adım 1","text":"Kombinin altındaki mavi/siyah doldurma musluğunu sola çevirin."},{"@type":"HowToStep","position":2,"name":"Adım 2","text":"Bar göstergesi 1.5 olana kadar su basın ve musluğu iyice kapatın."},{"@type":"HowToStep","position":3,"name":"Adım 3","text":"Ekranda hata silinmezse reset tuşuna basın."}]
+    "name": "E.C.A Kombi E4 Düşük Basınç Uyarısı",
+    "description": "E.C.A kombilerde kalorifer devresi su basıncının kritik seviyeye düşmesi.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Adım 1",
+        "text": "Kombinin altındaki doldurma musluğunu saat yönünün tersine çevirin."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Adım 2",
+        "text": "Basınç göstergesi 1.5 bara gelene kadar su doldurun."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Adım 3",
+        "text": "Musluğu iyice sıkıp kapatın ve ekrandaki arızanın silinmesini bekleyin."
+      }
+    ]
   }
   </script>
+
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #0b0f19; color: #f8fafc; margin: 0; padding: 20px; }
-    .container { max-width: 720px; margin: 0 auto; background: #131b2e; border: 1px solid #1e293b; border-radius: 20px; padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    h1 { font-size: 24px; color: #60a5fa; margin-top: 0; line-height: 1.3; }
-    .badge { display: inline-block; background: #1e3a8a; color: #93c5fd; padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 16px; }
-    .btn { display: inline-block; background: #2563eb; color: #ffffff; text-decoration: none; padding: 14px 24px; border-radius: 12px; font-weight: bold; text-align: center; margin-top: 20px; width: 100%; box-sizing: border-box; }
-    .btn:hover { background: #1d4ed8; }
-    .btn-secondary { background: #334155; margin-top: 10px; }
-    .desc { color: #94a3b8; font-size: 16px; line-height: 1.6; margin-bottom: 24px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 2rem 1rem; }
+    .card { max-width: 760px; margin: 0 auto; background: #1e293b; padding: 2.2rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); border: 1px solid #334155; }
+    .badge { display: inline-block; background: #2563eb; color: #fff; padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem; }
+    h1 { font-size: 1.6rem; color: #60a5fa; margin-top: 0; line-height: 1.3; }
+    p.desc { color: #94a3b8; font-size: 0.95rem; margin-bottom: 1.8rem; }
+    .steps-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .step-item { background: #0f172a; padding: 1rem 1.2rem; border-radius: 10px; margin-bottom: 0.8rem; border-left: 4px solid #38bdf8; display: flex; gap: 1rem; align-items: flex-start; }
+    .step-num { background: #2563eb; color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: bold; flex-shrink: 0; }
+    .step-text { font-size: 0.95rem; color: #e2e8f0; line-height: 1.5; }
+    
+    /* AdSense İçerik Zenginleştirme Bölümü */
+    .article-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #334155; }
+    .article-section h2 { font-size: 1.15rem; color: #38bdf8; margin-bottom: 0.6rem; }
+    .article-section p { font-size: 0.92rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 1rem; }
+    
+    .btn-group { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2rem; }
+    .btn { display: block; text-align: center; padding: 0.9rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.2s; }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-secondary { background: #334155; color: #cbd5e1; }
+    .btn-secondary:hover { background: #475569; }
+    
+    /* Yasal Footer */
+    footer { max-width: 760px; margin: 2.5rem auto 0; text-align: center; font-size: 0.85rem; color: #64748b; border-top: 1px solid #1e293b; padding-top: 1.2rem; }
+    footer a { color: #94a3b8; text-decoration: none; margin: 0 0.5rem; }
+    footer a:hover { color: #38bdf8; text-decoration: underline; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <span class="badge">ECA</span>
-    <h1>ECA Kombi E4 Düşük Su Basıncı Arızası</h1>
-    <p class="desc">ECA kombilerde su basıncı düşüklüğü ve su basma vanası çözümü.</p>
+  <div class="card">
+    <span class="badge">E.C.A</span>
+    <h1>E.C.A Kombi E4 Düşük Basınç Uyarısı</h1>
+    <p class="desc">E.C.A kombilerde kalorifer devresi su basıncının kritik seviyeye düşmesi.</p>
+
+    <div class="steps-title">🛠️ Servis Çağırmadan Önce Yapılacak Kontroller:</div>
     
-    <h3 style="color:#e2e8f0; margin-bottom:16px;">🛠️ Servis Çağırmadan Önce Yapılacak Kontroller:</h3>
-    <div style="background:#1e293b; padding:16px; border-radius:12px; margin-bottom:12px; border:1px solid #334155; display:flex; gap:12px; align-items:flex-start;">
-      <span style="background:#2563eb; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0;">1</span>
-      <p style="margin:0; font-size:15px; line-height:1.5; color:#e2e8f0;">Kombinin altındaki mavi/siyah doldurma musluğunu sola çevirin.</p>
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-text">Kombinin altındaki doldurma musluğunu saat yönünün tersine çevirin.</div>
     </div>
-<div style="background:#1e293b; padding:16px; border-radius:12px; margin-bottom:12px; border:1px solid #334155; display:flex; gap:12px; align-items:flex-start;">
-      <span style="background:#2563eb; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0;">2</span>
-      <p style="margin:0; font-size:15px; line-height:1.5; color:#e2e8f0;">Bar göstergesi 1.5 olana kadar su basın ve musluğu iyice kapatın.</p>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-text">Basınç göstergesi 1.5 bara gelene kadar su doldurun.</div>
     </div>
-<div style="background:#1e293b; padding:16px; border-radius:12px; margin-bottom:12px; border:1px solid #334155; display:flex; gap:12px; align-items:flex-start;">
-      <span style="background:#2563eb; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0;">3</span>
-      <p style="margin:0; font-size:15px; line-height:1.5; color:#e2e8f0;">Ekranda hata silinmezse reset tuşuna basın.</p>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-text">Musluğu iyice sıkıp kapatın ve ekrandaki arızanın silinmesini bekleyin.</div>
     </div>
 
-    <a href="/#eca-e4" class="btn">🤖 Yapay Zeka Usta ile Detaylı Çöz / Bütçe Hesapla</a>
-    <a href="/" class="btn btn-secondary">← Tüm Arıza Kodları Listesine Dön</a>
+    <!-- AdSense İçerik Alanı -->
+    <div class="article-section">
+      <h2>Olası Arıza Sebepleri ve Parça İncelemesi</h2>
+      <p>Cihazınızın ekranda <strong>E.C.A Kombi E4 Düşük Basınç Uyarısı</strong> uyarısı vermesi, genellikle güvenlik sensörlerinin veya mekanik parçaların çalışma limitleri dışına çıktığını gösterir. Kullanıcı olarak yukarıda belirtilen ilk müdahale adımlarını denemenize rağmen sorun düzelmiyorsa; sistem kontrol kartı, debimetre, sensör veya tahliye mekanizmalarında aşınma meydana gelmiş olabilir.</p>
+
+      <h2>Teknik Servis Çağırmadan Önce Bilmeniz Gerekenler</h2>
+      <p>Modern elektronik cihazlar kendilerini korumak için hata moduna geçer. Kendi başınıza cihaz gövdesini açarak elektrik veya gaz bağlantılarına müdahale etmeniz ciddi güvenlik riskleri doğurabilir. Eğer resetleme ve temel vana/filtre kontrolleri sonuca ulaştırmadıysa, cihazı enerji hattından kapatarak marka yetkili servisine arıza kodunu bildirmeniz en sağlıklı yoldur.</p>
+    </div>
+
+    <div class="btn-group">
+      <a href="/?ariza=E.C.A%20Kombi%20E4%20D%C3%BC%C5%9F%C3%BCk%20Bas%C4%B1n%C3%A7%20Uyar%C4%B1s%C4%B1" class="btn btn-primary">🤖 Yapay Zeka Usta ile Detaylı Çöz / Bütçe Hesapla</a>
+      <a href="/" class="btn btn-secondary">← Tüm Arıza Kodları Listesine Dön</a>
+    </div>
   </div>
+
+  <footer>
+    <p>© 2026 Arıza Rehberi - Tüm Hakları Saklıdır.</p>
+    <p>
+      <a href="/gizlilik-kosullar.html">Gizlilik Politikası</a> • 
+      <a href="/gizlilik-kosullar.html">Kullanım Koşulları</a> • 
+      <a href="/gizlilik-kosullar.html">İletişim</a>
+    </p>
+  </footer>
 </body>
 </html>
